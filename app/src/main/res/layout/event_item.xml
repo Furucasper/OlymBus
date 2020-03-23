@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/colorLightGray">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="12dp"
+        android:background="@color/colorWhite"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/eventIcon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"
+            app:srcCompat="@drawable/ic_black_olympic_rings" />
+
+        <TextView
+            android:id="@+id/eventHead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@+id/eventIcon"
+            android:fontFamily="@font/kanit_semibold"
+            android:text="@string/event_name"
+            android:textAlignment="textStart"
+            android:textColor="@color/colorBlack"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/eventSubhead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/eventHead"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="-5dp"
+            android:layout_toEndOf="@+id/eventIcon"
+            android:fontFamily="@font/kanit_semibold_italic"
+            android:text="@string/event_category"
+            android:textAlignment="textStart"
+            android:textAllCaps="true"
+            android:textColor="@color/colorBlack"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/eventDiscipline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/eventSubhead"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="-3dp"
+            android:layout_marginEnd="15dp"
+            android:layout_toStartOf="@+id/eventTime"
+            android:layout_toEndOf="@+id/eventIcon"
+            android:fontFamily="@font/kanit_extralight_italic"
+            android:text="@string/event_discipline"
+            android:textAlignment="textStart"
+            android:textColor="@color/colorBlack"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/eventDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/kanit_semibold"
+            android:text="@string/event_date"
+            android:textAlignment="textEnd"
+            android:textAllCaps="true"
+            android:textColor="@color/colorAccent"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/eventTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/eventDate"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="-8dp"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/kanit_semibold"
+            android:text="@string/event_time"
+            android:textAlignment="textEnd"
+            android:textColor="@color/colorPrimary"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/busTo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/eventDiscipline"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="-5dp"
+            android:fontFamily="@font/kanit_semibold"
+            android:text="@string/bus_to"
+            android:textAlignment="textStart"
+            android:textColor="@color/colorBlack"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/eventVenue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/busTo"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="-8dp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/kanit_semibold"
+            android:text="@string/event_venus"
+            android:textAlignment="textStart"
+            android:textColor="@color/colorBlack"
+            android:textSize="15sp" />
+
+
+    </RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
