@@ -1,15 +1,20 @@
 package app.olympics.olymbus;
-
+/**
+ *
+ * @author snipe
+ */
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class InputProcess {
-    private  ArrayList <String> allEvents = new ArrayList <>();
-    private  ArrayList <String> allBus = new ArrayList <>();
-    private  ArrayList <String> allAccount = new ArrayList <>();
+public class InputProcess
+{
+    private static ArrayList <String> allEvents = new ArrayList <String>();
+    private static ArrayList <String> allBus = new ArrayList <String>();
+    private static ArrayList <String> allAccount = new ArrayList <String>();
 
     public InputProcess (Scanner input)
     {
+
         String line ;
         String[] Details ;
         String trimmedDetails = "";
@@ -55,8 +60,6 @@ public class InputProcess {
     {
         return allEvents;
     }
-
-
 
     public ArrayList<String> getBus()
     {
