@@ -5,11 +5,17 @@
     <string name="title_booking">Booking</string>
     <string name="title_profile">Profile</string>
     <string name="home">Home</string>
-    <string name="event_name">Event</string>
-    <string name="event_discipline">Event Discipline</string>
+    <string name="event_name">Weightlifting</string>
+    <string name="event_discipline">+109 kg Group A &amp; Victory Ceremony</string>
     <string name="event_date">00 MON</string>
-    <string name="event_category">category</string>
+    <string name="event_category">Men\'s</string>
     <string name="event_time">00.00</string>
     <string name="bus_to">Bus to</string>
     <string name="event_venus">Event Venus</string>
+
+    <string name="eventVenue">Tokyo International Forum</string>
+    <string name="eventDate">02 August 2020</string>
+    <string name="eventTime">10.30</string>
+    <string name="eventDuration">2 hrs</string>
+    <string name="eventByBus">45 min</string>
 </resources>

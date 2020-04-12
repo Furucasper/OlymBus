@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.home.EventDetailFragment"
+        android:layout_marginBottom="60dp">
+
+
+        <ImageView
+            android:id="@+id/olympic_rings"
+            android:layout_width="50dp"
+            android:layout_height="23dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40dp"
+            app:srcCompat="@drawable/ic_olympic_rings" />
+
+    <ImageView
+        android:id="@+id/event_image_evd"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_below="@id/olympic_rings"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        app:srcCompat="@drawable/ic_weightlifting_pictogram" />
+
+    <ScrollView
+        android:id="@+id/evd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/back_btn_evd"
+        android:layout_below="@id/event_image_evd"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/bg_white_smallcurve"
+        android:elevation="5dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="25dp">
+
+            <TextView
+                android:id="@+id/eventHead_evd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/kanit_semibold"
+                android:text="@string/event_name"
+                android:textColor="@color/colorBlack"
+                android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/eventSubhead_evd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/eventHead_evd"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="30dp"
+                android:fontFamily="@font/kanit_semibold_italic"
+                android:text="@string/event_category"
+                android:textAllCaps="true"
+                android:textColor="@color/colorBlack"
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/eventDiscipline_evd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/eventSubhead_evd"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginEnd="30dp"
+                android:fontFamily="@font/kanit_extralight_italic"
+                android:text="@string/event_discipline"
+                android:textColor="@color/colorBlack"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/venue_evd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/eventDiscipline_evd"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/kanit_italic"
+                android:text="Venue : "
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/venue_evd2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/eventDiscipline_evd"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="19dp"
+                android:layout_marginEnd="20dp"
+                android:layout_toEndOf="@id/venue_evd"
+                android:fontFamily="@font/kanit_semibold"
+                android:text="@string/eventVenue"
+                android:textColor="@color/colorAccent"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/date_evd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/venue_evd2"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/kanit_italic"
+                android:text="Date : "
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/date_evd2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/venue_evd2"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginTop="9dp"
+                android:layout_toEndOf="@id/date_evd"
+                android:fontFamily="@font/kanit_semibold"
+                android:text="@string/eventDate"
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/starttime_evd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/date_evd2"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/kanit_italic"
+                android:text="Start Time : "
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/starttime_evd2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/date_evd2"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginTop="10dp"
+                android:layout_toEndOf="@id/starttime_evd"
+                android:fontFamily="@font/kanit"
+                android:text="@string/eventTime"
+                android:textColor="@color/colorBlack"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/duration_evd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/starttime_evd2"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/kanit_italic"
+                android:text="Duration : "
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/duration_evd2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/starttime_evd2"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginTop="10dp"
+                android:layout_toEndOf="@id/duration_evd"
+                android:fontFamily="@font/kanit"
+                android:text="@string/eventDuration"
+                android:textColor="@color/colorBlack"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/bybus_evd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/duration_evd2"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/kanit_italic"
+                android:text="Travel by bus : "
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/bybus_evd2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/duration_evd2"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginTop="10dp"
+                android:layout_toEndOf="@id/bybus_evd"
+                android:fontFamily="@font/kanit"
+                android:text="@string/eventByBus"
+                android:textColor="@color/colorBlack"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/imageView_evd"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_below="@id/bybus_evd2"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="30dp"
+                android:src="@drawable/tokyo_stadium" />
+
+        </RelativeLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/book_now_btn"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginBottom="30dp"
+        android:layout_toEndOf="@+id/back_btn_evd"
+        android:background="@drawable/bg_btn_purple_curve"
+        android:fontFamily="@font/muli_bold"
+        android:text="Book Now"
+        android:textAllCaps="false"
+        android:textColor="@color/colorWhite"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/back_btn_evd"
+        android:layout_width="90dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="36dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/bg_btn_white_curve"
+        android:fontFamily="@font/muli_bold"
+        android:text="Back"
+        android:textAllCaps="false"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp" />
+
+</RelativeLayout>

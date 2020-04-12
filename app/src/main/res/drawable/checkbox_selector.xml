@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android" >
-    <item android:drawable="@drawable/bg_cbtn_circle_avaliable"
+    <item android:drawable="@drawable/bg_cbtn_seat_avaliable"
         android:state_checked="false"
         android:state_enabled="true"/>
-    <item android:drawable="@drawable/bg_cbtn_circle_selected"
+    <item android:drawable="@drawable/bg_cbtn_seat_selected"
         android:state_checked="true"/>
-    <item android:drawable="@drawable/bg_cbtn_circle_notavaliable"
+    <item android:drawable="@drawable/bg_cbtn_seat_notavaliable"
         android:state_enabled="false"
         android:state_checked="false"/>
-    <item android:drawable="@drawable/bg_cbtn_circle_avaliable"/>
+    <item android:drawable="@drawable/bg_cbtn_seat_avaliable"/>
 </selector>

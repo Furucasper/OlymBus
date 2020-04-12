@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="60dp"
+    tools:context=".ui.home.SeatingFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorLightGray" >
+
+
+        <TextView
+            android:id="@+id/olymbus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:textColor="@color/colorAccent"
+            android:fontFamily="@font/kanit_medium_italic"
+            android:text="OLYMBUS"
+            android:textAllCaps="true"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/busTo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/olymbus"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/kanit_italic"
+            android:text="@string/bus_to"
+            android:textColor="@color/colorPrimary"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/busTo2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/olymbus"
+            android:layout_alignEnd="@+id/venueAndTime"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/kanit_italic"
+            android:text="Time"
+            android:textColor="@color/colorPrimary"
+            android:textSize="12sp" />
+
+        <RelativeLayout
+            android:id="@+id/venueAndTime"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/busTo"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:background="@drawable/bg_white_tinycurve">
+
+            <TextView
+                android:id="@+id/venue_seating"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="20dp"
+                android:fontFamily="@font/kanit_semibold"
+                android:text="Tokyo Stadium"
+                android:textColor="@color/colorBlack" />
+
+            <TextView
+                android:id="@+id/time_seating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="20dp"
+                android:fontFamily="@font/kanit_semibold"
+                android:text="14.00 - 14.30"
+                android:textColor="@color/colorBlack" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/busTypeAndSeats"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/venueAndTime"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/kanit_light"
+            android:text="BUS Type A / 20 Seats"
+            android:textColor="@color/colorPrimary"
+            android:textSize="12sp" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/theBUS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/busTypeAndSeats"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/bg_white_purple_smallcurve">
+
+
+            <TextView
+                android:id="@+id/front"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/kanit_light_italic"
+                android:text="Front"
+                android:textAllCaps="true"
+                android:textColor="@color/colorPrimary"
+                android:textSize="10sp"
+                app:layout_constraintBottom_toTopOf="@+id/driverIcon"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.153" />
+
+            <TextView
+                android:id="@+id/door"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/front"
+                android:fontFamily="@font/kanit_light_italic"
+                android:rotation="90"
+                android:text="Door"
+                android:textAllCaps="true"
+                android:textColor="@color/colorPrimary"
+                android:textSize="10sp"
+                app:layout_constraintBottom_toTopOf="@+id/seatingZone"
+                app:layout_constraintEnd_toStartOf="@+id/seatingZone"
+                app:layout_constraintTop_toBottomOf="@+id/front" />
+
+            <ImageView
+                android:id="@+id/driverIcon"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_below="@id/front"
+                android:layout_alignEnd="@+id/seatingZone"
+                android:layout_marginTop="25dp"
+                android:src="@drawable/bg_circle_driver"
+                app:layout_constraintEnd_toEndOf="@+id/seatingZone"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/driver"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/driverIcon"
+                android:layout_alignStart="@+id/driverIcon"
+                android:layout_alignEnd="@+id/driverIcon"
+                android:layout_marginBottom="5dp"
+                android:fontFamily="@font/kanit"
+                android:text="Driver"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textSize="8sp"
+                app:layout_constraintBottom_toTopOf="@+id/seatingZone"
+                app:layout_constraintEnd_toEndOf="@+id/driverIcon"
+                app:layout_constraintStart_toStartOf="@+id/driverIcon"
+                app:layout_constraintTop_toBottomOf="@+id/driverIcon" />
+
+            <TableLayout
+                android:id="@+id/seatingZone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/driver"
+                android:layout_centerHorizontal="true"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/driverIcon">
+
+            </TableLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/busPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/theBUS"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/kanit_light"
+            android:text="Normal Seat 2500 ฿ / Priority Seat +500 ฿"
+            android:textSize="12sp"
+            android:textColor="@color/colorBlack" />
+
+        <Button
+            android:id="@+id/eventDetail_btn_seating"
+            android:layout_width="100dp"
+            android:layout_height="21dp"
+            android:layout_below="@id/busPrice"
+            android:layout_marginTop="30dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/bg_btn_tranparent_gray_curve"
+            android:fontFamily="@font/muli_bold"
+            android:paddingBottom="1dp"
+            android:text="event detail"
+            android:textAllCaps="false"
+            android:textColor="@color/colorGray"
+            android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/book_btn"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_below="@id/eventDetail_btn_seating"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginBottom="40dp"
+            android:layout_toEndOf="@+id/back_btn_seating"
+            android:background="@drawable/bg_btn_purple_curve"
+            android:fontFamily="@font/muli_bold"
+            android:text="Book"
+            android:textAllCaps="false"
+            android:textColor="@color/colorWhite"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/back_btn_seating"
+            android:layout_width="90dp"
+            android:layout_height="50dp"
+            android:layout_below="@id/eventDetail_btn_seating"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/bg_btn_white_curve"
+            android:fontFamily="@font/muli_bold"
+            android:text="Back"
+            android:textAllCaps="false"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18sp" />
+
+
+    </RelativeLayout>
+
+
+</ScrollView>

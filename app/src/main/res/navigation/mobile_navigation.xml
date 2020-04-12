@@ -3,13 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@id/navigation_home">
 
     <fragment
         android:id="@+id/navigation_home"
         android:name="app.olympics.olymbus.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_busDetailFragment"
+            app:destination="@id/busDetailFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_booking"
@@ -22,4 +26,36 @@
         android:name="app.olympics.olymbus.ui.profile.ProfileFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/busDetailFragment"
+        android:name="app.olympics.olymbus.ui.home.EventDetailFragment"
+        android:label="fragment_blank"
+        tools:layout="@layout/fragment_event_detail" >
+        <action
+            android:id="@+id/action_busDetailFragment_to_busScheduleFragment"
+            app:destination="@id/busScheduleFragment" />
+        <argument
+            android:name="eventName"
+            app:argType="string" />
+        <argument
+            android:name="category"
+            app:argType="string" />
+        <argument
+            android:name="discipline"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/busScheduleFragment"
+        android:name="app.olympics.olymbus.ui.home.BusScheduleFragment"
+        android:label="fragment_bus_schedule"
+        tools:layout="@layout/fragment_bus_schedule" >
+        <action
+            android:id="@+id/action_busScheduleFragment_to_seatingFragment"
+            app:destination="@id/seatingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/seatingFragment"
+        android:name="app.olympics.olymbus.ui.home.SeatingFragment"
+        android:label="fragment_seating"
+        tools:layout="@layout/fragment_seating" />
 </navigation>

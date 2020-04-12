@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/colorWhite">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="290dp"
+            android:layout_height="wrap_content">
+
+
+            <ImageView
+                android:id="@+id/olympic_rings"
+                android:layout_width="50dp"
+                android:layout_height="23dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                app:srcCompat="@drawable/ic_olympic_rings" />
+
+            <ImageView
+                android:id="@+id/eventIcon_dialog_evd"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_below="@id/olympic_rings"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="15dp"
+                app:srcCompat="@drawable/ic_volleyball_pictogram" />
+
+            <TextView
+                android:id="@+id/eventHead_dialog_evd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/olympic_rings"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_toEndOf="@+id/eventIcon_dialog_evd"
+                android:fontFamily="@font/kanit_semibold"
+                android:text="Weightlifting"
+                android:textAlignment="textStart"
+                android:textColor="@color/colorBlack"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/eventSubhead_dialog_evd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/eventHead_dialog_evd"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="-3dp"
+                android:layout_toEndOf="@+id/eventIcon_dialog_evd"
+                android:fontFamily="@font/kanit_semibold_italic"
+                android:text="Individuals"
+                android:textAlignment="textStart"
+                android:textAllCaps="true"
+                android:textColor="@color/colorBlack"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/eventDiscipline_dialog_evd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/eventSubhead_dialog_evd"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="15dp"
+                android:layout_toEndOf="@+id/eventIcon_dialog_evd"
+                android:fontFamily="@font/kanit_extralight_italic"
+                android:text="+109 kg Group A Victory Ceremony, Men's"
+                android:textAlignment="textStart"
+                android:textColor="@color/colorBlack"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/venue_dialog_evd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/eventDiscipline_dialog_evd"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/kanit_italic"
+                android:text="Venue : Tokyo International Forum"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/date_dialog_evd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/venue_dialog_evd"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/kanit_italic"
+                android:text="Date : 04 August 2020"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/starttime_dialog_evd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/date_dialog_evd"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/kanit_italic"
+                android:text="Start Time : 10.00"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/duration_dialog_evd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/starttime_dialog_evd"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/kanit_italic"
+                android:text="Duration : 2.10 hrs"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/bybus_dialog_evd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/duration_dialog_evd"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/kanit_italic"
+                android:text="Travel by bus : 30 min"
+                android:textSize="14sp" />
+
+            <Button
+                android:id="@+id/close_dialog_evd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/bybus_dialog_evd"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:background="@android:color/transparent"
+                android:fontFamily="@font/muli_bold"
+                android:text="Close"
+                android:textColor="@color/colorAccent"
+                android:textSize="14sp" />
+
+
+        </RelativeLayout>
+
+    </LinearLayout>
+</LinearLayout>

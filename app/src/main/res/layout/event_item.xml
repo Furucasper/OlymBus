@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:background="@color/colorLightGray">
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -48,7 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/eventHead"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="-5dp"
+            android:layout_marginTop="-3dp"
             android:layout_toEndOf="@+id/eventIcon"
             android:fontFamily="@font/kanit_semibold_italic"
             android:text="@string/event_category"
@@ -63,7 +62,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/eventSubhead"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="-3dp"
+            android:layout_marginTop="0dp"
             android:layout_marginEnd="15dp"
             android:layout_toStartOf="@+id/eventTime"
             android:layout_toEndOf="@+id/eventIcon"
@@ -108,7 +107,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/eventDiscipline"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="-5dp"
+            android:layout_marginTop="0dp"
             android:fontFamily="@font/kanit_semibold"
             android:text="@string/bus_to"
             android:textAlignment="textStart"
