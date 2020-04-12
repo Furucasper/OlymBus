@@ -5,8 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -15,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import app.olympics.olymbus.EventItem;
 import app.olympics.olymbus.EventAdapter;
+import app.olympics.olymbus.InputProcess;
 import app.olympics.olymbus.R;
 
 public class HomeFragment extends Fragment {
@@ -22,7 +25,7 @@ public class HomeFragment extends Fragment {
     private HomeViewModel homeViewModel;
     private RecyclerView eventsRecyclerview;
     private EventAdapter eventsAdapter;
-    private List<EventItem> mData;
+    private ArrayList<EventItem> eventData;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -31,24 +34,24 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         eventsRecyclerview = view.findViewById(R.id.eventList);
-        mData = new ArrayList<>();
+        eventData = new ArrayList<>();
+        InputStream input = getResources().openRawResource(R.raw.input);
+        InputProcess in = new InputProcess(new Scanner(input));
 
-        //fill list event with data
-        //EventItem(String event, String category, String content, String venue, String date, String time)
-        //example >> This is RecyclerView test. >>
-        mData.add(new EventItem("Event","category","/// This is discipline. ////// This is discipline. ////// This is discipline. ////// This is discipline. ////// This is discipline. ///","Event Venus","30 FEB","00.00"));
-        for (int i=0;i<3;i++){
-            mData.add(new EventItem("Running","Men","Final round","National Stadium","23 MAR","07.00"));
+        String[] eventDetail ;
+
+        for (int i = 0; i < 11; i++)
+        {
+            eventDetail = in.getEvent().get(i).split(",");
+            eventData.add(new EventItem(eventDetail[0], eventDetail[1], eventDetail[2], eventDetail[3], eventDetail[4], eventDetail[5], eventDetail[6], eventDetail[7]));
         }
-        mData.add(new EventItem("Swimming","Women","Preliminary round","Aquatics Centre","29 MAR","13.00"));
-        mData.add(new EventItem("Football","Men","U-23/ Final round/ Brazil - Germany","Tokyo Stadium","01 APR","18.00"));
 
-
-        //setup adapter
-        eventsAdapter = new EventAdapter(getActivity(),mData);
+        eventsAdapter = new EventAdapter(getActivity(), eventData);
         eventsRecyclerview.setAdapter(eventsAdapter);
         eventsRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+
         return view;
     }
+
 }

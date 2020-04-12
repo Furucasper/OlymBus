@@ -37,11 +37,11 @@
 
     <ImageView
         android:id="@+id/login_logo"
-        android:layout_width="180dp"
-        android:layout_height="110dp"
+        android:layout_width="220dp"
+        android:layout_height="130dp"
         android:layout_above="@id/in_uid"
-        android:layout_marginTop="100dp"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
         app:srcCompat="@drawable/olymbus_logo" />
 
     <EditText
