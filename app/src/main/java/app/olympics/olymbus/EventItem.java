@@ -2,21 +2,37 @@ package app.olympics.olymbus;
 
 public class EventItem {
 
-    String event,category,content,venue,date,time;
+    String event,category,discipline,venue,date,time, duration,byBus;
 
     public EventItem(){
 
     }
 
-    public EventItem(String event, String category, String content, String venue, String date, String time) {
+    //Sport, Discipline, Category, Venue, Date, Start time, Duration, Bus travel time
+    public EventItem(String event, String discipline, String category, String venue, String date, String time,String duration, String byBus) {
         this.event = event;
         this.category = category;
-        this.content = content;
+        this.discipline = discipline;
         this.venue = venue;
         this.date = date;
         this.time = time;
+        this.duration = duration;
+        this.byBus = byBus;
     }
 
+
+
+    public int getPic(){
+
+        switch (event.toLowerCase()){
+            case "swimming" : return R.drawable.ic_swimming_pictogram;
+            case "football" : return R.drawable.ic_football_pictogram;
+            case "volleyball" : return R.drawable.ic_volleyball_pictogram;
+            case  "running" : return R.drawable.ic_athletics_pictogram;
+            case "taekwondo" : return R.drawable.ic_taekwondo_pictogram;
+            default : return R.drawable.ic_black_olympic_rings;
+        }
+    }
 
     public String getEvent() {
         return event;
@@ -26,8 +42,8 @@ public class EventItem {
         return category;
     }
 
-    public String getContent() {
-        return content;
+    public String getDiscipline() {
+        return discipline;
     }
 
     public String getVenue() {
@@ -42,39 +58,11 @@ public class EventItem {
         return time;
     }
 
-    public int getPic(){
-
-        switch (event.toLowerCase()){
-            case "swimming" : return R.drawable.ic_swimming_pictogram;
-            case "football" : return R.drawable.ic_football_pictogram;
-            case "volleyball" : return R.drawable.ic_volleyball_pictogram;
-            case  "running" : return R.drawable.ic_athletics_pictogram;
-            case "taekwondo" : return R.drawable.ic_taekwondo_pictogram;
-            default : return R.drawable.ic_black_olympic_rings;
-        }
+    public String getDuration() {
+        return duration;
     }
 
-    public void setEvent(String event) {
-        this.event = event;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public void setVenue(String venue) {
-        this.venue = venue;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
+    public String getByBus() {
+        return byBus;
     }
 }
