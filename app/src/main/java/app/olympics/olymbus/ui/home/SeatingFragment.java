@@ -21,7 +21,8 @@ import app.olympics.olymbus.R;
 public class SeatingFragment extends Fragment {
 
     private int cols, rows;
-    int theSeat[][];
+    private int theSeat[];
+    private CheckBox seat;
 
     public SeatingFragment() {
         // Required empty public constructor
@@ -32,6 +33,17 @@ public class SeatingFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_seating, container, false);
+
+        Button bookBtn = view.findViewById(R.id.book_btn);
+        /*
+        bookBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                seat.getId();
+            }
+        });
+
+         */
 
         Button backBtn = view.findViewById(R.id.back_btn_seating);
         backBtn.setOnClickListener(new View.OnClickListener() {
@@ -72,8 +84,10 @@ public class SeatingFragment extends Fragment {
          */
         cols = 4;
         rows = 5;
-        theSeat = new int[rows][cols];
-        int n = 1;
+        theSeat = new int[20];
+        theSeat[10]=1;
+        theSeat[5]=1;
+        int n = 0;
 
         int margin5dp = (int) TypedValue.applyDimension(
                 TypedValue.COMPLEX_UNIT_DIP, 5, getResources()
@@ -102,10 +116,11 @@ public class SeatingFragment extends Fragment {
 
             for(int j = 0; j<cols; j++){
 
-                CheckBox seat = new CheckBox(getActivity());
+                seat = new CheckBox(getActivity());
                 seat.setButtonDrawable(R.drawable.checkbox_selector);
-                seat.setId((10*(i+1)+j)); //SEAT ID = row col [ ex. row 1 col 4 = 14 ]
-                if(theSeat[i][j]==1) seat.setEnabled(false); //check the seat is available.
+                seat.setId(n);
+                //seat.setId((10*(i+1)+j)); //SEAT ID = row col [ ex. row 1 col 4 = 14 ]
+                if(theSeat[n]==1) seat.setEnabled(false); //check the seat is available.
                 /*
                 seat.setText(""+colsPosition);
                 seat.setTextSize(9);
@@ -138,7 +153,7 @@ public class SeatingFragment extends Fragment {
                 seatRow.addView(colNum);
                  */
 
-                //n++;
+                n++;
 
             }
 
@@ -146,6 +161,15 @@ public class SeatingFragment extends Fragment {
             seatingZone.addView(seatRow, i);
 
         }
+        /*
+        seat.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+            }
+        });
+
+         */
 
         return view;
     }

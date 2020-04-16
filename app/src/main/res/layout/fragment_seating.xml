@@ -146,7 +146,7 @@
                 android:layout_below="@id/front"
                 android:layout_alignEnd="@+id/seatingZone"
                 android:layout_marginTop="25dp"
-                android:src="@drawable/bg_circle_driver"
+                android:src="@drawable/bg_driver"
                 app:layout_constraintEnd_toEndOf="@+id/seatingZone"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -191,17 +191,126 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/theBUS"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:fontFamily="@font/kanit_light"
-            android:text="Normal Seat 2500 ฿ / Priority Seat +500 ฿"
+            android:text="Normal Seat XXXX ฿ / Priority Seat +500 ฿"
             android:textSize="12sp"
             android:textColor="@color/colorBlack" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/seatingDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/busPrice"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/bg_btn_tranparent_gray_curve">
+
+            <ImageView
+                android:id="@+id/selected"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/bg_seat_selected"
+                app:layout_constraintBottom_toBottomOf="@+id/notavailable"
+                app:layout_constraintStart_toStartOf="@+id/priority"
+                app:layout_constraintTop_toTopOf="@+id/notavailable" />
+
+            <ImageView
+                android:id="@+id/available"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="12dp"
+                android:src="@drawable/bg_seat_available"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/priority"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="35dp"
+                android:src="@drawable/bg_priority_seat"
+                app:layout_constraintStart_toEndOf="@+id/available_text"
+                app:layout_constraintTop_toTopOf="@+id/available" />
+
+            <ImageView
+                android:id="@+id/notavailable"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="12dp"
+                android:src="@drawable/bg_seat_notavailable"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/available"
+                app:layout_constraintTop_toBottomOf="@+id/available"
+                app:layout_constraintVertical_bias="0.071" />
+
+            <TextView
+                android:id="@+id/available_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_toEndOf="@id/available"
+                android:fontFamily="@font/kanit_light_italic"
+                android:text="Available"
+                android:textColor="@color/colorBlack"
+                android:textSize="10sp"
+                app:layout_constraintBottom_toBottomOf="@+id/available"
+                app:layout_constraintStart_toEndOf="@+id/available"
+                app:layout_constraintTop_toTopOf="@+id/available" />
+
+            <TextView
+                android:id="@+id/notavailable_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/kanit_light_italic"
+                android:text="Not Available"
+                android:textColor="@color/colorBlack"
+                android:textSize="10sp"
+                app:layout_constraintBottom_toBottomOf="@+id/notavailable"
+                app:layout_constraintStart_toStartOf="@+id/available_text"
+                app:layout_constraintTop_toTopOf="@+id/notavailable" />
+
+            <TextView
+                android:id="@+id/priority_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="24dp"
+                android:layout_toEndOf="@id/priority"
+                android:fontFamily="@font/kanit_light_italic"
+                android:text="Priority Seat"
+                android:textColor="@color/colorBlack"
+                android:textSize="10sp"
+                app:layout_constraintBottom_toBottomOf="@+id/priority"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/priority"
+                app:layout_constraintTop_toTopOf="@+id/priority" />
+
+            <TextView
+                android:id="@+id/selected_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/selected"
+                android:fontFamily="@font/kanit_light_italic"
+                android:text="Selected"
+                android:textColor="@color/colorBlack"
+                android:textSize="10sp"
+                app:layout_constraintBottom_toBottomOf="@+id/selected"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/priority_text"
+                app:layout_constraintTop_toTopOf="@+id/selected" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <Button
             android:id="@+id/eventDetail_btn_seating"
             android:layout_width="100dp"
             android:layout_height="21dp"
-            android:layout_below="@id/busPrice"
+            android:layout_below="@id/seatingDetail"
             android:layout_marginTop="30dp"
             android:layout_centerHorizontal="true"
             android:background="@drawable/bg_btn_tranparent_gray_curve"
