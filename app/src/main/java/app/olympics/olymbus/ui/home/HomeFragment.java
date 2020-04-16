@@ -16,7 +16,6 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import app.olympics.olymbus.EventAdapter;
-import app.olympics.olymbus.EventItem;
 import app.olympics.olymbus.InputProcess;
 import app.olympics.olymbus.R;
 

@@ -62,4 +62,9 @@ public class InputProcess
     {
         return allBus;
     }
+
+    public ArrayList<String> getAccount()
+    {
+        return allAccount;
+    }
 }

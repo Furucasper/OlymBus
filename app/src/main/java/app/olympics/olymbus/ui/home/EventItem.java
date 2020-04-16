@@ -1,6 +1,8 @@
-package app.olympics.olymbus;
+package app.olympics.olymbus.ui.home;
 
 import java.util.GregorianCalendar;
+
+import app.olympics.olymbus.R;
 
 public class EventItem {
 
