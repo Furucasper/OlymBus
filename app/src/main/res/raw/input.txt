@@ -1,13 +1,13 @@
 //			Sport, 				Discipline, 						Category, 			Venue, 								Date, 		Start time, 	Duration, 	Bus travel time
 Event 1	: 	Ceremony, 			Opening Ceremony, 					All, 				Olympic Stadium, 					24.7.20, 	20.00, 			3, 			30
-Event 2	:	Athletics,			Marathon Final,						Men's,				Olympic Stadium,					08.08.20,,	19.00,			3.20,		30
+Event 2	:	Athletics,			Marathon Final,						Men's,				Olympic Stadium,					08.08.20,	19.00,			3.20,		30
 Event 3 : 	Swimming, 			Preliminary,						Individuals, 		Tokyo Aquatics Centre, 				26.7.20, 	10.30, 			2, 			45
 Event 4	:	Swimming,			Freestyle/Medly Final,				Individuals,		Tokyo Aquatics Centre,				02.08.20,	10.30,			2,			45
 Event 5 : 	Diving, 			Springboard Semifinal, 				Men,				Tokyo Aquatics Centre, 				04.08.20, 	10.00, 			1.30, 		45
 Event 6	:	Diving,				Synchronized 3m Springboard Final,	Individuals,		Tokyo Aquatics Centre,				26.07.20,	15.00,			1,			45
 Event 7	:	Diving,				10m Platform Semifinal,				Men's,				Tokyo Aquatics Centre,				08.08.20,	11.00,			1.30,		45
 Event 8	:	Weightlifting,		40 kg Group B,						Women's,			Tokyo International Forum, 			25.07.20,	13.20,			1.50,		23
-Event 9	:	Weightlifting,		76 kg Group B,						Women's,			Tokyo International Forum,			08.02.20,	13.50,			2.10,		23
+Event 9	:	Weightlifting,		76 kg Group B,						Women's,			Tokyo International Forum,			02.08.20,	13.50,			2.10,		23
 Event 10:	Weightlifting,		+109 kg Group B,					Men's,				Tokyo International Forum,			04.08.20,	13.50,			2.10,		23
 Event 11:	Weightlifting,		+109 kg Group A & Victory Ceremony, Men's,				Tokyo International Forum,			05.08.20,	14.50,			2.10,		23
 

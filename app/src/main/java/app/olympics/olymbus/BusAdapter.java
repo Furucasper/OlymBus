@@ -1,6 +1,7 @@
 package app.olympics.olymbus;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,8 +41,20 @@ public class BusAdapter extends RecyclerView.Adapter<BusAdapter.BusViewHolder> {
         //holder.departFrom.setText("Depart : "+mData.get(position).getDepartFrom());
         holder.busType.setText(mData.get(position).getType());
         holder.busSeats.setText(mData.get(position).getBusSeats());
-        holder.availableSeats.setText(mData.get(position).getAvailableSeats());
+        holder.availableSeats.setText(""+mData.get(position).getAvailableSeats());
         holder.price.setText(""+mData.get(position).getCost()+" ฿");
+
+        if(mData.get(position).getAvailableSeats() == 0){
+            holder.busStatus.setText("sold out");
+            holder.busStatus.setTextColor(Color.GRAY);
+            holder.availableSeats.setTextColor(Color.GRAY);
+            holder.duration.setTextColor(Color.GRAY);
+            holder.busType.setTextColor(Color.GRAY);
+            holder.busSeats.setTextColor(Color.GRAY);
+        }else if (mData.get(position).getAvailableSeats() <= 2){
+            holder.busStatus.setTextColor(0xFFFF4D4D);
+            holder.availableSeats.setTextColor(0xFFFF4D4D);
+        }
     }
 
 
@@ -52,7 +65,7 @@ public class BusAdapter extends RecyclerView.Adapter<BusAdapter.BusViewHolder> {
 
     public class BusViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        TextView duration,departFrom,busType,busSeats,busStatus,availableSeats,price;
+        TextView duration,busType,busSeats,busStatus,availableSeats,price;
         OnBusListener onBusListener;
 
 

@@ -1,8 +1,12 @@
 package app.olympics.olymbus;
 
+import java.util.GregorianCalendar;
+
 public class EventItem {
 
     String event,category,discipline,venue,date,time, duration,byBus;
+    private GregorianCalendar gregolendar;
+    private int year,month,day,hour,min;
 
     public EventItem(){
 
@@ -17,6 +21,17 @@ public class EventItem {
         this.time = time;
         this.duration = duration;
         this.byBus = byBus;
+
+        String[] aDay = date.trim().split("\\.");
+        String[] aTime = time.split("\\.");
+
+        year = Integer.parseInt(aDay[2])+2000;
+        month = Integer.parseInt(aDay[1]);
+        day = Integer.parseInt(aDay[0]);
+        hour = Integer.parseInt(aTime[0]);
+        min = Integer.parseInt(aTime[1]);
+
+        gregolendar = new GregorianCalendar(year, month, day, hour, min);
     }
 
     public String getEvent() {
@@ -35,7 +50,17 @@ public class EventItem {
         return venue;
     }
 
-    public String getDate() { return date; }
+    public String getDate() {
+        String[] MONTH = {"January","February","March","April","May","June","July","August","September","October","November","December"};
+
+        return ""+day+" "+MONTH[month-1]+" "+year; }
+
+    public String getDateMonth() {
+
+        String[] MONTH = {"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"};
+        return day+" "+MONTH[month-1];
+    }
+
 
     public String getTime() {
         return time;
@@ -61,6 +86,10 @@ public class EventItem {
             case "volleyball" : return R.drawable.ic_volleyball_pictogram;
             default : return R.drawable.ic_black_olympic_rings;
         }
+    }
+
+    public GregorianCalendar getGregolendar() {
+        return gregolendar;
     }
 
 }

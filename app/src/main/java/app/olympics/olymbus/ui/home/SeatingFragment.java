@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TableLayout;
 import android.widget.TableRow;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import app.olympics.olymbus.R;
@@ -72,6 +73,7 @@ public class SeatingFragment extends Fragment {
         cols = 4;
         rows = 5;
         theSeat = new int[rows][cols];
+        int n = 1;
 
         int margin5dp = (int) TypedValue.applyDimension(
                 TypedValue.COMPLEX_UNIT_DIP, 5, getResources()
@@ -124,15 +126,20 @@ public class SeatingFragment extends Fragment {
                     seat.setLayoutParams(params);
                 }
                 seatRow.addView(seat);
-                /*
+
                 TextView colNum = new TextView(getActivity());
-                if(i==0)colNum.setText(""+colsPosition);
-                else colNum.setText(" ");
-                colNum.setTextSize(10);
-                colNum.setTextColor(getResources().getColor(colorPrimary));
+                /*
+                colNum.setText(""+n);
+                colNum.setGravity(Gravity.RIGHT);
+                //if(i==0)colNum.setText(""+colsPosition);
+                //else colNum.setText(" ");
+                colNum.setTextSize(8);
+                colNum.setTextColor(getResources().getColor(R.color.colorPrimary));
                 seatRow.addView(colNum);
-                colsPosition++;
                  */
+
+                //n++;
+
             }
 
 

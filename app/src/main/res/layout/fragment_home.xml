@@ -4,15 +4,16 @@
     android:id="@+id/homePage"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    android:background="@color/colorLightGray"
-    android:layout_marginBottom="60dp">
+    android:layout_marginBottom="56dp"
+
+    android:fitsSystemWindows="true">
 
     <RelativeLayout
         android:id="@+id/Home"
         android:layout_width="match_parent"
         android:layout_height="110dp"
         android:layout_gravity="top"
+        android:elevation="2dp"
         android:background="@color/colorWhite"
         android:orientation="vertical">
 
@@ -43,8 +44,8 @@
             android:id="@+id/imageView"
             android:layout_width="60dp"
             android:layout_height="40dp"
-            android:layout_centerVertical="true"
             android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
             android:layout_marginEnd="40dp"
             app:srcCompat="@drawable/ic_olympic_rings" />
 
@@ -58,9 +59,10 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/eventList"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:paddingBottom="10dp" />
     </ScrollView>
-
 
 
 </RelativeLayout>

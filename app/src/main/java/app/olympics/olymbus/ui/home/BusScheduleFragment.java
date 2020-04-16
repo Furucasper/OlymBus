@@ -10,9 +10,11 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Scanner;
 
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
@@ -20,6 +22,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import app.olympics.olymbus.BusAdapter;
 import app.olympics.olymbus.BusItem;
+import app.olympics.olymbus.InputProcess;
 import app.olympics.olymbus.R;
 
 
@@ -27,7 +30,8 @@ public class BusScheduleFragment extends Fragment implements BusAdapter.OnBusLis
 
     private RecyclerView busRecyclerview;
     private BusAdapter busAdapter;
-    private List<BusItem> busData;
+    private ArrayList<BusItem> busData;
+    private ArrayList<BusItem> busFilter = new ArrayList<>();
     private Bundle bundle = getArguments();
 
     public BusScheduleFragment() {
@@ -45,11 +49,15 @@ public class BusScheduleFragment extends Fragment implements BusAdapter.OnBusLis
 
         bundle = getArguments();
         final String date = bundle.getString("date");
+        final String venue = bundle.getString("venue");
         final String name = bundle.getString("eventName");
 
+        TextView busDes = view.findViewById(R.id.venue_bs);
+        busDes.setText(venue);
 
         TextView busDate = view.findViewById(R.id.textDate);
         busDate.setText(date);
+
 
         ImageButton backBtn= view.findViewById(R.id.back_btn_busS);
         backBtn.setOnClickListener(new View.OnClickListener() {
@@ -83,29 +91,26 @@ public class BusScheduleFragment extends Fragment implements BusAdapter.OnBusLis
             }
         });
 
-        //fill bus list with data
-        //BusItem(String duration, String departFrom, String busType, String busSeats, int availableSeats, double price)
-        //example >> This is RecyclerView test. >>
-
-        busData.add(new BusItem("Type A", "Olympic Stadium", "16.30", 30, 5, 4, 1000));
-        busData.add(new BusItem("Type A", "Olympic Stadium", "17.30", 30, 5, 4, 1000));
-        //busData.add(new BusItem("Type A", "Tokyo Aquatics Centre", "09.00", 45, 5, 4, 1000));
-        //busData.add(new BusItem("Type A", "Tokyo Aquatics Centre", "09.30", 45, 5, 4, 1000));
-        //busData.add(new BusItem("Type A", "Tokyo International Forum", "12.30", 23, 5, 4, 1000));
-        busData.add(new BusItem("Type B", "Olympic Stadium", "19.00", 30, 5, 2, 1500));
-        /*
-        busData.add(new EventItem("Event","category","/// This is discipline. ////// This is discipline. ////// This is discipline. ////// This is discipline. ////// This is discipline. ///","Event Venus","30 FEB","00.00"));
-        for (int i=0;i<10;i++){
-            busData.add(new EventItem("Running","Men","Final round","National Stadium","23 MAR","07.00"));
+        InputStream input = getResources().openRawResource(R.raw.input);
+        InputProcess in = new InputProcess(new Scanner(input));
+        String[] busDetail ;
+        for (int j = 0; j < in.getBus().size(); j++)
+        {
+            busDetail=in.getBus().get(j).split(",");
+            busData.add(new BusItem(busDetail[0], busDetail[1], busDetail[2], busDetail[3], busDetail[4], busDetail[5], busDetail[6]));
         }
-        busData.add(new EventItem("Swimming","Women","Preliminary round","Aquatics Centre","29 MAR","13.00"));
-        busData.add(new EventItem("Football","Men","U-23/ Final round/ Brazil - Germany","Tokyo Stadium","01 APR","18.00"));
 
-         */
+        for(BusItem b : busData){
+            String destinationRequest = venue.toLowerCase().trim();
+            if(b.getDestination().toLowerCase().trim().contains(destinationRequest)) {
+                busFilter.add(b);
+            }
+        }
 
-        //setup adapter
+        busData.clear();
 
-        busAdapter = new BusAdapter(getActivity(),busData,this);
+
+        busAdapter = new BusAdapter(getActivity(),busFilter,this);
         busRecyclerview.setAdapter(busAdapter);
         busRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -114,6 +119,10 @@ public class BusScheduleFragment extends Fragment implements BusAdapter.OnBusLis
 
     @Override
     public void onEventClick(int position) {
+        if(busFilter.get(position).getAvailableSeats()==0){
+            Toast.makeText(getActivity(), "This bus is sold out.", Toast.LENGTH_SHORT).show();
+            return;
+        }
         NavHostFragment.findNavController(this).navigate(R.id.action_busScheduleFragment_to_seatingFragment, bundle);
     }
 

@@ -1,16 +1,13 @@
 package app.olympics.olymbus;
-/**
- *
- * @author snipe
- */
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class InputProcess
 {
-    private static ArrayList <String> allEvents = new ArrayList <String>();
-    private static ArrayList <String> allBus = new ArrayList <String>();
-    private static ArrayList <String> allAccount = new ArrayList <String>();
+    private  ArrayList <String> allEvents = new ArrayList <>();
+    private  ArrayList <String> allBus = new ArrayList <>();
+    private  ArrayList <String> allAccount = new ArrayList <>();
 
     public InputProcess (Scanner input)
     {

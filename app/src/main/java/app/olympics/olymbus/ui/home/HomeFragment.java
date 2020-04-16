@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -47,6 +46,15 @@ public class HomeFragment extends Fragment implements EventAdapter.OnEventListen
             eventData.add(new EventItem(eventDetail[0], eventDetail[1], eventDetail[2], eventDetail[3], eventDetail[4], eventDetail[5], eventDetail[6], eventDetail[7]));
         }
 
+        for(int n = 0; n<eventData.size(); n++){
+            for(int i = 0; i<eventData.size()-1; i++){
+                if(eventData.get(i+1).getGregolendar().before(eventData.get(i).getGregolendar())){
+                    eventData.add(i,eventData.get(i+1));
+                    eventData.remove(i+2);
+                }
+            }
+        }
+
         eventsAdapter = new EventAdapter(getActivity(), eventData,this);
         eventsRecyclerview.setAdapter(eventsAdapter);
         eventsRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -71,7 +79,7 @@ public class HomeFragment extends Fragment implements EventAdapter.OnEventListen
         bundle.putString("byBus",eventData.get(position).getByBus());
         bundle.putInt("eventPic",eventData.get(position).getPic());
         NavHostFragment.findNavController(this).navigate(R.id.action_navigation_home_to_busDetailFragment,bundle);
-        Toast.makeText(getActivity(), "Event : "+eventData.get(position).getEvent(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getActivity(), "Event : "+eventData.get(position).getEvent(), Toast.LENGTH_SHORT).show();
 
     }
 }

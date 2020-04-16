@@ -91,7 +91,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="5dp"
             android:fontFamily="@font/kanit_light"
-            android:text="BUS Type A / 20 Seats"
+            android:text="BUS No Type / Not specified Seats"
             android:textColor="@color/colorPrimary"
             android:textSize="12sp" />
 

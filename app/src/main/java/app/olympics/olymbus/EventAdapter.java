@@ -41,7 +41,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         holder.category.setText(mData.get(position).getCategory());
         holder.discipline.setText(mData.get(position).getDiscipline());
         holder.venue.setText(mData.get(position).getVenue());
-        holder.date.setText(mData.get(position).getDate());
+        holder.date.setText(mData.get(position).getDateMonth());
         holder.time.setText(mData.get(position).getTime());
         holder.pic.setImageResource(mData.get(position).getPic());
     }

@@ -5,28 +5,28 @@ import java.sql.Time;
 public class BusItem {
 
     private String type, destination,depart,arrive;
-    private double cost;
+    private String cost;
     private int  rows, cols, availableSeats, duration;
     private Time busDepart,busArrive;
 
     //String type, String destination, String depart, int duration, int rows, int cols, double cost
-    public BusItem(String type, String destination, String depart, int duration, int rows, int cols, double cost) {
+    public BusItem(String type, String destination, String depart, String duration, String rows, String cols, String cost) {
         this.type = type;
         this.destination = destination;
         this.depart = depart;
-        this.duration = duration;
-        this.cost = cost;
-        this.rows = rows;
-        this.cols = cols;
-        this.availableSeats = cols*rows; //default
+        this.duration = Integer.parseInt(duration);
+        this.cost = cost.substring(1);
+        this.rows = Integer.parseInt(rows);
+        this.cols = Integer.parseInt(cols);
+        this.availableSeats = this.cols*this.rows; //default
 
         String aTime[] = depart.split("\\.");
 
         int hour = Integer.parseInt(aTime[0]);
         int min = Integer.parseInt(aTime[1]);
         //demo
-        int minA = min+duration;
-        arrive = (min+duration<60)? hour+"."+(min+duration): (hour+1)+"."+((min+duration)-60);
+        int minA = min+this.duration;
+        arrive = (min+this.duration<60)? hour+"."+(min+this.duration): (hour+1)+"."+((min+this.duration)-60);
         //busDepart = new Time(hourD,minD,0);
 
 
@@ -57,8 +57,8 @@ public class BusItem {
         return (rows*cols)+" Seats";
     }
 
-    public String getAvailableSeats(){
-        return ""+availableSeats;
+    public int getAvailableSeats(){
+        return availableSeats;
     }
 
     public void setAvailableSeats(int availableSeats){
@@ -77,7 +77,7 @@ public class BusItem {
         return depart+" - "+arrive;
     }
 
-    public double getCost() {
+    public String getCost() {
         return cost;
     }
 
