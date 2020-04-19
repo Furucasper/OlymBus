@@ -2,29 +2,27 @@ package app.olympics.olymbus.ui.profile;
 
 public class AccountItem
 {
-    String username,password,citizen_id,CCV;
+    String username,password,cardNo,CVC;
 
     public AccountItem(){
 
     }
 
-    public AccountItem(String username, String password, String id, String ccv)
+    public AccountItem(String username, String password, String card, String cvc)
     {
         this.username = username;
         this.password = password;
-        this.citizen_id = id;
-        this.CCV = ccv;
+        this.cardNo = card;
+        this.CVC = cvc;
     }
 
     public String getUsername() { return username; }
 
     public String getPassword() { return password; }
 
-    public String getCitizen_id() {
-        return citizen_id;
-    }
+    public String getCardNumber() { return cardNo;}
 
-    public String getCCV() {
-        return CCV;
+    public String getCVC() {
+        return CVC;
     }
 }

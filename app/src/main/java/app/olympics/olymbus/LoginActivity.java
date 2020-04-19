@@ -13,6 +13,9 @@ import java.util.Scanner;
 
 import androidx.appcompat.app.AppCompatActivity;
 import app.olympics.olymbus.ui.profile.AccountItem;
+import app.olympics.olymbus.ui.profile.ProfileFragment;
+import app.olympics.olymbus.ui.profile.Register;
+import app.olympics.olymbus.ui.profile.ResetPassword;
 
 public class LoginActivity extends AppCompatActivity
 {
@@ -22,7 +25,6 @@ public class LoginActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
 
         Button btn = findViewById(R.id.login_btn);
         final EditText uid = findViewById(R.id.in_uid);
@@ -34,7 +36,7 @@ public class LoginActivity extends AppCompatActivity
         String[] accountDetail ;
         for (int k = 0; k < in.getAccount().size(); k++)
         {
-            accountDetail=in.getAccount().get(k).split(",");
+            accountDetail = in.getAccount().get(k).split(",");
             accountData.add(new AccountItem(accountDetail[0], accountDetail[1], accountDetail[2], accountDetail[3]));
         }
 
@@ -48,6 +50,7 @@ public class LoginActivity extends AppCompatActivity
 
                 Boolean validUsername = false;
                 Boolean validPassword = false;
+                int attempts = 0;
 
                 for (int i = 0; i < accountData.size();i++)
                 {
@@ -58,26 +61,52 @@ public class LoginActivity extends AppCompatActivity
                         if(password.equalsIgnoreCase(accountData.get(i).getPassword()))
                         {
                             validPassword = true;
+                            ProfileFragment curr_acc = new ProfileFragment(accountData.get(i));
                         }
                         else
                         {
                             Toast.makeText(getApplicationContext(), "Incorrect Password", Toast.LENGTH_LONG).show();
+                            attempts++;
+                            if (attempts == 3)
+                            {
+                                Toast.makeText(getApplicationContext(), "Please try again in $time.", Toast.LENGTH_LONG).show();
+                            }
                             return;
                         }
                     }
                     else if (!validUsername && i == accountData.size()-1)
                     {
-                        Toast.makeText(getApplicationContext(), "Incorrect Username", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "UserId does not exist. Please try again.", Toast.LENGTH_LONG).show();
                         return;
                     }
                 }
 
                 if (validUsername && validPassword)
                 {
-                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    startActivity(new Intent(LoginActivity.this, ProfileFragment.class));
                     finish();
                 }
 
+            }
+        });
+
+        final Button reset = findViewById(R.id.forgot_pwd_btn);
+        reset.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                startActivity(new Intent(LoginActivity.this, ResetPassword.class));
+                finish();
+            }
+        });
+
+        final Button register = findViewById(R.id.reg_btn);
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, Register.class));
+                finish();
             }
         });
     }
