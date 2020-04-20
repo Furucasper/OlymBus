@@ -39,7 +39,7 @@ public class HomeFragment extends Fragment implements EventAdapter.OnEventListen
 
         String[] eventDetail ;
 
-        for (int i = 0; i < 11; i++)
+        for (int i = 0; i < in.getEvent().size(); i++)
         {
             eventDetail = in.getEvent().get(i).split(",");
             eventData.add(new EventItem(eventDetail[0], eventDetail[1], eventDetail[2], eventDetail[3], eventDetail[4], eventDetail[5], eventDetail[6], eventDetail[7]));
@@ -77,6 +77,7 @@ public class HomeFragment extends Fragment implements EventAdapter.OnEventListen
         bundle.putString("eventDuration",eventData.get(position).getDuration());
         bundle.putString("byBus",eventData.get(position).getByBus());
         bundle.putInt("eventPic",eventData.get(position).getPic());
+        bundle.putSerializable("EVENT",eventData.get(position));
         NavHostFragment.findNavController(this).navigate(R.id.action_navigation_home_to_busDetailFragment,bundle);
         //Toast.makeText(getActivity(), "Event : "+eventData.get(position).getEvent(), Toast.LENGTH_SHORT).show();
 

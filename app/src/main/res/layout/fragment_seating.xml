@@ -54,18 +54,21 @@
         <RelativeLayout
             android:id="@+id/venueAndTime"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:layout_below="@id/busTo"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
             android:layout_marginLeft="40dp"
             android:layout_marginRight="40dp"
             android:background="@drawable/bg_white_tinycurve">
 
             <TextView
                 android:id="@+id/venue_seating"
-                android:layout_width="140dp"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
                 android:fontFamily="@font/kanit_semibold"
                 android:text="Tokyo Stadium"
                 android:textColor="@color/colorBlack" />
@@ -330,7 +333,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="30dp"
             android:layout_marginEnd="40dp"
-            android:layout_marginBottom="40dp"
+            android:layout_marginBottom="30dp"
             android:layout_toEndOf="@+id/back_btn_seating"
             android:background="@drawable/bg_btn_purple_curve"
             android:fontFamily="@font/muli_bold"

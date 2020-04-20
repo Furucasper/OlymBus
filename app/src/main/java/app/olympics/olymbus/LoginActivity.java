@@ -43,31 +43,36 @@ public class LoginActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                String username = uid.getText().toString();
-                String password = pwd.getText().toString();
+                String username = uid.getText().toString().trim();
+                String password = pwd.getText().toString().trim();
+
+                if(username.isEmpty() || password.isEmpty()){
+                    Toast.makeText(getApplicationContext(), "Please input username/password", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 Boolean validUsername = false;
                 Boolean validPassword = false;
 
                 for (int i = 0; i < accountData.size();i++)
                 {
-                    if(username.equalsIgnoreCase(accountData.get(i).getUsername()))
+                    if(username.equals(accountData.get(i).getUsername()))
                     {
                         validUsername = true;
 
-                        if(password.equalsIgnoreCase(accountData.get(i).getPassword()))
+                        if(password.equals(accountData.get(i).getPassword()))
                         {
                             validPassword = true;
                         }
                         else
                         {
-                            Toast.makeText(getApplicationContext(), "Incorrect Password", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "Incorrect Password", Toast.LENGTH_SHORT).show();
                             return;
                         }
                     }
                     else if (!validUsername && i == accountData.size()-1)
                     {
-                        Toast.makeText(getApplicationContext(), "Incorrect Username", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Incorrect Username", Toast.LENGTH_SHORT).show();
                         return;
                     }
                 }

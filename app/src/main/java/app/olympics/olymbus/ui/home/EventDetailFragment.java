@@ -17,6 +17,7 @@ public class EventDetailFragment extends Fragment {
 
     private String event,category,discipline,venue,date,time, duration,byBus;
     private TextView eventName,eventCategory,eventDiscipline,eventVenue,eventDate,eventTime, eventDuration,eventByBus;
+    private EventItem EVENT;
 
     public EventDetailFragment() {
         // Required empty public constructor
@@ -28,15 +29,7 @@ public class EventDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_event_detail, container, false);
         final Bundle bundle = getArguments();
-        event = bundle.getString("eventName");
-        category = bundle.getString("category");
-        discipline = bundle.getString("discipline");
-        venue = bundle.getString("venue");
-        date = bundle.getString("date");
-        time = bundle.getString("startTime");
-        duration = bundle.getString("eventDuration");
-        byBus = bundle.getString("byBus");
-        int pic = bundle.getInt("eventPic");
+        EVENT = (EventItem) bundle.getSerializable("EVENT");
 
         eventName = view.findViewById(R.id.eventHead_evd);
         eventCategory = view.findViewById(R.id.eventSubhead_evd);
@@ -48,15 +41,15 @@ public class EventDetailFragment extends Fragment {
         eventByBus = view.findViewById(R.id.bybus_evd2);
         ImageView eventPic = view.findViewById(R.id.event_image_evd);
 
-        eventName.setText(event);
-        eventCategory.setText(category);
-        eventDiscipline.setText(discipline);
-        eventVenue.setText(venue);
-        eventDate.setText(date);
-        eventTime.setText(time);
-        eventDuration.setText(duration+" hrs");
-        eventByBus.setText(byBus+" min");
-        eventPic.setImageResource(pic);
+        eventName.setText(EVENT.getEvent());
+        eventCategory.setText(EVENT.getCategory());
+        eventDiscipline.setText(EVENT.getDiscipline());
+        eventVenue.setText(EVENT.getVenue());
+        eventDate.setText(EVENT.getDate());
+        eventTime.setText(EVENT.getTime());
+        eventDuration.setText(EVENT.getDuration()+" hrs");
+        eventByBus.setText(EVENT.getByBus()+" min");
+        eventPic.setImageResource(EVENT.getPic());
 
 
         Button bookNow = view.findViewById(R.id.book_now_btn);

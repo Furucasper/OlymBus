@@ -1,12 +1,13 @@
 package app.olympics.olymbus.ui.home;
 
+import java.io.Serializable;
 import java.util.GregorianCalendar;
 
 import app.olympics.olymbus.R;
 
-public class EventItem {
+public class EventItem implements Serializable {
 
-    String event,category,discipline,venue,date,time, duration,byBus;
+    private String event,category,discipline,venue,date,time, duration,byBus;
     private GregorianCalendar gregolendar;
     private int year,month,day,hour,min;
 
@@ -68,8 +69,8 @@ public class EventItem {
         return time;
     }
 
-    public String getShortTime(){
-        return null;
+    public String getInitialDate(){
+        return date;
     }
 
     public String getDuration() { return duration; }

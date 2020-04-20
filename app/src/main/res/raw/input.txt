@@ -57,3 +57,4 @@ Account 1 : Mickey,	Mouseee222!!!, 123456789011111, 123
 Account 2 : Minnie,	[Mousie8900], 123456789011111, 123
 Account 3 : Donald,	##duckIee2608, 123456789011111, 123
 Account 4 : Daisy,	0080^26_duckoO, 123456789011111, 123
+Account 5 : Furuku,	123456, 123456789011111, 123
