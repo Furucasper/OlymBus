@@ -9,8 +9,10 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
-public class MainActivity extends AppCompatActivity {
+import app.olympics.olymbus.ui.profile.AccountItem;
+import app.olympics.olymbus.ui.profile.ProfileFragment;
 
+public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

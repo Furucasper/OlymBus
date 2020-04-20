@@ -28,12 +28,13 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="50dp"
-        android:textColor="@color/colorPrimary"
         android:background="@android:color/transparent"
         android:fontFamily="@font/muli_bold"
         android:text="Register Here"
         android:textAllCaps="false"
-        android:textSize="15sp" />
+        android:textColor="@color/colorPrimary"
+        android:textSize="15sp"
+        android:visibility="invisible" />
 
     <ImageView
         android:id="@+id/login_logo"
@@ -74,19 +75,5 @@
         android:layout_centerHorizontal="true"
         android:inputType="textPassword"
         android:paddingLeft="30dp" />
-
-    <Button
-        android:id="@+id/forgot_pwd_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="20dp"
-        android:layout_below="@id/in_pwd"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
-        android:background="@android:color/transparent"
-        android:fontFamily="@font/muli_extralight_italic"
-        android:text="Forgot password?"
-        android:textAllCaps="false"
-        android:textColor="@color/colorGray"
-        android:textSize="15sp" />
 
 </RelativeLayout>

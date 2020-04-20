@@ -5,16 +5,15 @@ import java.util.Scanner;
 
 public class InputProcess
 {
-    private  ArrayList <String> allEvents = new ArrayList <>();
-    private  ArrayList <String> allBus = new ArrayList <>();
-    private  ArrayList <String> allAccount = new ArrayList <>();
+    private  ArrayList <String> allEvents = new ArrayList <>();                                     // Create ArrayList for Events
+    private  ArrayList <String> allBus = new ArrayList <>();                                        // Create ArrayList for Buses
+    private  ArrayList <String> allAccount = new ArrayList <>();                                    // Create ArrayList for Accounts
 
-    public InputProcess (Scanner input)
-    {
-
-        String line ;
-        String[] Details ;
-        String trimmedDetails = "";
+    public InputProcess (Scanner input)                                                             // Constructor with input in parameter
+    {                                                                                               // Categorized with sequential access file. (might change to RandomAccessFile in next update)
+        String line ;                                                                               // Declare line for each line read from input
+        String[] Details ;                                                                          // Declare Array to split each category from each line
+        String trimmedDetails = "";                                                                 //
 
         while (input.hasNextLine())
         {
