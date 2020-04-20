@@ -44,7 +44,7 @@
         app:layout_constraintVertical_bias="0.100000024" />
 
     <EditText
-        android:id="@+id/userID"
+        android:id="@+id/userID_reg"
         android:layout_width="274dp"
         android:layout_height="47dp"
         android:layout_marginTop="50dp"
@@ -78,11 +78,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/card_number"
+        app:layout_constraintTop_toBottomOf="@+id/card_number_reg"
         tools:visibility="visible" />
 
     <EditText
-        android:id="@+id/card_number"
+        android:id="@+id/card_number_reg"
         android:layout_width="274dp"
         android:layout_height="47dp"
         android:layout_marginTop="20dp"
@@ -100,7 +100,7 @@
         tools:visibility="visible" />
 
     <EditText
-        android:id="@+id/password"
+        android:id="@+id/password_reg"
         android:layout_width="274dp"
         android:layout_height="47dp"
         android:layout_marginTop="20dp"
@@ -114,7 +114,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userID"
+        app:layout_constraintTop_toBottomOf="@+id/userID_reg"
         tools:visibility="visible" />
 
     <EditText
@@ -132,7 +132,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password"
+        app:layout_constraintTop_toBottomOf="@+id/password_reg"
         tools:visibility="visible" />
 
     <Button
