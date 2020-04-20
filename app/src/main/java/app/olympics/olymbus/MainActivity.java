@@ -9,9 +9,6 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
-import app.olympics.olymbus.ui.profile.AccountItem;
-import app.olympics.olymbus.ui.profile.ProfileFragment;
-
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -27,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
          */
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupWithNavController(navView, navController);
+        navView.setSelectedItemId(R.id.navigation_profile);
 
         /*
         BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener

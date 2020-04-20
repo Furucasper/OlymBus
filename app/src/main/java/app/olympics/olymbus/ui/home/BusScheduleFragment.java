@@ -154,7 +154,7 @@ public class BusScheduleFragment extends Fragment implements BusAdapter.OnBusLis
             }
         }
 
-
+        //set RecyclerView Adapter
         busAdapter = new BusAdapter(getActivity(),busFilter,this);
         busRecyclerview.setAdapter(busAdapter);
         busRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));

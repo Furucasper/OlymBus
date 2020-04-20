@@ -53,7 +53,7 @@ public class HomeFragment extends Fragment implements EventAdapter.OnEventListen
                 }
             }
         }
-
+        //set RecyclerView Adapter
         eventsAdapter = new EventAdapter(getActivity(), eventData,this);
         eventsRecyclerview.setAdapter(eventsAdapter);
         eventsRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));

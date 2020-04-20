@@ -2,10 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginBottom="60dp">
+    android:layout_marginBottom="58dp">
 
     <TextView
         android:id="@+id/textView"
@@ -25,22 +24,21 @@
     <ImageView
         android:id="@+id/icon"
         android:layout_width="115dp"
-        android:layout_height="194dp"
-        android:layout_marginTop="25dp"
+        android:layout_height="115dp"
+        android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:srcCompat="@drawable/ic_user" />
+        app:srcCompat="@drawable/bg_yellow_circle" />
 
     <TextView
         android:id="@+id/userID_reg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="24dp"
         android:text="User ID"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.26"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/icon" />
 
@@ -48,118 +46,125 @@
         android:id="@+id/userViewID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="40dp"
-        android:hint="ThomasInwZa007"
+        android:hint="Anonymous"
+        app:layout_constraintBottom_toTopOf="@+id/password_reg"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.112"
         app:layout_constraintStart_toEndOf="@+id/userID_reg"
-        app:layout_constraintTop_toBottomOf="@+id/icon" />
+        app:layout_constraintTop_toTopOf="@+id/userID_reg"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/password_reg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         android:text="Pass"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.29"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/userID_reg"
         app:layout_constraintTop_toBottomOf="@+id/userID_reg" />
 
     <TextView
         android:id="@+id/userViewPass"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
+        android:layout_width="62dp"
+        android:layout_height="18dp"
         android:hint="**********"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/password_reg"
-        app:layout_constraintTop_toBottomOf="@+id/userViewID"
-        app:layout_constraintVertical_bias="0.050000012" />
+        app:layout_constraintBottom_toBottomOf="@+id/password_reg"
+        app:layout_constraintStart_toStartOf="@+id/userViewID"
+        app:layout_constraintTop_toTopOf="@+id/password_reg" />
 
     <TextView
         android:id="@+id/card_ID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="8dp"
         android:text="Card"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.289"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/password_reg"
         app:layout_constraintTop_toBottomOf="@+id/password_reg" />
 
     <TextView
         android:id="@+id/userViewCardID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="10dp"
-        android:hint="4821 **** **** 9524"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.006"
-        app:layout_constraintStart_toEndOf="@+id/card_ID"
-        app:layout_constraintTop_toBottomOf="@+id/userViewPass" />
+        android:hint="**** **** **** 9524"
+        app:layout_constraintBottom_toBottomOf="@+id/card_ID"
+        app:layout_constraintStart_toStartOf="@+id/userViewPass"
+        app:layout_constraintTop_toTopOf="@+id/card_ID" />
 
     <Button
         android:id="@+id/edit_btn"
-        android:layout_width="163dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/bg_btn_white_yellow_smallcurve"
+        android:layout_width="120dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/bg_btn_tranparent_gray_curve"
         android:fontFamily="@font/muli_bold"
         android:text="Edit Profile"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="@color/colorGray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/userViewCardID" />
 
     <Button
         android:id="@+id/payment_btn"
-        android:layout_width="413dp"
+        android:layout_width="0dp"
         android:layout_height="58dp"
-        android:layout_marginTop="25dp"
         android:background="#00FFFFFF"
         android:fontFamily="@font/muli_bold"
         android:text="Payment                                        "
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textSize="20sp"
+        android:textSize="18sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/about_btn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_btn" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_btn"
+        app:layout_constraintVertical_bias="0.966" />
 
     <Button
         android:id="@+id/about_btn"
-        android:layout_width="413dp"
+        android:layout_width="0dp"
         android:layout_height="58dp"
-        android:layout_marginTop="5dp"
-        android:background="#00FFFFFF"
+        android:layout_marginBottom="1dp"
+        android:background="@color/colorWhite"
         android:fontFamily="@font/muli_bold"
         android:text="About us                                         "
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textSize="20sp"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/logout_btn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/payment_btn" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/logout_btn"
-        android:layout_width="413dp"
+        android:layout_width="0dp"
         android:layout_height="58dp"
-        android:layout_marginTop="5dp"
-        android:background="#00FFFFFF"
+        android:layout_marginBottom="32dp"
+        android:background="@color/colorWhite"
         android:fontFamily="@font/muli_bold"
         android:text="Log out                                           "
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textSize="20sp"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/about_btn" />
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="top" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

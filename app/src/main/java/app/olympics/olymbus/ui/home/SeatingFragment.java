@@ -80,7 +80,7 @@ public class SeatingFragment extends Fragment {
         int margin5dp = (int) TypedValue.applyDimension(
                 TypedValue.COMPLEX_UNIT_DIP, 5, getResources()
                         .getDisplayMetrics());
-
+        //loop for generate seats(CheckBox)
         for (int i = 0; i < rows; i++) {
 
             TableRow seatRow= new TableRow(getActivity());
