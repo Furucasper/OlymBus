@@ -23,8 +23,8 @@ public class Register extends AppCompatActivity {
         TextView con_password = findViewById(R.id.confirm_password);
         TextView cardNo = findViewById(R.id.card_number_reg);
         TextView cvcNo = findViewById(R.id.cvc_number);
-        Button sign_up = findViewById(R.id.signup_btn);
-        Button sign_in = findViewById(R.id.sign_in_btn);
+        Button sign_up = findViewById(R.id.signup_btn);                                             // Declare sign up button
+        Button sign_in = findViewById(R.id.sign_in_btn);                                            // Declare sign in button
 
         sign_up.setOnClickListener(new View.OnClickListener() {
             @Override

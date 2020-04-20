@@ -13,23 +13,23 @@ public class InputProcess
     {                                                                                               // Categorized with sequential access file. (might change to RandomAccessFile in next update)
         String line ;                                                                               // Declare line for each line read from input
         String[] Details ;                                                                          // Declare Array to split each category from each line
-        String trimmedDetails = "";                                                                 //
+        String trimmedDetails = "";                                                                 // Keep an easy to read details for each category
 
-        while (input.hasNextLine())
+        while (input.hasNextLine())                                                                 // Loop until input reach it's end
         {
-            line = input.nextLine();
-            if (line.startsWith("Event"))
+            line = input.nextLine();                                                                // change String in line each time read
+            if (line.startsWith("Event"))                                                           // Check if it an event category
             {
-                Details = line.substring(10).split(",");
-                for (int i = 0; i < Details.length; i++)
+                Details = line.substring(10).split(",");                                      // get rid of headers and split for sub category sorting
+                for (int i = 0; i < Details.length; i++)                                            // Loop trimming each details
                 {
                     trimmedDetails += Details[i].trim()+",";
                 }
-                allEvents.add(trimmedDetails);
+                allEvents.add(trimmedDetails);                                                      // Add good-looking event data to an ArrayList
                 trimmedDetails = "";
 
             }
-            else if (line.startsWith("Bus"))
+            else if (line.startsWith("Bus"))                                                        // Same steps with events
             {
                 Details = line.substring(7).split(",");
                 for (int j = 0; j < Details.length; j++)
@@ -39,7 +39,7 @@ public class InputProcess
                 allBus.add(trimmedDetails);
                 trimmedDetails = "";
             }
-            else if (line.startsWith("Account"))
+            else if (line.startsWith("Account"))                                                    // Same steps with events and buses
             {
                 Details = line.substring(11).split(",");
                 for (int k = 0; k < Details.length; k++)
@@ -52,10 +52,7 @@ public class InputProcess
         }
     }
 
-    public ArrayList<String> getEvent()
-    {
-        return allEvents;
-    }
+    public ArrayList<String> getEvent() { return allEvents; }                                       //Declare methods for easy-to-access
 
     public ArrayList<String> getBus()
     {

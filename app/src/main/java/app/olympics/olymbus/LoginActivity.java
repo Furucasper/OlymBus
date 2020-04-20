@@ -30,14 +30,14 @@ public class LoginActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        Button btn = findViewById(R.id.login_btn);                                                  //declare login button
-        final EditText uid = findViewById(R.id.in_uid);                                             //declare userID text
-        final EditText pwd = findViewById(R.id.in_pwd);                                             //declare password text
+        Button btn = findViewById(R.id.login_btn);                                                  // Declare login button
+        final EditText uid = findViewById(R.id.in_uid);                                             // Declare userID text
+        final EditText pwd = findViewById(R.id.in_pwd);                                             // Declare password text
 
-        InputStream input = getResources().openRawResource(R.raw.input);                            //import data from input.txt
-        InputProcess in = new InputProcess(new Scanner(input));                                     //process input to categorize them
+        InputStream input = getResources().openRawResource(R.raw.input);                            // Import data from input.txt
+        InputProcess in = new InputProcess(new Scanner(input));                                     // Process input to categorize them
 
-        String[] accountDetail ;                                                                    //add each account form input to ArrayList
+        String[] accountDetail ;                                                                    // Add each account form input to ArrayList
         for (int k = 0; k < in.getAccount().size(); k++) {
             accountDetail = in.getAccount().get(k).split(",");
             accountData.add(new AccountItem(accountDetail[0], accountDetail[1], accountDetail[2], accountDetail[3]));
@@ -48,8 +48,8 @@ public class LoginActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                String username = uid.getText().toString();                                         //  Get string from username text
-                String password = pwd.getText().toString();                                         //  Get string from password text
+                String username = uid.getText().toString();                                         // Get string from username text
+                String password = pwd.getText().toString();                                         // Get string from password text
 
                 Boolean validUsername = false;
                 Boolean validPassword = false;
@@ -61,19 +61,19 @@ public class LoginActivity extends AppCompatActivity
                             validUsername = true;                                                   // set username to valid
 
                             if (password.equalsIgnoreCase(accountData.get(i).getPassword())) {      // Then, check if password valid
-                                validPassword = true;                                               // set password to valid
+                                validPassword = true;                                               // Set password to valid
                             } else {
-                                if (attempts < 3) {                                                 // if not and less than 3 tries. Show toast
+                                if (attempts < 3) {                                                 // If not and less than 3 tries. Show toast
                                     Toast.makeText(getApplicationContext(), "Incorrect Password", Toast.LENGTH_SHORT).show();
-                                    attempts++;                                                     // attempts plus;
+                                    attempts++;                                                     // attempts count plus;
                                 }
-                                if (attempts == 3) {                                                // if not and reach 3 tries
-                                    wait_init.add(Calendar.MINUTE, 15 * wait_multiply);     // tell when timer ends
-                                    wait_multiply++;                                                // more waiting time if still insert wrong password
-                                    GregorianCalendar curr_time = new GregorianCalendar();          // get current local time
-                                    duration = wait_init.get(Calendar.MINUTE) - curr_time.get(Calendar.MINUTE);//calculate the duration and show toast
+                                if (attempts == 3) {                                                // If not and reach 3 tries
+                                    wait_init.add(Calendar.MINUTE, 15 * wait_multiply);     // Tell when timer ends
+                                    wait_multiply++;                                                // More waiting time if still insert wrong password
+                                    GregorianCalendar curr_time = new GregorianCalendar();          // Get current local time
+                                    duration = wait_init.get(Calendar.MINUTE) - curr_time.get(Calendar.MINUTE);// Calculate the duration and show toast
                                     Toast.makeText(getApplicationContext(), "Please try again in " + duration + " minutes.", Toast.LENGTH_LONG).show();
-                                    attempts = 0;                                                   // reset attempt
+                                    attempts = 0;                                                   // Reset attempts count
                                 }
                                 return;
                             }
