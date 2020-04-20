@@ -76,7 +76,7 @@
                 android:layout_marginBottom="24dp"
                 android:background="@color/colorLightGray"
                 android:fontFamily="@font/kanit_medium"
-                android:text="Pongpond  Yasotarin\n6234440023"
+                android:text="Pongporn  Yasotarin\n6234440023"
                 android:textAlignment="center"
                 app:layout_constraintBottom_toTopOf="@+id/close_dialog_evd"
                 app:layout_constraintEnd_toEndOf="parent"
