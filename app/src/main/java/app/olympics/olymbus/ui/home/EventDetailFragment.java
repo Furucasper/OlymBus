@@ -15,9 +15,9 @@ import app.olympics.olymbus.R;
 
 public class EventDetailFragment extends Fragment {
 
-    private String event,category,discipline,venue,date,time, duration,byBus;
-    private TextView eventName,eventCategory,eventDiscipline,eventVenue,eventDate,eventTime, eventDuration,eventByBus;
-    private EventItem EVENT;
+    private String event,category,discipline,venue,date,time, duration,byBus;                       // Declare String instance variables
+    private TextView eventName,eventCategory,eventDiscipline,eventVenue,eventDate,eventTime, eventDuration,eventByBus;//Declare each text box from the layout
+    private EventItem EVENT;                                                                        // Declare EventItem instance variable
 
     public EventDetailFragment() {
         // Required empty public constructor
@@ -29,9 +29,9 @@ public class EventDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_event_detail, container, false);
         final Bundle bundle = getArguments();
-        EVENT = (EventItem) bundle.getSerializable("EVENT");
+        EVENT = (EventItem) bundle.getSerializable("EVENT");                                   // Get serializable object
 
-        eventName = view.findViewById(R.id.eventHead_evd);
+        eventName = view.findViewById(R.id.eventHead_evd);                                          // Link each instance variables from the layout
         eventCategory = view.findViewById(R.id.eventSubhead_evd);
         eventDiscipline = view.findViewById(R.id.eventDiscipline_evd);
         eventVenue = view.findViewById(R.id.venue_evd2);
@@ -41,7 +41,7 @@ public class EventDetailFragment extends Fragment {
         eventByBus = view.findViewById(R.id.bybus_evd2);
         ImageView eventPic = view.findViewById(R.id.event_image_evd);
 
-        eventName.setText(EVENT.getEvent());
+        eventName.setText(EVENT.getEvent());                                                        // Display each Texts/Images on the layout
         eventCategory.setText(EVENT.getCategory());
         eventDiscipline.setText(EVENT.getDiscipline());
         eventVenue.setText(EVENT.getVenue());
@@ -52,19 +52,19 @@ public class EventDetailFragment extends Fragment {
         eventPic.setImageResource(EVENT.getPic());
 
 
-        Button bookNow = view.findViewById(R.id.book_now_btn);
+        Button bookNow = view.findViewById(R.id.book_now_btn);                                      // Declare each buttons from the layout
         Button backBtn = view.findViewById(R.id.back_btn_evd);
 
         bookNow.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v) {                                                          // Activate when clicked book now button
                 Navigation.findNavController(v).navigate(R.id.action_busDetailFragment_to_busScheduleFragment,bundle);
             }
         });
 
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v) {                                                          // Activate when clicked back button
                 getActivity().onBackPressed();
             }
         });

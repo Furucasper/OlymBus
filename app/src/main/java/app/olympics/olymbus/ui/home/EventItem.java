@@ -5,18 +5,17 @@ import java.util.GregorianCalendar;
 
 import app.olympics.olymbus.R;
 
-public class EventItem implements Serializable {
+public class EventItem implements Serializable {                                                    // Make these objects serializable
 
-    private String event,category,discipline,venue,date,time, duration,byBus;
-    private GregorianCalendar gregolendar;
-    private int year,month,day,hour,min;
+    private String event,category,discipline,venue,date,time, duration,byBus;                       // Declare String instance variables
+    private GregorianCalendar gregolendar;                                                          // Declare Gregorain instance variables
+    private int year,month,day,hour,min;                                                            // Declare integer instance variables
 
-    public EventItem(){
+    public EventItem(){ }                                                                           // Empty constructor
 
-    }
     //Sport, Discipline, Category, Venue, Date, Start time, Duration, Bus travel time
     public EventItem(String event, String discipline, String category, String venue, String date, String time,String duration, String byBus) {
-        this.event = event;
+        this.event = event;                                                                         // Set each variables depends on each event
         this.category = category;
         this.discipline = discipline;
         this.venue = venue;
@@ -25,19 +24,19 @@ public class EventItem implements Serializable {
         this.duration = duration;
         this.byBus = byBus;
 
-        String[] aDay = date.trim().split("\\.");
-        String[] aTime = time.split("\\.");
+        String[] aDay = date.trim().split("\\.");                                             // Get event date
+        String[] aTime = time.split("\\.");                                                   // Get event time
 
-        year = Integer.parseInt(aDay[2])+2000;
-        month = Integer.parseInt(aDay[1]);
-        day = Integer.parseInt(aDay[0]);
-        hour = Integer.parseInt(aTime[0]);
-        min = Integer.parseInt(aTime[1]);
+        year = Integer.parseInt(aDay[2])+2000;                                                      // Get event year (int)
+        month = Integer.parseInt(aDay[1]);                                                          // Get event month (int)
+        day = Integer.parseInt(aDay[0]);                                                            // Get event day (int)
+        hour = Integer.parseInt(aTime[0]);                                                          // Get event hour (int)
+        min = Integer.parseInt(aTime[1]);                                                           // Get event minutes (int)
 
-        gregolendar = new GregorianCalendar(year, month, day, hour, min);
+        gregolendar = new GregorianCalendar(year, month, day, hour, min);                           // Create a new event calendar
     }
 
-    public String getEvent() {
+    public String getEvent() {                                                                      // Declare methods for-easy-to-access
         return event;
     }
 
@@ -77,7 +76,7 @@ public class EventItem implements Serializable {
 
     public String getByBus() { return byBus; }
 
-    public int getPic(){
+    public int getPic(){                                                                            // Method for displaying icons for each sports category
 
         switch (event.toLowerCase()){
             case "athletics" : return R.drawable.ic_athletics_pictogram;

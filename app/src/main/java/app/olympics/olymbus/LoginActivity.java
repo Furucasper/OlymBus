@@ -57,10 +57,10 @@ public class LoginActivity extends AppCompatActivity
 
                 if (duration <= 0) {                                                                // First, check if cooldown period ends
                     for (int i = 0; i < accountData.size(); i++) {                                  // Second, check if Username valid
-                        if (username.equalsIgnoreCase(accountData.get(i).getUsername())) {
+                        if (username.equals(accountData.get(i).getUsername())) {
                             validUsername = true;                                                   // set username to valid
 
-                            if (password.equalsIgnoreCase(accountData.get(i).getPassword())) {      // Then, check if password valid
+                            if (password.equals(accountData.get(i).getPassword())) {      // Then, check if password valid
                                 validPassword = true;                                               // Set password to valid
                             } else {
                                 if (attempts < 3) {                                                 // If not and less than 3 tries. Show toast
