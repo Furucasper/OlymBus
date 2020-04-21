@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="app.olympics.olymbus">
 
     <application
@@ -11,8 +12,11 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:label="@string/title_activity_major"></activity>
-        <activity android:name=".LoginActivity" android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:label="@string/title_activity_major"
+            tools:ignore="LockedOrientationActivity"/>
+        <activity android:name=".LoginActivity" android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

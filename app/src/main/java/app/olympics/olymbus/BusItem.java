@@ -38,7 +38,7 @@ public class BusItem implements Serializable {
         gregoarrive.add(Calendar.MINUTE, this.duration);
         int minA = min+this.duration;
         arrive = (minA<60)? hour+"."+((minA<10)?"0"+minA : minA):
-                (hour+1)+"."+(((minA-60)<10)? "0"+(minA-60): minA );
+                (hour+1)+"."+(((minA-60)<10)? "0"+(minA-60): minA-60 );
 
 
     }
