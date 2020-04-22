@@ -74,6 +74,9 @@ public class BusScheduleFragment extends Fragment implements BusAdapter.OnBusLis
         TextView busDate = view.findViewById(R.id.textDate);
         busDate.setText(date);
 
+        TextView eventStart = view.findViewById(R.id.textEventStart);
+        eventStart.setText("event start : "+EVENT.getTime());
+
         //Back Button
         ImageButton backBtn= view.findViewById(R.id.back_btn_busS);
         backBtn.setOnClickListener(new View.OnClickListener() {

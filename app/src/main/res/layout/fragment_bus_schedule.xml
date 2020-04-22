@@ -78,7 +78,7 @@
         android:layout_height="21dp"
         android:layout_below="@id/BusDes"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="24dp"
         android:layout_marginRight="40dp"
         android:background="@drawable/bg_btn_tranparent_gray_curve"
         android:fontFamily="@font/muli_bold"
@@ -91,13 +91,24 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/textDate"
-        android:layout_marginTop="12dp">
+        android:layout_below="@id/textEventStart"
+        android:layout_marginTop="10dp">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/busList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </ScrollView>
+
+    <TextView
+        android:id="@+id/textEventStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textDate"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="-3dp"
+        android:text="event start : 00.00"
+        android:textColor="@color/colorAccent"
+        android:fontFamily="@font/muli_bold"/>
 
 </RelativeLayout>

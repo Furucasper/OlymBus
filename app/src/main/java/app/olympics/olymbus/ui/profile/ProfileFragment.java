@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.fragment.NavHostFragment;
 import app.olympics.olymbus.LoginActivity;
 import app.olympics.olymbus.R;
 
@@ -65,6 +66,14 @@ public class ProfileFragment extends Fragment {
                 });                            // Close Dialog
 
                 dialog.show();                                                                      // Display Dialog on screen
+            }
+        });
+
+        Button bookNow = view.findViewById(R.id.book_now_profile);
+        bookNow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavHostFragment.findNavController(ProfileFragment.this).navigate(R.id.action_navigation_profile_to_navigation_home);
             }
         });
 
