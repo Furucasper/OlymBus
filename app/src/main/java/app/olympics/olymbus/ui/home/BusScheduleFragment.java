@@ -15,8 +15,6 @@ import android.widget.Toast;
 
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.Scanner;
 
 import androidx.fragment.app.Fragment;
@@ -133,15 +131,11 @@ public class BusScheduleFragment extends Fragment implements BusAdapter.OnBusLis
             busDetail=in.getBus().get(j).split(",");                                          // Separate each bus details and send to BusItem
             busData.add(new BusItem(busDetail[0], busDetail[1], busDetail[2], busDetail[3], busDetail[4], busDetail[5], busDetail[6], EVENT.getInitialDate()));
         }
-        GregorianCalendar beforeEvent2Hr = EVENT.getGregolendar();                                  // Create calendar for buses to depart to each event 2 hours before event starts
-        beforeEvent2Hr.add(Calendar.HOUR,-2);
-        GregorianCalendar afterEvent1Hr = EVENT.getGregolendar();                                   // Create calendar for buses to depart from each event 1 hours after event ends
-        afterEvent1Hr.add(Calendar.HOUR,1);
 
         for(BusItem b : busData){                                                                   // Check if each bus is qualified for an event
             String destinationRequest = venue.toLowerCase().trim();                                 // First, get venue name
             if(b.getDestination().toLowerCase().trim().contains(destinationRequest)) {              // Then, check if the bus goes to the venue
-                if(b.getGregoarrive().before(beforeEvent2Hr) || b.getGregoarrive().after(afterEvent1Hr))// Then, check if the bus is depart to a venue 2 hour before and 1 hour after from a venue
+                if(b.getGregoarrive().after(EVENT.getBeforeEvent2HR()) && b.getGregoarrive().before(EVENT.getAfterEvent1HR()))// Then, check if the bus is depart to a venue 2 hour before and 1 hour after from a venue
                     busFilter.add(b);                                                               // Bus qualified add to ArrayList
             }
         }

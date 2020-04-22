@@ -1,6 +1,7 @@
 package app.olympics.olymbus.ui.home;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import app.olympics.olymbus.R;
@@ -8,7 +9,7 @@ import app.olympics.olymbus.R;
 public class EventItem implements Serializable {                                                    // Make these objects serializable
 
     private String event,category,discipline,venue,date,time, duration,byBus;                       // Declare String instance variables
-    private GregorianCalendar gregolendar;                                                          // Declare Gregorain instance variables
+    private GregorianCalendar gregolendar,beforeEvent2HR,afterEvent1HR;                                                          // Declare Gregorain instance variables
     private int year,month,day,hour,min;                                                            // Declare integer instance variables
 
     public EventItem(){ }                                                                           // Empty constructor
@@ -34,6 +35,10 @@ public class EventItem implements Serializable {                                
         min = Integer.parseInt(aTime[1]);                                                           // Get event minutes (int)
 
         gregolendar = new GregorianCalendar(year, month, day, hour, min);                           // Create a new event calendar
+        beforeEvent2HR = new GregorianCalendar(year, month, day, hour, min);                        // Create calendar for buses to depart to each event 2 hours before event starts
+        beforeEvent2HR.add(Calendar.HOUR,-2);
+        afterEvent1HR = new GregorianCalendar(year, month, day, hour, min);                         // Create calendar for buses to depart from each event 1 hours after event starts
+        afterEvent1HR.add(Calendar.HOUR,1);
     }
 
     public String getEvent() {                                                                      // Declare methods for-easy-to-access
@@ -92,6 +97,14 @@ public class EventItem implements Serializable {                                
 
     public GregorianCalendar getGregolendar() {
         return gregolendar;
+    }
+
+    public GregorianCalendar getBeforeEvent2HR() {
+        return beforeEvent2HR;
+    }
+
+    public GregorianCalendar getAfterEvent1HR() {
+        return afterEvent1HR;
     }
 
 }
