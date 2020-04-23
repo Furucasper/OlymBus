@@ -1,6 +1,8 @@
 package app.olympics.olymbus.ui.profile;
 
-public class AccountItem
+import java.io.Serializable;
+
+public class AccountItem implements Serializable
 {
     String username,password,cardNo,CVC;                                                            // Declare String instance variables
 

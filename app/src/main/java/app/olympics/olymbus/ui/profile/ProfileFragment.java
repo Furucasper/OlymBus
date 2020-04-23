@@ -15,12 +15,14 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.fragment.NavHostFragment;
 import app.olympics.olymbus.LoginActivity;
+import app.olympics.olymbus.MainActivity;
 import app.olympics.olymbus.R;
 
 public class ProfileFragment extends Fragment {
 
     private ProfileViewModel profileViewModel;
     private String username ,password,cardNo,cvc = "";                                              // String instance variables
+    private AccountItem account;
 
     public ProfileFragment () {                                                                     // Empty constructor
 
@@ -34,6 +36,13 @@ public class ProfileFragment extends Fragment {
         TextView user = view.findViewById(R.id.userViewID);                                         // Declare username text box
         TextView pass = view.findViewById(R.id.userViewPass);                                       // Declare password text box
         TextView civ_id = view.findViewById(R.id.userViewCardID);                                   // Declare Card Number text box
+
+        this.account = ((MainActivity)getActivity()).getAccount();
+        this.username = account.getUsername();
+        for (int i = 0; i < account.getPassword().length(); i++)
+        {this.password += "*";}
+        this.cardNo = "**** **** **** "+account.getCardNumber().substring(12,16);
+        this.cvc = account.getCVC();
 
         user.setText(username);                                                                     // set user's ID text for each logged in user
         pass.setText(password);                                                                     // set user's password text for each logged in user

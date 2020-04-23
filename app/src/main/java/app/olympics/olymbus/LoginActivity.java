@@ -14,6 +14,7 @@ import java.util.GregorianCalendar;
 import java.util.Scanner;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import app.olympics.olymbus.ui.profile.AccountItem;
 
 public class LoginActivity extends AppCompatActivity
@@ -23,6 +24,7 @@ public class LoginActivity extends AppCompatActivity
     private int duration = 0;
     private int attempts = 0;
     private int wait_multiply = 1;
+    private AccountItem account = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -48,7 +50,7 @@ public class LoginActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                String username = uid.getText().toString();                                         // Get string from username text
+                String username = uid.getText().toString().trim();                                         // Get string from username text
                 String password = pwd.getText().toString();                                         // Get string from password text
 
                 Boolean validUsername = false;
@@ -59,10 +61,18 @@ public class LoginActivity extends AppCompatActivity
                     for (int i = 0; i < accountData.size(); i++) {                                  // Second, check if Username valid
                         if (username.equals(accountData.get(i).getUsername())) {
                             validUsername = true;                                                   // set username to valid
-
                             if (password.equals(accountData.get(i).getPassword())) {      // Then, check if password valid
                                 validPassword = true;                                               // Set password to valid
-                            } else {
+                                account = accountData.get(i);
+                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                intent.putExtra("Account", accountData.get(i));
+                                startActivity(intent);
+                            }
+                            else {
+                                if (password.isEmpty()) {
+                                    Toast.makeText(getApplicationContext(), "Please enter password.", Toast.LENGTH_SHORT).show();
+                                    return;
+                                }
                                 if (attempts < 3) {                                                 // If not and less than 3 tries. Show toast
                                     Toast.makeText(getApplicationContext(), "Incorrect Password", Toast.LENGTH_SHORT).show();
                                     attempts++;                                                     // attempts count plus;
@@ -77,17 +87,26 @@ public class LoginActivity extends AppCompatActivity
                                 }
                                 return;
                             }
-                        } else if (!validUsername && i == accountData.size() - 1) {                 // if username not valid. Show toast
-                            Toast.makeText(getApplicationContext(), "UserId does not exist. Please try again.", Toast.LENGTH_SHORT).show();
-                            return;
+                        }
+                        else
+                            {
+                                if (username.isEmpty()) {
+                                    Toast.makeText(getApplicationContext(), "Please enter username.", Toast.LENGTH_SHORT).show();
+                                    return;
+                                }
+                                if (!validUsername && i == accountData.size() - 1) {                 // if username not valid. Show toast
+                                    Toast.makeText(getApplicationContext(), "UserId does not exist. Please try again.", Toast.LENGTH_SHORT).show();
+                                    return;
+                                }
+                            }
                         }
                     }
 
-                    if (validUsername && validPassword) {                                           // if username and password are valid. Proceed to Main page.
-                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    if (validUsername && validPassword) {
+
+                        startActivity(new Intent(LoginActivity.this, MainActivity.class)); // if username and password are valid. Proceed to Profile page.
                         finish();
                     }
-                }
                 else                                                                                // if tries to login while still in cooldown
                 {
                     GregorianCalendar curr_time = new GregorianCalendar();                          // get current local time

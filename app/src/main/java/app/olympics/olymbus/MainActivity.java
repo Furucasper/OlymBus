@@ -9,7 +9,11 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
+import app.olympics.olymbus.ui.profile.AccountItem;
+
 public class MainActivity extends AppCompatActivity {
+
+    private AccountItem account;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
                 R.id.navigation_home, R.id.navigation_booking, R.id.navigation_profile)
                 .build();
          */
+        this.account = (AccountItem) getIntent().getSerializableExtra("Account");
+
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupWithNavController(navView, navController);
         navView.setSelectedItemId(R.id.navigation_profile);
@@ -50,9 +56,9 @@ public class MainActivity extends AppCompatActivity {
             }
         };
          */
+    }
 
-
-
-
+    public AccountItem getAccount(){
+        return account;
     }
 }
