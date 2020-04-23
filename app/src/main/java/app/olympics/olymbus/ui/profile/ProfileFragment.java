@@ -21,7 +21,7 @@ import app.olympics.olymbus.R;
 public class ProfileFragment extends Fragment {
 
     private ProfileViewModel profileViewModel;
-    private String username, cardNo, cvc, password = "";                                                            // String instance variables
+    private String username, cardNo, csv, password = "";                                                            // String instance variables
     private AccountItem account;
 
     public ProfileFragment () {                                                                     // Empty constructor
@@ -42,7 +42,7 @@ public class ProfileFragment extends Fragment {
         for (int i = 0; i < account.getPassword().length(); i++)
         {password += "*";}
         cardNo = "**** **** **** "+account.getCardNumber().substring(12,16);
-        cvc = account.getCVC();
+        csv = account.getCSV();
 
         user.setText(username);                                                                     // set user's ID text for each logged in user
         pass.setText(password);                                                                     // set user's password text for each logged in user

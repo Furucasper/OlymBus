@@ -21,20 +21,22 @@ import androidx.fragment.app.Fragment;
 import app.olympics.olymbus.BusItem;
 import app.olympics.olymbus.MainActivity;
 import app.olympics.olymbus.R;
+import app.olympics.olymbus.ui.booking.Tickets;
 import app.olympics.olymbus.ui.profile.AccountItem;
 
 
 public class SeatingFragment extends Fragment {
 
-    private int cols, rows;
+    private int cols, rows, seatingID;
     private int seatsStatus[];
     private CheckBox[][] seats;
     private Bundle bundle;
     private EventItem EVENT;
     private BusItem BUS;
-    private String event,category,discipline,venue,date, price, time, duration,byBus,busType, destination,depart,arrive;
+    private String event,category,discipline,venue,date, price, time, duration,byBus,busType, destination,depart,arrive, selectedSeat = "";
     private double amountCost;
     private AccountItem account;
+    private Tickets ticket;
 
     public SeatingFragment() {
         // Required empty public constructor
@@ -148,6 +150,7 @@ public class SeatingFragment extends Fragment {
                         if(seats[i][j].isChecked()){
                             cnt++;
                             int sid = seats[i][j].getId();
+                            seatingID = sid;
                             if(cnt==1){
                                 uSeat += ("" + (i + 1) + colNames[j]);
                             }else
@@ -168,6 +171,7 @@ public class SeatingFragment extends Fragment {
                 //Toast.makeText(getActivity(), "Your seat :"+uSeat, Toast.LENGTH_SHORT).show();
                 //KEEP Booking Seat with Seat Number [ex. Seat No.1 ,2 ] and Seat rowColumn format [ 1A ,2A ]
 
+                ticket = new Tickets(EVENT, BUS, seatingID, selectedSeat);                          // Create new ticket for this selected seating
 
                 //Confirm Booking Dialog
                 final Dialog dialog = new Dialog(getActivity());
@@ -231,8 +235,9 @@ public class SeatingFragment extends Fragment {
                                     Toast.makeText(getActivity(), "Please enter CSV code", Toast.LENGTH_SHORT).show();
                                     return;
                                 }
-                                if(csvCode.equals(account.getCVC())){
+                                if(csvCode.equals(account.getCSV())){
                                     Toast.makeText(getActivity(), "Booking Complete!", Toast.LENGTH_SHORT).show();
+                                    account.addTicket(ticket);                                      // Add this ticket to the account
                                     payDialog.cancel();
                                 }else{
                                     Toast.makeText(getActivity(), "Incorrect CSV code", Toast.LENGTH_SHORT).show();

@@ -52,7 +52,7 @@ Bus 34: Type B,		Olympic Stadium,				20.00,		30,			5,		2,		B1500
 Bus 35: Type B,		Olympic Stadium,				20.30,		30,			5,		2,		B1500
 
 
-//	    	UserID, password,	    Card ID,	        CCV
+//	    	UserID, password,	    Card ID,	        CSV
 Account 1 : Admin,	1234567890,	    4621146557531891,	697
 Account 2 : Minnie,	[Mousie8900],	1489251732462418,	927
 Account 3 : Donald,	##duckIee2608,	4877238874622176,	217
