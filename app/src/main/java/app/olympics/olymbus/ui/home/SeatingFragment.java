@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -18,7 +19,9 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import app.olympics.olymbus.BusItem;
+import app.olympics.olymbus.MainActivity;
 import app.olympics.olymbus.R;
+import app.olympics.olymbus.ui.profile.AccountItem;
 
 
 public class SeatingFragment extends Fragment {
@@ -31,6 +34,7 @@ public class SeatingFragment extends Fragment {
     private BusItem BUS;
     private String event,category,discipline,venue,date, price, time, duration,byBus,busType, destination,depart,arrive;
     private double amountCost;
+    private AccountItem account;
 
     public SeatingFragment() {
         // Required empty public constructor
@@ -44,6 +48,7 @@ public class SeatingFragment extends Fragment {
         bundle = getArguments();
         EVENT = (EventItem) bundle.getSerializable("EVENT");
         BUS = (BusItem) bundle.getSerializable("BUS");
+        account = ((MainActivity)getActivity()).getAccount();
 
         event = EVENT.getEvent();
         category = EVENT.getCategory();
@@ -144,9 +149,9 @@ public class SeatingFragment extends Fragment {
                             cnt++;
                             int sid = seats[i][j].getId();
                             if(cnt==1){
-                                uSeat += ( (i + 1) + colNames[j]);
-                            }
-                            uSeat += ("" + (i + 1) + colNames[j]); // Condition tester
+                                uSeat += ("" + (i + 1) + colNames[j]);
+                            }else
+                                uSeat += (" " + (i + 1) + colNames[j]); // Condition tester
                         }
                         if(cnt>2){
                             Toast.makeText(getActivity(), "Bus booking can book no more than 2 seats", Toast.LENGTH_SHORT).show();
@@ -215,6 +220,26 @@ public class SeatingFragment extends Fragment {
 
                         TextView amountPay = payDialog.findViewById(R.id.amount_cp);
                         TextView cardID = payDialog.findViewById(R.id.card_ID_cp);
+                        final EditText csv = payDialog.findViewById(R.id.csv_check_cp);
+
+                        Button confirmBtn = payDialog.findViewById(R.id.confirm_cp);
+                        confirmBtn.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                String csvCode = csv.getText().toString().trim();
+                                if(csvCode.isEmpty()){
+                                    Toast.makeText(getActivity(), "Please enter CSV code", Toast.LENGTH_SHORT).show();
+                                    return;
+                                }
+                                if(csvCode.equals(account.getCVC())){
+                                    Toast.makeText(getActivity(), "Booking Complete!", Toast.LENGTH_SHORT).show();
+                                    payDialog.cancel();
+                                }else{
+                                    Toast.makeText(getActivity(), "Incorrect CSV code", Toast.LENGTH_SHORT).show();
+                                    payDialog.cancel();
+                                }
+                            }
+                        });
 
                         Button cancelBtn = payDialog.findViewById(R.id.cancel_cp);
                         cancelBtn.setOnClickListener(new View.OnClickListener() {
@@ -223,6 +248,8 @@ public class SeatingFragment extends Fragment {
                                 payDialog.cancel();
                             }
                         });
+
+
 
                         payDialog.show();
                     }
