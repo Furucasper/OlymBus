@@ -64,9 +64,6 @@ public class LoginActivity extends AppCompatActivity
                             if (password.equals(accountData.get(i).getPassword())) {      // Then, check if password valid
                                 validPassword = true;                                               // Set password to valid
                                 account = accountData.get(i);
-                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                                intent.putExtra("Account", accountData.get(i));
-                                startActivity(intent);
                             }
                             else {
                                 if (password.isEmpty()) {
@@ -102,9 +99,11 @@ public class LoginActivity extends AppCompatActivity
                         }
                     }
 
-                    if (validUsername && validPassword) {
-
-                        startActivity(new Intent(LoginActivity.this, MainActivity.class)); // if username and password are valid. Proceed to Profile page.
+                    if (validUsername && validPassword)                                             // if username and password are valid. Proceed to Profile page.
+                    {
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        intent.putExtra("Account", account);
+                        startActivity(intent);
                         finish();
                     }
                 else                                                                                // if tries to login while still in cooldown
