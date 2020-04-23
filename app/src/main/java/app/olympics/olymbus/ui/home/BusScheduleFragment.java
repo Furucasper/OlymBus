@@ -32,7 +32,7 @@ public class BusScheduleFragment extends Fragment implements BusAdapter.OnBusLis
     private RecyclerView busRecyclerview;
     private BusAdapter busAdapter;
     private ArrayList<BusItem> busData;                                                             // Declare BusItem ArrayList named busData
-    private ArrayList<BusItem> busFilter = new ArrayList<>();                                       // Create new BusItem ArrayList named busFilter
+    private ArrayList<BusItem> busFilter;                                       // Create new BusItem ArrayList named busFilter
     private String event,category,discipline,venue,date,time, duration,byBus;                       // Declare String instance variables
     private EventItem EVENT;                                                                        // Declare EventItem instance variable
     private BusItem BUS;                                                                            // Declare BusItem instance variable
@@ -50,6 +50,7 @@ public class BusScheduleFragment extends Fragment implements BusAdapter.OnBusLis
 
         busRecyclerview = view.findViewById(R.id.busList);
         busData = new ArrayList<>();                                                                // Create new BusItem ArrayList named busData
+        busFilter = new ArrayList<>();
         bundle = getArguments();
 
         EVENT =  (EventItem)bundle.getSerializable("EVENT");                                   // Get Serializable object
