@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@color/colorWhite">
+    android:background="@drawable/bg_white_smallcurve">
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="30dp"
+        android:layout_margin="20dp"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -91,9 +91,10 @@
                 android:layout_marginTop="32dp"
                 android:background="@android:color/transparent"
                 android:fontFamily="@font/muli_bold"
+                android:gravity="bottom|center_horizontal"
                 android:text="Close"
                 android:textColor="@color/colorAccent"
-                android:textSize="14sp"
+                android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

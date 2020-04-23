@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_white_smallcurve">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="260dp"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:id="@+id/confirmPayment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/maven_pro_bold"
+                android:text="Confirm Booking"
+                android:textAllCaps="true"
+                android:textColor="@color/colorAccent"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.057"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/bus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/maven_pro"
+                android:text="Bus"
+                android:textAllCaps="true"
+                android:textColor="@color/colorBlack"
+                android:textSize="10sp"
+                app:layout_constraintStart_toStartOf="@+id/confirmPayment"
+                app:layout_constraintTop_toBottomOf="@+id/confirmPayment" />
+
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/maven_pro"
+                android:text="Date"
+                android:textAllCaps="true"
+                android:textColor="@color/colorBlack"
+                android:textSize="10sp"
+                app:layout_constraintStart_toStartOf="@+id/busType_cb"
+                app:layout_constraintTop_toBottomOf="@+id/destination_cb" />
+
+            <TextView
+                android:id="@+id/date_cb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/maven_pro_medium"
+                android:text="23.04.2020"
+                android:textColor="@color/colorBlack"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="@+id/date"
+                app:layout_constraintTop_toBottomOf="@+id/date" />
+
+            <TextView
+                android:id="@+id/arrive"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/maven_pro"
+                android:text="Arrive"
+                android:textAllCaps="true"
+                android:textColor="@color/colorBlack"
+                android:textSize="10sp"
+                app:layout_constraintEnd_toEndOf="@+id/destination_cb"
+                app:layout_constraintTop_toTopOf="@+id/date" />
+
+            <TextView
+                android:id="@+id/arrive_cb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/maven_pro_medium"
+                android:text="18.00"
+                android:textColor="@color/colorBlack"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="@+id/arrive"
+                app:layout_constraintTop_toBottomOf="@+id/arrive" />
+
+            <TextView
+                android:id="@+id/depart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/maven_pro"
+                android:text="Depart"
+                android:textAllCaps="true"
+                android:textColor="@color/colorBlack"
+                android:textSize="10sp"
+                app:layout_constraintEnd_toEndOf="@+id/depart_cb"
+                app:layout_constraintStart_toStartOf="@+id/depart_cb"
+                app:layout_constraintTop_toTopOf="@+id/date" />
+
+            <TextView
+                android:id="@+id/depart_cb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/maven_pro_medium"
+                android:text="17.30"
+                android:textColor="@color/colorBlack"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toStartOf="@+id/arrive_cb"
+                app:layout_constraintStart_toEndOf="@+id/date_cb"
+                app:layout_constraintTop_toBottomOf="@+id/depart" />
+
+            <TextView
+                android:id="@+id/destination"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="@font/maven_pro"
+                android:text="Destination"
+                android:textAllCaps="true"
+                android:textColor="@color/colorBlack"
+                android:textSize="10sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/bus" />
+
+            <TextView
+                android:id="@+id/destination_cb"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/maven_pro_medium"
+                android:text="Tokyo International Forum"
+                android:textAlignment="textEnd"
+                android:textColor="@color/colorBlack"
+                app:layout_constraintEnd_toEndOf="@+id/destination"
+                app:layout_constraintTop_toBottomOf="@+id/destination" />
+
+            <TextView
+                android:id="@+id/busType_cb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/maven_pro_medium"
+                android:text="Type A"
+                android:textColor="@color/colorBlack"
+                app:layout_constraintStart_toStartOf="@+id/bus"
+                app:layout_constraintTop_toBottomOf="@+id/bus" />
+
+            <TextView
+                android:id="@+id/price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/maven_pro"
+                android:text="Price"
+                android:textAllCaps="true"
+                android:textColor="@color/colorBlack"
+                android:textSize="10sp"
+                app:layout_constraintStart_toStartOf="@+id/date_cb"
+                app:layout_constraintTop_toBottomOf="@+id/date_cb" />
+
+            <TextView
+                android:id="@+id/price_cb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/maven_pro_medium"
+                android:text="2000 ฿"
+                android:textColor="@color/colorBlack"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="@+id/price"
+                app:layout_constraintTop_toBottomOf="@+id/price" />
+
+            <TextView
+                android:id="@+id/seatNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/maven_pro"
+                android:text="Seat No."
+                android:textAllCaps="true"
+                android:textColor="@color/colorBlack"
+                android:textSize="10sp"
+                app:layout_constraintStart_toStartOf="@+id/seatNo_cb"
+                app:layout_constraintTop_toTopOf="@+id/price" />
+
+            <TextView
+                android:id="@+id/seatNo_cb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/maven_pro_bold"
+                android:text="1A 1B"
+                android:textColor="@color/colorBlack"
+                android:textSize="30sp"
+                app:layout_constraintStart_toStartOf="@+id/depart_cb"
+                app:layout_constraintTop_toBottomOf="@+id/seatNo" />
+
+            <TextView
+                android:id="@+id/price2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/maven_pro"
+                android:text="Event"
+                android:textAllCaps="true"
+                android:textColor="@color/colorBlack"
+                android:textSize="10sp"
+                app:layout_constraintStart_toStartOf="@+id/price_cb"
+                app:layout_constraintTop_toBottomOf="@+id/price_cb" />
+
+            <TextView
+                android:id="@+id/event_cb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/maven_pro_medium"
+                android:text="Ceremony"
+                android:textColor="@color/colorBlack"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="@+id/price2"
+                app:layout_constraintTop_toBottomOf="@+id/price2" />
+
+            <TextView
+                android:id="@+id/category_cb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:fontFamily="@font/maven_pro_medium"
+                android:text="All"
+                android:textAllCaps="true"
+                android:textColor="@color/colorBlack"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@+id/event_cb"
+                app:layout_constraintTop_toBottomOf="@+id/event_cb" />
+
+            <TextView
+                android:id="@+id/discipline_cb"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:fontFamily="@font/maven_pro"
+                android:text="Opening Ceremony"
+                android:textAllCaps="false"
+                android:textColor="@color/colorBlack"
+                android:textSize="11sp"
+                android:textStyle="italic"
+                app:layout_constraintStart_toStartOf="@+id/category_cb"
+                app:layout_constraintTop_toBottomOf="@+id/category_cb" />
+
+            <Button
+                android:id="@+id/cancel_cp"
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="32dp"
+                android:background="@android:color/transparent"
+                android:fontFamily="@font/maven_pro_bold"
+                android:text="@android:string/cancel"
+                android:textColor="@color/colorPrimary"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/confirm_cp"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/discipline_cb"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <Button
+                android:id="@+id/confirm_cp"
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:background="@drawable/bg_btn_purple_curve"
+                android:fontFamily="@font/maven_pro_bold"
+                android:paddingBottom="1dp"
+                android:text="Confirm"
+                android:textColor="@color/colorWhite"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+</LinearLayout>

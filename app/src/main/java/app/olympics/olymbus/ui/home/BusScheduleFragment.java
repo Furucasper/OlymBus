@@ -93,6 +93,7 @@ public class BusScheduleFragment extends Fragment implements BusAdapter.OnBusLis
                 final Dialog dialog = new Dialog(getActivity());                                    // Create new Dialog
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 dialog.setContentView(R.layout.dialog_event_detail);                                // Set Dialog's Display
+                dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
                 dialog.setCancelable(true);
 
                 Button closeBtn = dialog.findViewById(R.id.close_dialog_evd);                       // Declare close dialog button

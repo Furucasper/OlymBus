@@ -1,7 +1,6 @@
 package app.olympics.olymbus;
 
 import java.io.Serializable;
-import java.sql.Time;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -10,7 +9,6 @@ public class BusItem implements Serializable {
     private String type, destination,depart,arrive;
     private String cost;
     private int  rows, cols, availableSeats, duration;
-    private Time busDepart,busArrive;
     private GregorianCalendar gregoarrive, gregodepart;
 
     //String type, String destination, String depart, int duration, int rows, int cols, double cost
@@ -74,6 +72,10 @@ public class BusItem implements Serializable {
 
     public String getDepart() {
         return depart;
+    }
+
+    public String getArrive() {
+        return arrive;
     }
 
     public String getBusDuration() {
