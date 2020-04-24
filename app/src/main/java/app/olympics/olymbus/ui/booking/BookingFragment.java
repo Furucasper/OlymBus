@@ -36,12 +36,10 @@ public class BookingFragment extends Fragment implements TicketAdapter.OnTicketL
         ticketsRecyclerview = view.findViewById(R.id.ticketList);
         ticketsData = account.getTickets();
 
-            //set RecyclerView Adapter
-            ticketAdapter = new TicketAdapter(getActivity(), ticketsData,this);
-            ticketsRecyclerview.setAdapter(ticketAdapter);
-            ticketsRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-
+        //set RecyclerView Adapter
+        ticketAdapter = new TicketAdapter(getActivity(), ticketsData,this);
+        ticketsRecyclerview.setAdapter(ticketAdapter);
+        ticketsRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         return view;
     }

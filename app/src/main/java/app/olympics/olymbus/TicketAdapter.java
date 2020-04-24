@@ -29,7 +29,7 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.TicketView
     public TicketViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View layout;
-        layout = LayoutInflater.from(mContext).inflate(R.layout.event_item,parent,false);
+        layout = LayoutInflater.from(mContext).inflate(R.layout.ticket_item,parent,false);
 
         return new TicketViewHolder(layout, onTicketListener);
     }
@@ -47,15 +47,6 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.TicketView
         holder.eventCategory.setText(mData.get(position).getTicketEventCategory());
         holder.eventDiscipline.setText(mData.get(position).getTicketEventDiscipline());
 
-        /*
-        holder.event.setText(mData.get(position).getEvent());
-        holder.category.setText(mData.get(position).getCategory());
-        holder.discipline.setText(mData.get(position).getDiscipline());
-        holder.venue.setText(mData.get(position).getVenue());
-        holder.date.setText(mData.get(position).getDateMonth());
-        holder.time.setText(mData.get(position).getTime());
-        holder.pic.setImageResource(mData.get(position).getPic());
-         */
     }
 
 
