@@ -1,7 +1,5 @@
 package app.olympics.olymbus.ui.booking;
 
-import java.util.GregorianCalendar;
-
 import app.olympics.olymbus.BusItem;
 import app.olympics.olymbus.ui.home.EventItem;
 
@@ -22,7 +20,7 @@ public class Tickets
         this.bus = bus;
         this.type = bus.getType();
         this.destination = ev.getVenue();
-        this.date = ev.getDate();
+        this.date = ev.getInitialDate();
         this.depart = bus.getDepart();
         this.arrive = bus.getArrive();
         this.price = bus.getCost();

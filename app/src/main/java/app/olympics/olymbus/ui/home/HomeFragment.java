@@ -5,9 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -16,7 +14,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import app.olympics.olymbus.EventAdapter;
-import app.olympics.olymbus.InputProcess;
+import app.olympics.olymbus.MainActivity;
 import app.olympics.olymbus.R;
 
 public class HomeFragment extends Fragment implements EventAdapter.OnEventListener {
@@ -33,6 +31,7 @@ public class HomeFragment extends Fragment implements EventAdapter.OnEventListen
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         eventsRecyclerview = view.findViewById(R.id.eventList);
+        eventData = ((MainActivity)getActivity()).getAllEvent();
 
         for(int n = 0; n<eventData.size(); n++){                                                    // Loop for each event in ArrayList
             for(int i = 0; i<eventData.size()-1; i++){                                              // Loop to sort events to correct time order

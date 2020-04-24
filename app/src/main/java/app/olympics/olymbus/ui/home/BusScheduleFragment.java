@@ -13,9 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
@@ -23,7 +21,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import app.olympics.olymbus.BusAdapter;
 import app.olympics.olymbus.BusItem;
-import app.olympics.olymbus.InputProcess;
+import app.olympics.olymbus.MainActivity;
 import app.olympics.olymbus.R;
 
 
@@ -52,7 +50,7 @@ public class BusScheduleFragment extends Fragment implements BusAdapter.OnBusLis
         bundle = getArguments();
 
         EVENT =  (EventItem)bundle.getSerializable("EVENT");                                   // Get Serializable object
-
+        busData = ((MainActivity)getActivity()).getAllBus();
         event = EVENT.getEvent();                                                                   // Set each variables with data from EventItem
         category = EVENT.getCategory();
         discipline = EVENT.getDiscipline();
@@ -130,7 +128,6 @@ public class BusScheduleFragment extends Fragment implements BusAdapter.OnBusLis
             }
         }
 
-        busData.clear();                                                                            // Clear busData
 
         for(int n = 0; n<busFilter.size(); n++){                                                    // Loop to sort an qualified buses to a time order
             for(int i = 0; i<busFilter.size()-1; i++){
