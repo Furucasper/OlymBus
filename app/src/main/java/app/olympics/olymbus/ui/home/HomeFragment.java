@@ -33,17 +33,6 @@ public class HomeFragment extends Fragment implements EventAdapter.OnEventListen
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         eventsRecyclerview = view.findViewById(R.id.eventList);
-        eventData = new ArrayList<>();                                                              // Create new ArrayList named eventData
-        InputStream input = getResources().openRawResource(R.raw.input);                            // Import data from input.txt
-        InputProcess in = new InputProcess(new Scanner(input));                                     // Use InputProcess
-
-        String[] eventDetail ;                                                                      // Declare Array String
-
-        for (int i = 0; i < in.getEvent().size(); i++)                                              // Loop until no event left
-        {
-            eventDetail = in.getEvent().get(i).split(",");                                    // Separate each category from each event and sent those to EventItem constructor
-            eventData.add(new EventItem(eventDetail[0], eventDetail[1], eventDetail[2], eventDetail[3], eventDetail[4], eventDetail[5], eventDetail[6], eventDetail[7]));
-        }                                                                                           // Then add each event to ArrayLists
 
         for(int n = 0; n<eventData.size(); n++){                                                    // Loop for each event in ArrayList
             for(int i = 0; i<eventData.size()-1; i++){                                              // Loop to sort events to correct time order

@@ -34,8 +34,7 @@ public class BusScheduleFragment extends Fragment implements BusAdapter.OnBusLis
     private ArrayList<BusItem> busData;                                                             // Declare BusItem ArrayList named busData
     private ArrayList<BusItem> busFilter;                                       // Create new BusItem ArrayList named busFilter
     private String event,category,discipline,venue,date,time, duration,byBus;                       // Declare String instance variables
-    private EventItem EVENT;                                                                        // Declare EventItem instance variable
-    private BusItem BUS;                                                                            // Declare BusItem instance variable
+    private EventItem EVENT;                                                                        // Declare EventItem instance variable     // Declare BusItem instance variable
     private Bundle bundle;                                                                          // Declare Bundle instance variable
 
     public BusScheduleFragment() {
@@ -49,7 +48,6 @@ public class BusScheduleFragment extends Fragment implements BusAdapter.OnBusLis
         final View view = inflater.inflate(R.layout.fragment_bus_schedule, container, false);
 
         busRecyclerview = view.findViewById(R.id.busList);
-        busData = new ArrayList<>();                                                                // Create new BusItem ArrayList named busData
         busFilter = new ArrayList<>();
         bundle = getArguments();
 
@@ -64,7 +62,6 @@ public class BusScheduleFragment extends Fragment implements BusAdapter.OnBusLis
         duration = EVENT.getDuration();
         byBus = EVENT.getByBus();
         final int pic = EVENT.getPic();
-
 
         //Show Destination
         TextView busDes = view.findViewById(R.id.venue_bs);
@@ -124,15 +121,6 @@ public class BusScheduleFragment extends Fragment implements BusAdapter.OnBusLis
                 dialog.show();                                                                      // Display Dialog on screen
             }
         });
-
-        InputStream input = getResources().openRawResource(R.raw.input);                            // import data from input.txt
-        InputProcess in = new InputProcess(new Scanner(input));                                     // Use Input Process
-        String[] busDetail ;                                                                        // Declare String Array
-        for (int j = 0; j < in.getBus().size(); j++)                                                // Loop until last bus
-        {
-            busDetail=in.getBus().get(j).split(",");                                          // Separate each bus details and send to BusItem
-            busData.add(new BusItem(busDetail[0], busDetail[1], busDetail[2], busDetail[3], busDetail[4], busDetail[5], busDetail[6], EVENT.getInitialDate()));
-        }
 
         for(BusItem b : busData){                                                                   // Check if each bus is qualified for an event
             String destinationRequest = venue.toLowerCase().trim();                                 // First, get venue name
