@@ -1,5 +1,7 @@
 package app.olympics.olymbus.ui.booking;
 
+import java.util.GregorianCalendar;
+
 import app.olympics.olymbus.BusItem;
 import app.olympics.olymbus.ui.home.EventItem;
 
@@ -9,7 +11,8 @@ public class Tickets
     private EventItem event;                                                                        // Declare Event instance variables
     private BusItem bus;                                                                            // Declare Bus instance variables
     private int id;                                                                                 // Declare Integer instance variables
-    private String type, destination, date, seatNo, price, sid, eventName, eventCategory, eventDiscipline, depart, arrive;          // Declare String instance variables
+    private String type, destination, date, seatNo, price, sid, eventName, depart, arrive, eventCategory, eventDiscipline;// Declare String instance variables
+    private boolean available;                                                                      // Declare Boolean instance variables
 
     public Tickets (EventItem ev, BusItem bus, int sid, String seatNo)
     {
@@ -19,7 +22,7 @@ public class Tickets
         this.bus = bus;
         this.type = bus.getType();
         this.destination = ev.getVenue();
-        this.date = ev.getInitialDate();
+        this.date = ev.getDate();
         this.depart = bus.getDepart();
         this.arrive = bus.getArrive();
         this.price = bus.getCost();
@@ -28,6 +31,7 @@ public class Tickets
         this.eventName = ev.getEvent();
         this.eventCategory = ev.getCategory();
         this.eventDiscipline = ev.getDiscipline();
+        this.available = true;
     }
 
     public String getSeatNo() { return seatNo; }                                                    // Declare methods for-easy-to-access
@@ -55,4 +59,15 @@ public class Tickets
     public EventItem getTicketEvent() { return event; }
 
     public BusItem getTicketBus() { return bus; }
+
+    public Boolean isAvailable() {return available; }
+
+    public String getTicketStatus() {
+        if (available) {
+            return "available.";
+        } else {
+            return "unavailable.";
+        }
+    }
+
 }

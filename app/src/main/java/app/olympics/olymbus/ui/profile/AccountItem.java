@@ -57,6 +57,8 @@ public class AccountItem implements Serializable
 
     public ArrayList<Tickets> getTickets () { return tickets; }
 
+    public ArrayList<Tickets> getCancelledTickets () { return cancelled_tickets; }
+
     public ArrayList<BusItem> getBookedBus () { return bookedBus; }
 
     public ArrayList<BusItem> getMaxedQuotaBus () { return Maxed_Quota_Bus; }
