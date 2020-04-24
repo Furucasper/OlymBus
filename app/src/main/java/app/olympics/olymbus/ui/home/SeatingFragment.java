@@ -281,6 +281,7 @@ public class SeatingFragment extends Fragment {
                                                     if (ticketCnt == 1)
                                                         account.addTicket(ticket1);                                      // Add this ticket to the account
                                                     else if (ticketCnt == 2)
+                                                        account.addTicket(ticket1);
                                                         account.addTicket(ticket2);
 
                                                     final Dialog completeDialog = new Dialog(getActivity());
