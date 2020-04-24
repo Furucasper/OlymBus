@@ -1,6 +1,7 @@
 package app.olympics.olymbus.ui.home;
 
 
+import android.accounts.Account;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -23,6 +24,7 @@ import app.olympics.olymbus.BusAdapter;
 import app.olympics.olymbus.BusItem;
 import app.olympics.olymbus.MainActivity;
 import app.olympics.olymbus.R;
+import app.olympics.olymbus.ui.profile.AccountItem;
 
 
 public class BusScheduleFragment extends Fragment implements BusAdapter.OnBusListener {
@@ -30,9 +32,10 @@ public class BusScheduleFragment extends Fragment implements BusAdapter.OnBusLis
     private RecyclerView busRecyclerview;
     private BusAdapter busAdapter;
     private ArrayList<BusItem> busData;                                                             // Declare BusItem ArrayList named busData
-    private ArrayList<BusItem> busFilter;                                       // Create new BusItem ArrayList named busFilter
+    private ArrayList<BusItem> busFilter;                                                           // Create new BusItem ArrayList named busFilter
     private String event,category,discipline,venue,date,time, duration,byBus;                       // Declare String instance variables
-    private EventItem EVENT;                                                                        // Declare EventItem instance variable     // Declare BusItem instance variable
+    private EventItem EVENT;                                                                        // Declare EventItem instance variable
+    private AccountItem account;
     private Bundle bundle;                                                                          // Declare Bundle instance variable
 
     public BusScheduleFragment() {
@@ -60,6 +63,7 @@ public class BusScheduleFragment extends Fragment implements BusAdapter.OnBusLis
         duration = EVENT.getDuration();
         byBus = EVENT.getByBus();
         final int pic = EVENT.getPic();
+        account = ((MainActivity)getActivity()).getAccount();
 
         //Show Destination
         TextView busDes = view.findViewById(R.id.venue_bs);
@@ -123,7 +127,7 @@ public class BusScheduleFragment extends Fragment implements BusAdapter.OnBusLis
         for(BusItem b : busData){                                                                   // Check if each bus is qualified for an event
             String destinationRequest = venue.toLowerCase().trim();                                 // First, get venue name
             if(b.getDestination().toLowerCase().trim().contains(destinationRequest)) {              // Then, check if the bus goes to the venue
-                if(b.getGregoarrive().after(EVENT.getBeforeEvent2HR()) && b.getGregoarrive().before(EVENT.getAfterEvent1HR()))// Then, check if the bus is depart to a venue 2 hour before and 1 hour after from a venue
+                if(b.getGregoarrive().after(EVENT.getBeforeEvent2HR()) && b.getGregoarrive().before(EVENT.getAfterEvent1HR()) && !account.getMaxedQuotaBus().contains(b))// Then, check if the bus is depart to a venue 2 hour before and 1 hour after from a venue
                     busFilter.add(b);                                                               // Bus qualified add to ArrayList
             }
         }

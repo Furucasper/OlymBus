@@ -161,6 +161,11 @@ public class SeatingFragment extends Fragment {
                                 seatingID[0] = sid;
                                 selectedSeat[0] = ("" + (i + 1) + colNames[j]);
                             }else if(cnt==2){
+                                if (account.getBookedBus().contains(BUS))
+                                {
+                                    Toast.makeText(getActivity(), "You can only book 1 more seat", Toast.LENGTH_SHORT).show();
+                                    return;
+                                }
                                 uSeat += (" " + (i + 1) + colNames[j]); // Condition tester
                                 seatingID[1] = sid;
                                 selectedSeat[1] = ("" + (i + 1) + colNames[j]);
