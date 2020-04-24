@@ -61,5 +61,9 @@
         android:id="@+id/seatingFragment"
         android:name="app.olympics.olymbus.ui.home.SeatingFragment"
         android:label="fragment_seating"
-        tools:layout="@layout/fragment_seating" />
+        tools:layout="@layout/fragment_seating" >
+        <action
+            android:id="@+id/action_seatingFragment_to_navigation_booking"
+            app:destination="@id/navigation_booking" />
+    </fragment>
 </navigation>

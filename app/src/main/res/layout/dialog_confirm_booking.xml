@@ -66,7 +66,7 @@
                 android:id="@+id/date_cb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/maven_pro_medium"
+                android:fontFamily="@font/maven_pro_bold"
                 android:text="23.04.2020"
                 android:textColor="@color/colorBlack"
                 android:textSize="16sp"
@@ -89,7 +89,7 @@
                 android:id="@+id/arrive_cb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/maven_pro_medium"
+                android:fontFamily="@font/maven_pro_bold"
                 android:text="18.00"
                 android:textColor="@color/colorBlack"
                 android:textSize="16sp"
@@ -113,7 +113,7 @@
                 android:id="@+id/depart_cb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/maven_pro_medium"
+                android:fontFamily="@font/maven_pro_bold"
                 android:text="17.30"
                 android:textColor="@color/colorBlack"
                 android:textSize="16sp"
@@ -138,7 +138,7 @@
                 android:id="@+id/destination_cb"
                 android:layout_width="160dp"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/maven_pro_medium"
+                android:fontFamily="@font/maven_pro_bold"
                 android:text="Tokyo International Forum"
                 android:textAlignment="textEnd"
                 android:textColor="@color/colorBlack"
@@ -149,7 +149,7 @@
                 android:id="@+id/busType_cb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/maven_pro_medium"
+                android:fontFamily="@font/maven_pro_bold"
                 android:text="Type A"
                 android:textColor="@color/colorBlack"
                 app:layout_constraintStart_toStartOf="@+id/bus"
@@ -172,7 +172,7 @@
                 android:id="@+id/price_cb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/maven_pro_medium"
+                android:fontFamily="@font/maven_pro_bold"
                 android:text="2000 ฿"
                 android:textColor="@color/colorBlack"
                 android:textSize="16sp"
@@ -219,10 +219,10 @@
                 android:id="@+id/event_cb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/maven_pro_medium"
+                android:fontFamily="@font/maven_pro_bold"
                 android:text="Ceremony"
                 android:textColor="@color/colorBlack"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="@+id/price2"
                 app:layout_constraintTop_toBottomOf="@+id/price2" />
 
@@ -254,7 +254,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/category_cb" />
 
             <Button
-                android:id="@+id/cancel_cp"
+                android:id="@+id/cancel_cb"
                 android:layout_width="100dp"
                 android:layout_height="30dp"
                 android:layout_marginTop="32dp"
@@ -264,14 +264,14 @@
                 android:textColor="@color/colorPrimary"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/confirm_cp"
+                app:layout_constraintEnd_toStartOf="@+id/confirm_cb"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/discipline_cb"
                 app:layout_constraintVertical_bias="1.0" />
 
             <Button
-                android:id="@+id/confirm_cp"
+                android:id="@+id/confirm_cb"
                 android:layout_width="100dp"
                 android:layout_height="30dp"
                 android:background="@drawable/bg_btn_purple_curve"
@@ -281,6 +281,17 @@
                 android:textColor="@color/colorWhite"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
+
+            <ProgressBar
+                android:id="@+id/progressBar_cb"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginEnd="8dp"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/confirm_cb"
+                app:layout_constraintTop_toTopOf="@+id/confirm_cb" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

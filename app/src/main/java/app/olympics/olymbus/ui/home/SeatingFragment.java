@@ -3,6 +3,7 @@ package app.olympics.olymbus.ui.home;
 
 import android.app.Dialog;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,12 +13,14 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import app.olympics.olymbus.BusItem;
 import app.olympics.olymbus.MainActivity;
 import app.olympics.olymbus.R;
@@ -27,16 +30,18 @@ import app.olympics.olymbus.ui.profile.AccountItem;
 
 public class SeatingFragment extends Fragment {
 
-    private int cols, rows, seatingID;
+    private int cols, rows;
+    private int seatingID[];
     private int seatsStatus[];
     private CheckBox[][] seats;
     private Bundle bundle;
     private EventItem EVENT;
     private BusItem BUS;
-    private String event,category,discipline,venue,date, price, time, duration,byBus,busType, destination,depart,arrive, selectedSeat = "";
+    private String event,category,discipline,venue,date, price, time, duration,byBus,busType, destination,depart,arrive;
+    private String selectedSeat[];
     private double amountCost;
     private AccountItem account;
-    private Tickets ticket;
+    private Tickets ticket1,ticket2;
 
     public SeatingFragment() {
         // Required empty public constructor
@@ -143,6 +148,8 @@ public class SeatingFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 int cnt = 0;
+                seatingID = new int[2];
+                selectedSeat = new String[2];
                 char[]colNames = {'A','B','C','D','E','F','G'};
                 String uSeat = "";
                 for(int i = 0; i<rows; i++){
@@ -150,11 +157,15 @@ public class SeatingFragment extends Fragment {
                         if(seats[i][j].isChecked()){
                             cnt++;
                             int sid = seats[i][j].getId();
-                            seatingID = sid;
                             if(cnt==1){
                                 uSeat += ("" + (i + 1) + colNames[j]);
-                            }else
+                                seatingID[0] = sid;
+                                selectedSeat[0] = ("" + (i + 1) + colNames[j]);
+                            }else if(cnt==2){
                                 uSeat += (" " + (i + 1) + colNames[j]); // Condition tester
+                                seatingID[1] = sid;
+                                selectedSeat[1] = ("" + (i + 1) + colNames[j]);
+                            }
                         }
                         if(cnt>2){
                             Toast.makeText(getActivity(), "Bus booking can book no more than 2 seats", Toast.LENGTH_SHORT).show();
@@ -171,14 +182,25 @@ public class SeatingFragment extends Fragment {
                 //Toast.makeText(getActivity(), "Your seat :"+uSeat, Toast.LENGTH_SHORT).show();
                 //KEEP Booking Seat with Seat Number [ex. Seat No.1 ,2 ] and Seat rowColumn format [ 1A ,2A ]
 
-                ticket = new Tickets(EVENT, BUS, seatingID, selectedSeat);                          // Create new ticket for this selected seating
+                if(cnt==1){
 
+                    ticket1 = new Tickets(EVENT, BUS, seatingID[0], selectedSeat[0]);                          // Create new ticket for this selected seating
+
+                }else if(cnt==2){
+
+                    ticket1 = new Tickets(EVENT, BUS, seatingID[0], selectedSeat[0]);
+                    ticket2 = new Tickets(EVENT, BUS, seatingID[1], selectedSeat[1]);
+
+                }
+
+                amountCost = Double.parseDouble(price)*cnt;
+                final int ticketCnt = cnt;
                 //Confirm Booking Dialog
                 final Dialog dialog = new Dialog(getActivity());
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 dialog.setContentView(R.layout.dialog_confirm_booking);
                 dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-                dialog.setCancelable(true);
+                dialog.setCancelable(false);
 
                 TextView type = dialog.findViewById(R.id.busType_cb);
                 TextView des = dialog.findViewById(R.id.destination_cb);
@@ -191,18 +213,20 @@ public class SeatingFragment extends Fragment {
                 TextView eventCategory = dialog.findViewById(R.id.category_cb);
                 TextView eventDiscipline = dialog.findViewById(R.id.discipline_cb);
 
+                final ProgressBar progressBar = dialog.findViewById(R.id.progressBar_cb);
+
                 type.setText(busType);
                 des.setText(destination);
                 dateTxt.setText(EVENT.getInitialDate());
                 departTxt.setText(depart);
                 arriveTxt.setText(arrive);
-                priceTxt.setText(price);
+                priceTxt.setText(amountCost+" ฿");
                 seatNo.setText(uSeat);
                 eventName.setText(event);
                 eventCategory.setText(category);
                 eventDiscipline.setText(discipline);
 
-                Button cancelBtn = dialog.findViewById(R.id.cancel_cp);
+                Button cancelBtn = dialog.findViewById(R.id.cancel_cb);
                 cancelBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -210,53 +234,93 @@ public class SeatingFragment extends Fragment {
                     }
                 });
 
-                Button confirmBtn = dialog.findViewById(R.id.confirm_cp);
+                Button confirmBtn = dialog.findViewById(R.id.confirm_cb);
                 confirmBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        dialog.cancel();
-
-                        final Dialog payDialog = new Dialog(getActivity());
-                        payDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                        payDialog.setContentView(R.layout.dialog_confirm_payment);
-                        payDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-                        payDialog.setCancelable(true);
-
-                        TextView amountPay = payDialog.findViewById(R.id.amount_cp);
-                        TextView cardID = payDialog.findViewById(R.id.card_ID_cp);
-                        final EditText csv = payDialog.findViewById(R.id.csv_check_cp);
-
-                        Button confirmBtn = payDialog.findViewById(R.id.confirm_cp);
-                        confirmBtn.setOnClickListener(new View.OnClickListener() {
+                        progressBar.setVisibility(View.VISIBLE);
+                        Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
                             @Override
-                            public void onClick(View v) {
-                                String csvCode = csv.getText().toString().trim();
-                                if(csvCode.isEmpty()){
-                                    Toast.makeText(getActivity(), "Please enter CSV code", Toast.LENGTH_SHORT).show();
-                                    return;
-                                }
-                                if(csvCode.equals(account.getCSV())){
-                                    Toast.makeText(getActivity(), "Booking Complete!", Toast.LENGTH_SHORT).show();
-                                    account.addTicket(ticket);                                      // Add this ticket to the account
-                                    payDialog.cancel();
-                                }else{
-                                    Toast.makeText(getActivity(), "Incorrect CSV code", Toast.LENGTH_SHORT).show();
-                                    payDialog.cancel();
-                                }
+                            public void run() {
+                                dialog.cancel();
+                                final Dialog payDialog = new Dialog(getActivity());
+                                payDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                                payDialog.setContentView(R.layout.dialog_confirm_payment);
+                                payDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+                                payDialog.setCancelable(false);
+
+                                TextView amountPay = payDialog.findViewById(R.id.amount_cp);
+                                TextView cardID = payDialog.findViewById(R.id.card_ID_cp);
+                                final EditText csv = payDialog.findViewById(R.id.csv_check_cp);
+                                final ProgressBar progressBar2 = payDialog.findViewById(R.id.progressBar_cp);
+
+                                amountPay.setText(amountCost+" ฿");
+                                cardID.setText("**** **** **** "+account.getCardNumber().substring(12,16));
+
+                                final Button confirmBtn = payDialog.findViewById(R.id.confirm_cp);
+                                confirmBtn.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        progressBar2.setVisibility(View.VISIBLE);
+                                        Handler handler2 = new Handler();
+                                        handler2.postDelayed(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                progressBar2.setVisibility(View.INVISIBLE);
+
+                                                String csvCode = csv.getText().toString().trim();
+                                                if(csvCode.isEmpty()){
+                                                    Toast.makeText(getActivity(), "Please enter CSV code", Toast.LENGTH_SHORT).show();
+                                                    return;
+                                                }
+                                                if(csvCode.equals(account.getCSV())){
+                                                    payDialog.cancel();
+                                                    Toast.makeText(getActivity(), "Booking Complete!", Toast.LENGTH_SHORT).show();
+
+                                                    if (ticketCnt == 1)
+                                                        account.addTicket(ticket1);                                      // Add this ticket to the account
+                                                    else if (ticketCnt == 2)
+                                                        account.addTicket(ticket2);
+
+                                                    final Dialog completeDialog = new Dialog(getActivity());
+                                                    completeDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                                                    completeDialog.setContentView(R.layout.dialog_booking_complete);
+                                                    completeDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+                                                    completeDialog.setCancelable(true);
+
+                                                    Button continueBtn = completeDialog.findViewById(R.id.confirm_cb);
+                                                    continueBtn.setOnClickListener(new View.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(View v) {
+                                                            completeDialog.cancel();
+                                                            FragmentManager fragmentManager = getFragmentManager();
+                                                            fragmentManager.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                                                        }
+                                                    });
+
+                                                    completeDialog.show();
+                                                }else{
+                                                    Toast.makeText(getActivity(), "Incorrect CSV code", Toast.LENGTH_SHORT).show();
+                                                    payDialog.cancel();
+                                                }
+                                            }
+                                        },1000);
+
+                                    }
+                                });
+
+                                Button cancelBtn = payDialog.findViewById(R.id.cancel_cp);
+                                cancelBtn.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        payDialog.cancel();
+                                    }
+                                });
+
+                                payDialog.show();
                             }
-                        });
-
-                        Button cancelBtn = payDialog.findViewById(R.id.cancel_cp);
-                        cancelBtn.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                payDialog.cancel();
-                            }
-                        });
-
-
-
-                        payDialog.show();
+                        },1500);
                     }
                 });
 

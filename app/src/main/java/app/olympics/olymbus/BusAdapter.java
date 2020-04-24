@@ -65,8 +65,8 @@ public class BusAdapter extends RecyclerView.Adapter<BusAdapter.BusViewHolder> {
 
     public class BusViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        TextView duration,busType,busSeats,busStatus,availableSeats,price;
-        OnBusListener onBusListener;
+        private TextView duration,busType,busSeats,busStatus,availableSeats,price;
+        private OnBusListener onBusListener;
 
 
         public BusViewHolder(@NonNull View itemView,OnBusListener onBusListener){

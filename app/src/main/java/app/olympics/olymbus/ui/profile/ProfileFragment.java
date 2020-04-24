@@ -66,6 +66,7 @@ public class ProfileFragment extends Fragment {
                 final Dialog dialog = new Dialog(getActivity());                                    // Create new Dialog
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 dialog.setContentView(R.layout.dialog_aboutus);                                // Set Dialog's Display
+                dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
                 dialog.setCancelable(true);
 
                 Button closeBtn = dialog.findViewById(R.id.close_dialog_abs);                       // Declare close dialog button
@@ -82,6 +83,7 @@ public class ProfileFragment extends Fragment {
         bookNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                getFragmentManager().popBackStack();
                 NavHostFragment.findNavController(ProfileFragment.this).navigate(R.id.action_navigation_profile_to_navigation_home);
             }
         });

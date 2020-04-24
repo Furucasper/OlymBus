@@ -29,5 +29,18 @@
         android:textColor="#000000"
         android:textSize="20sp" />
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar2">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/ticketList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:paddingBottom="10dp"/>
+    </ScrollView>
+
 
 </RelativeLayout>
