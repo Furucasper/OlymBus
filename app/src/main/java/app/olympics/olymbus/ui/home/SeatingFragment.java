@@ -114,8 +114,8 @@ public class SeatingFragment extends Fragment {
                 seats[i][j].setId(SeatNum);
 
                 //CHECK the seat is available with Seat Number. ( Condition Tester )
-                for(int bs : bookSeats){
-                    if(bs == SeatNum) seats[i][j].setEnabled(false);
+                for(int k = 0; k < BUS.getBookedSeats().size(); k++){
+                    if(BUS.getBookedSeats().get(k).equals(SeatNum+"")) seats[i][j].setEnabled(false);
                 }
                 //if(seatsStatus[SeatNum-1] == 1) seats[i][j].setEnabled(false);
 
@@ -278,12 +278,16 @@ public class SeatingFragment extends Fragment {
                                                     payDialog.cancel();
                                                     Toast.makeText(getActivity(), "Booking Complete!", Toast.LENGTH_SHORT).show();
 
-                                                    if (ticketCnt == 1)
+                                                    if (ticketCnt == 1) {
                                                         account.addTicket(ticket1);                                      // Add this ticket to the account
-                                                    else if (ticketCnt == 2)
+                                                        BUS.bookSeat(seatingID[0] + "");
+                                                    }
+                                                    else if (ticketCnt == 2) {
                                                         account.addTicket(ticket1);
                                                         account.addTicket(ticket2);
-
+                                                        BUS.bookSeat(seatingID[0]+"");
+                                                        BUS.bookSeat(seatingID[1]+"");
+                                                    }
                                                     final Dialog completeDialog = new Dialog(getActivity());
                                                     completeDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                                                     completeDialog.setContentView(R.layout.dialog_booking_complete);
@@ -296,7 +300,7 @@ public class SeatingFragment extends Fragment {
                                                         public void onClick(View v) {
                                                             completeDialog.cancel();
                                                             FragmentManager fragmentManager = getFragmentManager();
-                                                            fragmentManager.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+//                                                            fragmentManager.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                                                         }
                                                     });
 

@@ -83,7 +83,7 @@ public class ProfileFragment extends Fragment {
         bookNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getFragmentManager().popBackStack();
+//                getFragmentManager().popBackStack();
                 NavHostFragment.findNavController(ProfileFragment.this).navigate(R.id.action_navigation_profile_to_navigation_home);
             }
         });

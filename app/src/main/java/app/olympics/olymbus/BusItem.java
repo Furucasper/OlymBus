@@ -1,6 +1,7 @@
 package app.olympics.olymbus;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -10,6 +11,7 @@ public class BusItem implements Serializable {
     private String cost;
     private int  rows, cols, availableSeats, duration;
     private GregorianCalendar gregoarrive, gregodepart;
+    private ArrayList <String> bookedSeat = new ArrayList <> ();
 
     //String type, String destination, String depart, int duration, int rows, int cols, double cost
     public BusItem(String type, String destination, String depart, String duration, String rows, String cols, String cost, String date) {
@@ -39,6 +41,18 @@ public class BusItem implements Serializable {
                 (hour+1)+"."+(((minA-60)<10)? "0"+(minA-60): minA-60 );
 
 
+    }
+
+    public void bookSeat (String sid)
+    {
+        bookedSeat.add(sid);
+        availableSeats--;
+    }
+
+    public void cancelSeat (String sid)
+    {
+        bookedSeat.remove(sid);
+        availableSeats++;
     }
 
     @Override
@@ -100,5 +114,9 @@ public class BusItem implements Serializable {
 
     public GregorianCalendar getGregodepart() {
         return gregodepart;
+    }
+
+    public ArrayList<String> getBookedSeats (){
+        return bookedSeat;
     }
 }
