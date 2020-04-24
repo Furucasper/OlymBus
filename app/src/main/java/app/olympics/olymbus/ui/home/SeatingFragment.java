@@ -20,7 +20,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import app.olympics.olymbus.BusItem;
 import app.olympics.olymbus.MainActivity;
 import app.olympics.olymbus.R;
@@ -299,8 +298,7 @@ public class SeatingFragment extends Fragment {
                                                         @Override
                                                         public void onClick(View v) {
                                                             completeDialog.cancel();
-                                                            FragmentManager fragmentManager = getFragmentManager();
-//                                                            fragmentManager.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                                                            ((MainActivity) getActivity()).selectedBooking();
                                                         }
                                                     });
 
