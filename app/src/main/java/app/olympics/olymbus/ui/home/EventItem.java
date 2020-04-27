@@ -21,10 +21,10 @@ public class EventItem implements Serializable {                                
         this.category = category;
         this.discipline = discipline;
         this.venue = venue;
-        this.date = date;
         this.time = time;
         this.duration = duration;
         this.byBus = byBus;
+
 
         String[] aDay = date.trim().split("\\.");                                             // Get event date
         String[] aTime = time.split("\\.");                                                   // Get event time
@@ -35,6 +35,7 @@ public class EventItem implements Serializable {                                
         hour = Integer.parseInt(aTime[0]);                                                          // Get event hour (int)
         min = Integer.parseInt(aTime[1]);                                                           // Get event minutes (int)
 
+        this.date = ((day<10)? "0"+day : day) + "." + ((month<10)? "0"+month : month) + "." + year;
         gregolendar = new GregorianCalendar(year, month, day, hour, min);                           // Create a new event calendar
         beforeEvent2HR = new GregorianCalendar(year, month, day, hour, min);                        // Create calendar for buses to depart to each event 2 hours before event starts
         beforeEvent2HR.add(Calendar.HOUR,-2);

@@ -19,10 +19,9 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.fragment.app.Fragment;
-
 import java.util.GregorianCalendar;
 
+import androidx.fragment.app.Fragment;
 import app.olympics.olymbus.BusItem;
 import app.olympics.olymbus.MainActivity;
 import app.olympics.olymbus.R;
@@ -117,7 +116,7 @@ public class SeatingFragment extends Fragment {
 
                 //CHECK the seat is available with Seat Number. ( Condition Tester )
                 for(int k = 0; k < BUS.getBookedSeats().size(); k++){
-                    if(BUS.getBookedSeats().get(k).equals(SeatNum+"")) seats[i][j].setEnabled(false);
+                    if(BUS.getBookedSeats().get(k)[0].equals(SeatNum+"")) seats[i][j].setEnabled(false);
                 }
                 //if(seatsStatus[SeatNum-1] == 1) seats[i][j].setEnabled(false);
 

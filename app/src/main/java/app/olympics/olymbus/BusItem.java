@@ -29,11 +29,12 @@ public class BusItem implements Serializable {
         String[] aDay = date.trim().split("\\.");
         String[] aTime = depart.split("\\.");
 
-        int year = Integer.parseInt(aDay[2])+2000;
+        int year = Integer.parseInt(aDay[2]);
         int month = Integer.parseInt(aDay[1]);
         int day = Integer.parseInt(aDay[0]);
         int hour = Integer.parseInt(aTime[0]);
         int min = Integer.parseInt(aTime[1]);
+
         this.depart = hour+"."+((min<10)? "0"+min : min);
         gregodepart = new GregorianCalendar(year, month, day, hour, min);
         gregoarrive = new GregorianCalendar(year, month, day, hour, min);

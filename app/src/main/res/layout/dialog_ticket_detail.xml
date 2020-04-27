@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_white_smallcurve">
+
+    <LinearLayout
+        android:layout_width="270dp"
+        android:layout_height="420dp"
+        android:layout_margin="10dp"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/cancel_ticket"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:background="@android:color/transparent"
+                android:fontFamily="@font/maven_pro_bold"
+                android:text="Cancel Ticket"
+                android:textAllCaps="true"
+                android:textColor="@color/colorAccent"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <Button
+                android:id="@+id/close_td"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
+                android:paddingBottom="2dp"
+                android:background="@drawable/bg_btn_yellow_curve"
+                android:fontFamily="@font/maven_pro_bold"
+                android:text="close"
+                android:textAllCaps="false"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toTopOf="@+id/cancel_ticket"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/kanit_medium_italic"
+                android:text="OlymBus Ticket"
+                android:textAllCaps="true"
+                android:textColor="@color/colorGray"
+                android:textSize="10sp"
+                app:layout_constraintEnd_toStartOf="@+id/ticket_status2"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/ticket_status2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:fontFamily="@font/maven_pro_bold"
+                android:text="Available"
+                android:textColor="@color/colorGreenGreen"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ScrollView
+                android:id="@+id/scrollView2"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintBottom_toTopOf="@+id/close_td"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView8"
+                app:layout_constraintVertical_bias="0.0">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="30dp">
+
+
+                    <ImageView
+                        android:id="@+id/imageView7"
+                        android:layout_width="40dp"
+                        android:layout_height="18dp"
+                        android:layout_marginEnd="16dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/imageView6"
+                        app:layout_constraintEnd_toStartOf="@+id/imageView6"
+                        app:layout_constraintTop_toTopOf="@+id/imageView6"
+                        app:srcCompat="@drawable/ic_olympic_rings" />
+
+                    <ImageView
+                        android:id="@+id/imageView6"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/price_td"
+                        app:layout_constraintEnd_toEndOf="@+id/seatNo_td"
+                        app:layout_constraintTop_toTopOf="@+id/price"
+                        app:srcCompat="@drawable/ic_bus" />
+
+                    <TextView
+                        android:id="@+id/seatNo_td"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:fontFamily="@font/maven_pro_bold"
+                        android:text="1A"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="40sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/seatNo" />
+
+                    <TextView
+                        android:id="@+id/busType_td"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/maven_pro_bold"
+                        android:text="Type A"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toEndOf="@+id/seatNo_td"
+                        app:layout_constraintStart_toStartOf="@+id/seatNo_td"
+                        app:layout_constraintTop_toBottomOf="@+id/seatNo_td" />
+
+                    <TextView
+                        android:id="@+id/date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:fontFamily="@font/maven_pro"
+                        android:text="Date"
+                        android:textAllCaps="true"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/date_td"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/maven_pro_bold"
+                        android:text="23.04.2020"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="18sp"
+                        app:layout_constraintStart_toStartOf="@+id/date"
+                        app:layout_constraintTop_toBottomOf="@+id/date" />
+
+                    <TextView
+                        android:id="@+id/arrive"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/maven_pro"
+                        android:text="Arrive"
+                        android:textAllCaps="true"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="12sp"
+                        app:layout_constraintBottom_toTopOf="@+id/arrive_td"
+                        app:layout_constraintEnd_toEndOf="@+id/arrive_td"
+                        app:layout_constraintStart_toStartOf="@+id/arrive_td"
+                        app:layout_constraintTop_toTopOf="@+id/depart" />
+
+                    <TextView
+                        android:id="@+id/arrive_td"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/maven_pro_bold"
+                        android:text="18.00"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/depart_td"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.19"
+                        app:layout_constraintStart_toEndOf="@+id/depart_td"
+                        app:layout_constraintTop_toBottomOf="@+id/depart" />
+
+                    <TextView
+                        android:id="@+id/depart"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:fontFamily="@font/maven_pro"
+                        android:text="Depart"
+                        android:textAllCaps="true"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toStartOf="@+id/date_td"
+                        app:layout_constraintTop_toBottomOf="@+id/date_td" />
+
+                    <TextView
+                        android:id="@+id/depart_td"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/maven_pro_bold"
+                        android:text="17.30"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="18sp"
+                        app:layout_constraintStart_toStartOf="@+id/depart"
+                        app:layout_constraintTop_toBottomOf="@+id/depart" />
+
+                    <TextView
+                        android:id="@+id/destination_td"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:fontFamily="@font/maven_pro_bold"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="18sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="@+id/destination"
+                        app:layout_constraintTop_toBottomOf="@+id/destination" />
+
+                    <TextView
+                        android:id="@+id/destination"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:fontFamily="@font/maven_pro"
+                        android:text="Destination"
+                        android:textAllCaps="true"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toStartOf="@+id/depart_td"
+                        app:layout_constraintTop_toBottomOf="@+id/depart_td" />
+
+                    <TextView
+                        android:id="@+id/price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:fontFamily="@font/maven_pro"
+                        android:text="Price per Seat"
+                        android:textAllCaps="true"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toStartOf="@+id/destination_td"
+                        app:layout_constraintTop_toBottomOf="@+id/destination_td" />
+
+                    <TextView
+                        android:id="@+id/price_td"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:fontFamily="@font/maven_pro_bold"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="18sp"
+                        app:layout_constraintEnd_toStartOf="@+id/imageView7"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="@+id/price"
+                        app:layout_constraintTop_toBottomOf="@+id/price" />
+
+                    <TextView
+                        android:id="@+id/event"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:fontFamily="@font/maven_pro"
+                        android:text="Event"
+                        android:textAllCaps="true"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toStartOf="@+id/price_td"
+                        app:layout_constraintTop_toBottomOf="@+id/price_td" />
+
+                    <TextView
+                        android:id="@+id/category_td"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginEnd="16dp"
+                        android:fontFamily="@font/maven_pro_medium"
+                        android:textAllCaps="true"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toStartOf="@+id/eventPic_td"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="@+id/event_td"
+                        app:layout_constraintTop_toBottomOf="@+id/event_td" />
+
+                    <TextView
+                        android:id="@+id/discipline_td"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginEnd="16dp"
+                        android:fontFamily="@font/maven_pro"
+                        android:textAllCaps="false"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="13sp"
+                        android:textStyle="italic"
+                        app:layout_constraintEnd_toStartOf="@+id/eventPic_td"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="@+id/category_td"
+                        app:layout_constraintTop_toBottomOf="@+id/category_td" />
+
+                    <TextView
+                        android:id="@+id/event_td"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:fontFamily="@font/maven_pro_bold"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp"
+                        app:layout_constraintEnd_toStartOf="@+id/eventPic_td"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="@+id/event"
+                        app:layout_constraintTop_toBottomOf="@+id/event" />
+
+                    <TextView
+                        android:id="@+id/seatNo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/maven_pro"
+                        android:text="Seat No."
+                        android:textAllCaps="true"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="12sp"
+                        app:layout_constraintEnd_toEndOf="@+id/seatNo_td"
+                        app:layout_constraintStart_toStartOf="@+id/seatNo_td"
+                        app:layout_constraintTop_toTopOf="@+id/date" />
+
+                    <TextView
+                        android:id="@+id/venue_td"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:fontFamily="@font/maven_pro"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="12sp"
+                        app:layout_constraintEnd_toEndOf="@+id/eventPic_td"
+                        app:layout_constraintStart_toStartOf="@+id/discipline_td"
+                        app:layout_constraintTop_toBottomOf="@+id/discipline_td" />
+
+                    <TextView
+                        android:id="@+id/dateEvent_td"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/maven_pro"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="12sp"
+                        app:layout_constraintEnd_toEndOf="@+id/venue_td"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="@+id/discipline_td"
+                        app:layout_constraintTop_toBottomOf="@+id/venue_td" />
+
+                    <TextView
+                        android:id="@+id/eventStart_td"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/maven_pro"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="12sp"
+                        app:layout_constraintEnd_toEndOf="@+id/dateEvent_td"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="@+id/dateEvent_td"
+                        app:layout_constraintTop_toBottomOf="@+id/dateEvent_td" />
+
+                    <TextView
+                        android:id="@+id/duration_td"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/maven_pro"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="12sp"
+                        app:layout_constraintEnd_toEndOf="@+id/eventStart_td"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="@+id/eventStart_td"
+                        app:layout_constraintTop_toBottomOf="@+id/eventStart_td" />
+
+                    <TextView
+                        android:id="@+id/byBus_td"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/maven_pro"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="12sp"
+                        app:layout_constraintEnd_toEndOf="@+id/duration_td"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="@+id/duration_td"
+                        app:layout_constraintTop_toBottomOf="@+id/duration_td" />
+
+                    <ImageView
+                        android:id="@+id/eventPic_td"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/category_td"
+                        app:layout_constraintEnd_toEndOf="@+id/imageView6"
+                        app:layout_constraintTop_toTopOf="@+id/event_td"
+                        app:srcCompat="@drawable/ic_taekwondo_pictogram" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </ScrollView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+</LinearLayout>

@@ -16,9 +16,10 @@
         android:elevation="3dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
         <TextView
             android:id="@+id/date"
@@ -39,7 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/maven_pro_bold"
-            android:text="23.04.20"
+            android:text="23.04.2020"
             android:textColor="@color/colorBlack"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="@+id/date"
@@ -62,13 +63,13 @@
             android:id="@+id/arrive_ticket"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="36dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
             android:fontFamily="@font/maven_pro_bold"
             android:text="18.00"
             android:textColor="@color/colorBlack"
             android:textSize="16sp"
             app:layout_constraintEnd_toStartOf="@+id/seatNo_ticket"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/depart_ticket"
             app:layout_constraintTop_toBottomOf="@+id/arrive" />
 
@@ -89,11 +90,12 @@
             android:id="@+id/depart_ticket"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
+            android:layout_marginStart="24dp"
             android:fontFamily="@font/maven_pro_bold"
             android:text="17.30"
             android:textColor="@color/colorBlack"
             android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@+id/arrive_ticket"
             app:layout_constraintStart_toEndOf="@+id/date_ticket"
             app:layout_constraintTop_toBottomOf="@+id/depart" />
 
@@ -112,12 +114,15 @@
 
         <TextView
             android:id="@+id/destination_ticket"
-            android:layout_width="200dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
             android:fontFamily="@font/maven_pro_bold"
             android:text="Tokyo International Forum"
             android:textAlignment="textStart"
             android:textColor="@color/colorBlack"
+            app:layout_constraintEnd_toStartOf="@+id/busType_ticket"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/destination"
             app:layout_constraintTop_toBottomOf="@+id/destination" />
 
@@ -173,22 +178,26 @@
 
         <TextView
             android:id="@+id/category_ticket"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
+            android:layout_marginEnd="16dp"
             android:fontFamily="@font/maven_pro_medium"
             android:text="All"
             android:textAllCaps="true"
             android:textColor="@color/colorBlack"
             android:textSize="11sp"
+            app:layout_constraintEnd_toStartOf="@+id/textView7"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/event_ticket"
             app:layout_constraintTop_toBottomOf="@+id/event_ticket" />
 
         <TextView
             android:id="@+id/discipline_ticket"
-            android:layout_width="200dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
+            android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             android:fontFamily="@font/maven_pro"
             android:text="Opening Ceremony"
@@ -197,18 +206,21 @@
             android:textSize="11sp"
             android:textStyle="italic"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/textView7"
             app:layout_constraintStart_toStartOf="@+id/category_ticket"
             app:layout_constraintTop_toBottomOf="@+id/category_ticket"
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/event_ticket"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/maven_pro_bold"
             android:text="Ceremony"
             android:textColor="@color/colorBlack"
             android:textSize="12sp"
+            app:layout_constraintEnd_toStartOf="@+id/textView7"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/price2"
             app:layout_constraintTop_toBottomOf="@+id/price2" />
 
@@ -233,9 +245,30 @@
             android:textColor="@color/colorGray"
             android:textSize="10sp"
             app:layout_constraintBottom_toBottomOf="@+id/discipline_ticket"
-            app:layout_constraintEnd_toEndOf="@+id/seatNo_ticket"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/discipline_ticket" />
+            app:layout_constraintEnd_toEndOf="@+id/seatNo_ticket" />
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/ticket_status"
+            app:layout_constraintEnd_toEndOf="@+id/textView7"
+            app:layout_constraintTop_toBottomOf="@+id/busType_ticket"
+            app:layout_constraintVertical_bias="0.8"
+            app:srcCompat="@drawable/ic_bus" />
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="20dp"
+            android:layout_height="10dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView4"
+            app:layout_constraintEnd_toStartOf="@+id/imageView4"
+            app:layout_constraintHorizontal_bias="0.75"
+            app:layout_constraintStart_toStartOf="@+id/ticket_status"
+            app:layout_constraintTop_toTopOf="@+id/imageView4"
+            app:srcCompat="@drawable/ic_olympic_rings" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
