@@ -3,6 +3,7 @@ package app.olympics.olymbus;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private BottomNavigationView navView;
     private ArrayList<EventItem> eventData;
     private ArrayList<BusItem> busData;
+    private ArrayList<AccountItem> accountData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +75,13 @@ public class MainActivity extends AppCompatActivity {
             for(String date : eventDate) {
                 busData.add(new BusItem(busDetail[0], busDetail[1], busDetail[2], busDetail[3], busDetail[4], busDetail[5], busDetail[6], busDetail[7],  date));
             }
+        }
+
+        accountData = new ArrayList<>();
+        String[] accountDetail ;                                                                    // Add each account form input to ArrayList
+        for (int k = 0; k < in.getAccount().size(); k++) {
+            accountDetail = in.getAccount().get(k).split(",");
+            accountData.add(new AccountItem(accountDetail[0], accountDetail[1], accountDetail[2], accountDetail[3], accountDetail[4]));
         }
 
         this.account = (AccountItem) getIntent().getSerializableExtra("Account");
@@ -119,39 +128,38 @@ public class MainActivity extends AppCompatActivity {
         return busData;
     }
 
+    public ArrayList<AccountItem> getAllAccount(){
+        return accountData;
+    }
+
     public void selectedBooking(){
         navView.setSelectedItemId(R.id.navigation_booking);
     }
 
-    public void saveFile () {
+    public void saveFile() {
         try {
-            File data = new File ()
-            FileWriter fw = new FileWriter(data.getAbsoluteFile());
-            BufferedWriter bw = new BufferedWriter(fw);
-
-            bw.write("//Accounts Data\n");
-            bw.write(account.toString());
-            bw.write("//Buses Data\n");
-            bw.write(account.toString());
-            for (int i = 0; i < getAllBus().size(); i++) {
-                bw.write(busData.get(i).toString());
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(MainActivity.this.openFileOutput("output.txt", Context.MODE_PRIVATE));
+            outputStreamWriter.write("//Accounts Data\n");
+            for (int i = 0; i < getAllAccount().size(); i++) {
+                outputStreamWriter.write(accountData.get(i).toString());
             }
-            bw.close();
-//            FileOutputStream Data = openFileOutput("output.txt", Context.MODE_PRIVATE);
-//            Data.write("//Accounts Data".getBytes());
-//            Data.write(account.toString().getBytes());
-//            Data.write("//Buses Data".getBytes());
-//            Data.close();
+            outputStreamWriter.write("//Buses Data\n");
+            for (int j = 0; j < getAllBus().size(); j++) {
+                outputStreamWriter.write(busData.get(j).toString());
+            }
+            outputStreamWriter.close();
             Toast.makeText(MainActivity.this, "Saved!", Toast.LENGTH_SHORT).show();
-        } catch (IOException e) {
-            e.printStackTrace();
+            Toast.makeText(MainActivity.this, "Saved to "+ getFilesDir(), Toast.LENGTH_SHORT).show();
+        }
+        catch (IOException e) {
+            Log.e("Exception", "File write failed: " + e.toString());
             Toast.makeText(MainActivity.this, "Save Failed!", Toast.LENGTH_SHORT).show();
         }
     }
 
     @Override
-    public void onDestroy () {
-        super.onDestroy();
+    public void onStop () {
+        super.onStop();
         saveFile();
     }
 }
