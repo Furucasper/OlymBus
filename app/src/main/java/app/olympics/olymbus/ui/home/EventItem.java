@@ -8,14 +8,15 @@ import app.olympics.olymbus.R;
 
 public class EventItem implements Serializable {                                                    // Make these objects serializable
 
-    private String event,category,discipline,venue,date,time, duration,byBus;                       // Declare String instance variables
+    private String id,event,category,discipline,venue,date,time, duration,byBus;                       // Declare String instance variables
     private GregorianCalendar gregolendar,beforeEvent2HR,afterEvent1HR;                                                          // Declare Gregorain instance variables
     private int year,month,day,hour,min;                                                            // Declare integer instance variables
 
     public EventItem(){ }                                                                           // Empty constructor
 
     //Sport, Discipline, Category, Venue, Date, Start time, Duration, Bus travel time
-    public EventItem(String event, String discipline, String category, String venue, String date, String time,String duration, String byBus) {
+    public EventItem(String id, String event, String discipline, String category, String venue, String date, String time,String duration, String byBus) {
+        this.id = id;
         this.event = event;                                                                         // Set each variables depends on each event
         this.category = category;
         this.discipline = discipline;
@@ -40,6 +41,8 @@ public class EventItem implements Serializable {                                
         afterEvent1HR = new GregorianCalendar(year, month, day, hour, min);                         // Create calendar for buses to depart from each event 1 hours after event starts
         afterEvent1HR.add(Calendar.HOUR,1);
     }
+
+    public String getEventID() { return id; }
 
     public String getEvent() {                                                                      // Declare methods for-easy-to-access
         return event;
@@ -107,4 +110,8 @@ public class EventItem implements Serializable {                                
         return afterEvent1HR;
     }
 
+    @Override
+    public String toString(){
+        return  "[ Event : "+event+", "+discipline+", "+category+", "+venue+", "+date+", "+time+", "+duration+", "+byBus+" ]";
+    }
 }

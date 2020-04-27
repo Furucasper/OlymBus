@@ -7,22 +7,24 @@ import java.util.GregorianCalendar;
 
 public class BusItem implements Serializable {
 
-    private String type, destination,depart,arrive;
+    private String id, type, destination,depart,arrive;
     private String cost;
-    private int  rows, cols, availableSeats, duration;
+    private int  rows, cols, maximumSeats, availableSeats, duration;
     private GregorianCalendar gregoarrive, gregodepart;
-    private ArrayList <String> bookedSeat = new ArrayList <> ();
+    private String[] booking = new String[3];
+    private ArrayList <String[]> bookedSeat = new ArrayList <> ();
 
     //String type, String destination, String depart, int duration, int rows, int cols, double cost
-    public BusItem(String type, String destination, String depart, String duration, String rows, String cols, String cost, String date) {
+    public BusItem(String id, String type, String destination, String depart, String duration, String rows, String cols, String cost, String date) {
+        this. id = id;
         this.type = type;
         this.destination = destination;
-
         this.duration = Integer.parseInt(duration);
         this.cost = cost.substring(1);
         this.rows = Integer.parseInt(rows);
         this.cols = Integer.parseInt(cols);
         this.availableSeats = this.cols*this.rows; //default
+        this.maximumSeats = this.cols*this.rows;
 
         String[] aDay = date.trim().split("\\.");
         String[] aTime = depart.split("\\.");
@@ -43,26 +45,34 @@ public class BusItem implements Serializable {
 
     }
 
-    public void bookSeat (String sid)
+    public void bookSeat (String sid, String aid, String time)
     {
-        bookedSeat.add(sid);
+        booking[0] = sid;
+        booking[1] = aid;
+        booking[2] = time;
+        bookedSeat.add(booking);
         availableSeats--;
     }
 
-    public void cancelSeat (String sid)
+    public void cancelSeat (String sid, String aid)
     {
-        bookedSeat.remove(sid);
+        booking[0] = sid;
+        booking[1] = aid;
+        bookedSeat.remove(booking);
         availableSeats++;
     }
 
     @Override
     public String toString(){
-        return  "Bus : "+type+
-                "\nDestination : "+destination+
-                "\nDepart : "+depart+
-                "\nDuration : "+duration+" min"+
-                "\nCost : "+cost;
+        String detail =  "[ Bus : "+id+", "+type+", "+destination+", "+depart+", "+duration+" ]\n";
+        detail += "\t[ Seat booked : " + (maximumSeats - availableSeats) + " ]\n";
+        for (int i = 0; i < bookedSeat.size(); i++){
+            detail += "[ Seat : "+ bookedSeat.get(i)[0] + "Owner : " + bookedSeat.get(i)[1] + "Booked in : " + bookedSeat.get(i)[2] + " ]\n" ;
+        }
+        return detail;
     }
+
+    public String getBusID() { return id; }
 
     public String getType() {
         return type;
@@ -116,7 +126,8 @@ public class BusItem implements Serializable {
         return gregodepart;
     }
 
-    public ArrayList<String> getBookedSeats (){
+    public ArrayList<String[]> getBookedSeats (){
         return bookedSeat;
     }
+
 }

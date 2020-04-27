@@ -42,7 +42,7 @@ public class LoginActivity extends AppCompatActivity
         String[] accountDetail ;                                                                    // Add each account form input to ArrayList
         for (int k = 0; k < in.getAccount().size(); k++) {
             accountDetail = in.getAccount().get(k).split(",");
-            accountData.add(new AccountItem(accountDetail[0], accountDetail[1], accountDetail[2], accountDetail[3]));
+            accountData.add(new AccountItem(accountDetail[0], accountDetail[1], accountDetail[2], accountDetail[3], accountDetail[4]));
         }
 
         btn.setOnClickListener(new View.OnClickListener()                                           // Activate method when click log in button

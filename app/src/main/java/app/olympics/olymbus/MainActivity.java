@@ -1,10 +1,22 @@
 package app.olympics.olymbus;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.os.Environment;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -33,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
                 R.id.navigation_home, R.id.navigation_booking, R.id.navigation_profile)
                 .build();
          */
+
         InputStream input = getResources().openRawResource(R.raw.input);                            // Import data from input.txt
         InputProcess in = new InputProcess(new Scanner(input));                                     // Use InputProcess
 
@@ -42,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < in.getEvent().size(); i++)                                              // Loop until no event left
         {
             eventDetail = in.getEvent().get(i).split(",");                                    // Separate each category from each event and sent those to EventItem constructor
-            eventData.add(new EventItem(eventDetail[0], eventDetail[1], eventDetail[2], eventDetail[3], eventDetail[4], eventDetail[5], eventDetail[6], eventDetail[7]));
+            eventData.add(new EventItem(eventDetail[0], eventDetail[1], eventDetail[2], eventDetail[3], eventDetail[4], eventDetail[5], eventDetail[6], eventDetail[7], eventDetail[8]));
         }                                                                                           // Then add each event to ArrayLists
 
         ArrayList <String> eventDate = new ArrayList<>();
@@ -58,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         {
             busDetail=in.getBus().get(j).split(",");                                          // Separate each bus details and send to BusItem
             for(String date : eventDate) {
-                busData.add(new BusItem(busDetail[0], busDetail[1], busDetail[2], busDetail[3], busDetail[4], busDetail[5], busDetail[6], date));
+                busData.add(new BusItem(busDetail[0], busDetail[1], busDetail[2], busDetail[3], busDetail[4], busDetail[5], busDetail[6], busDetail[7],  date));
             }
         }
 
@@ -108,5 +121,37 @@ public class MainActivity extends AppCompatActivity {
 
     public void selectedBooking(){
         navView.setSelectedItemId(R.id.navigation_booking);
+    }
+
+    public void saveFile () {
+        try {
+            File data = new File ()
+            FileWriter fw = new FileWriter(data.getAbsoluteFile());
+            BufferedWriter bw = new BufferedWriter(fw);
+
+            bw.write("//Accounts Data\n");
+            bw.write(account.toString());
+            bw.write("//Buses Data\n");
+            bw.write(account.toString());
+            for (int i = 0; i < getAllBus().size(); i++) {
+                bw.write(busData.get(i).toString());
+            }
+            bw.close();
+//            FileOutputStream Data = openFileOutput("output.txt", Context.MODE_PRIVATE);
+//            Data.write("//Accounts Data".getBytes());
+//            Data.write(account.toString().getBytes());
+//            Data.write("//Buses Data".getBytes());
+//            Data.close();
+            Toast.makeText(MainActivity.this, "Saved!", Toast.LENGTH_SHORT).show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Toast.makeText(MainActivity.this, "Save Failed!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void onDestroy () {
+        super.onDestroy();
+        saveFile();
     }
 }

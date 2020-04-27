@@ -20,6 +20,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+
+import java.util.GregorianCalendar;
+
 import app.olympics.olymbus.BusItem;
 import app.olympics.olymbus.MainActivity;
 import app.olympics.olymbus.R;
@@ -163,7 +166,8 @@ public class SeatingFragment extends Fragment {
                             }else if(cnt==2){
                                 if (account.getBookedBus().contains(BUS))
                                 {
-                                    Toast.makeText(getActivity(), "You can only book 1 more seat", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getActivity(), "You can only book 1 more seat" +
+                                            "", Toast.LENGTH_SHORT).show();
                                     return;
                                 }
                                 uSeat += (" " + (i + 1) + colNames[j]); // Condition tester
@@ -284,13 +288,15 @@ public class SeatingFragment extends Fragment {
 
                                                     if (ticketCnt == 1) {
                                                         account.addTicket(ticket1);                                      // Add this ticket to the account
-                                                        BUS.bookSeat(seatingID[0] + "");
+                                                        GregorianCalendar bookingDate = new GregorianCalendar();
+                                                        BUS.bookSeat(seatingID[0] + "", account.getAccountID(), bookingDate.getTime().toString());
                                                     }
                                                     else if (ticketCnt == 2) {
                                                         account.addTicket(ticket1);
                                                         account.addTicket(ticket2);
-                                                        BUS.bookSeat(seatingID[0]+"");
-                                                        BUS.bookSeat(seatingID[1]+"");
+                                                        GregorianCalendar bookingDate = new GregorianCalendar();
+                                                        BUS.bookSeat(seatingID[0]+"", account.getAccountID(), bookingDate.getTime().toString());
+                                                        BUS.bookSeat(seatingID[1]+"", account.getAccountID(), bookingDate.getTime().toString());
                                                     }
                                                     final Dialog completeDialog = new Dialog(getActivity());
                                                     completeDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);

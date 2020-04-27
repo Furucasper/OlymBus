@@ -8,7 +8,8 @@ import app.olympics.olymbus.ui.booking.Tickets;
 
 public class AccountItem implements Serializable
 {
-    String username,password,cardNo,CSV;                                                            // Declare String instance variables
+
+    String id,username,password,cardNo,CSV;                                                            // Declare String instance variables
     ArrayList <Tickets> tickets = new ArrayList <> ();                                              // Make new Ticket ArrayList that user owns
     ArrayList <Tickets> cancelled_tickets = new ArrayList <> ();                                    // Make new Ticket ArrayList that user has been cancelled
     ArrayList <BusItem> bookedBus = new ArrayList<> ();                                             // Make new Bus ArrayList that user booked
@@ -16,8 +17,9 @@ public class AccountItem implements Serializable
 
     public AccountItem(){ }                                                                         // Empty constructor
 
-    public AccountItem(String username, String password, String card, String cvc)                   // Constructor with each every account's details
+    public AccountItem(String id, String username, String password, String card, String cvc)                   // Constructor with each every account's details
     {
+        this.id = id;
         this.username = username;                                                                   //set each instance variable depends on each account
         this.password = password;
         this.cardNo = card;
@@ -45,7 +47,10 @@ public class AccountItem implements Serializable
         }
         else bookedBus.remove(t.getTicketBus());                                                    // Remove the ticket from owned ticket
 
+        t.getTicketBus().cancelSeat(t.getSid(),id);
     }
+
+    public String getAccountID() { return id; }
 
     public String getUsername() { return username; }                                                // Declare methods for-easy-to-access
 
@@ -62,5 +67,15 @@ public class AccountItem implements Serializable
     public ArrayList<BusItem> getBookedBus () { return bookedBus; }
 
     public ArrayList<BusItem> getMaxedQuotaBus () { return Maxed_Quota_Bus; }
+
+    @Override
+    public String toString(){
+        String detail = "[ID : " +id +" ]\n";
+        for (int i = 0; i < tickets.size(); i++){
+            detail += "\t[Ticket : " + i +" ]\n";
+            detail += "\t\t"+tickets.get(i).toString() + "\n";
+        }
+        return detail;
+    }
 
 }

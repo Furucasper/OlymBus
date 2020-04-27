@@ -68,4 +68,18 @@ public class Tickets
         }
     }
 
+    @Override
+    public String toString(){
+        String detail = event.toString()+"\n";
+        detail += "\t\t[ Bus : "+bus.getBusID()+", "+bus.getType()+", "+bus.getDepart()+", "+
+                bus.getBusDuration()+", "+bus.getRows()+", "+bus.getCols()+", "+bus.getCost()+" ]\n";
+        String bookedDate = "";
+        for (int i = 0; i <getTicketBus().getBookedSeats().size(); i++){
+            if (getSid().equals(getTicketBus().getBookedSeats().get(i)[0])) {
+                bookedDate = getTicketBus().getBookedSeats().get(i)[2];
+            }
+        }
+        detail += "\t\t[ Seat : "+getSeatNo()+" Cost : "+getTicketPrice()+ " Booked in : "+bookedDate+" ]\n";
+        return  detail;
+    }
 }
