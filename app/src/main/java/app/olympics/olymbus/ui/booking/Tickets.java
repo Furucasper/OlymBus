@@ -1,7 +1,6 @@
 package app.olympics.olymbus.ui.booking;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 import app.olympics.olymbus.BusItem;
@@ -13,9 +12,9 @@ public class Tickets implements Serializable
     private EventItem event;                                                                        // Declare Event instance variables
     private BusItem bus;                                                                            // Declare Bus instance variables
     private int id;                                                                                 // Declare Integer instance variables
-    private String type, destination, date, seatNo, price, sid, aid, eventName, depart, arrive, eventCategory, eventDiscipline, bookingTime;// Declare String instance variables
-    private boolean available;                                                                      // Declare Boolean instance variables
-    private GregorianCalendar gregoTicketDepart ,gregoTicketArrive ,gregoTicketBooked;
+    private String type, destination, date, seatNo, price, sid,aid, eventName, depart, arrive, eventCategory, eventDiscipline, bookingTime;// Declare String instance variables
+    private boolean available, newTicket;                                                                      // Declare Boolean instance variables
+    private GregorianCalendar gregoTicketDepart ,gregoTicketArrive ,gregoTicketTime;
 
     public Tickets (EventItem ev, BusItem bus, int sid, String seatNo, String aid)
     {
@@ -38,6 +37,7 @@ public class Tickets implements Serializable
         this.available = true;
         this.gregoTicketArrive = bus.getGregoarrive();
         this.gregoTicketDepart = bus.getGregodepart();
+        this.newTicket = true;
     }
 
     public void setBookedTime(String time) { this.bookingTime = time; }
@@ -74,13 +74,19 @@ public class Tickets implements Serializable
 
     public BusItem getTicketBus() { return bus; }
 
-    public GregorianCalendar getGregoTicketBooked(){ return gregoTicketBooked; }
+    public void setGregoTicketTime(GregorianCalendar bookedTime){ this.gregoTicketTime = bookedTime; }
+
+    public GregorianCalendar getGregoTicketTime(){ return gregoTicketTime; }
 
     public GregorianCalendar getGregoTicketDepart(){ return gregoTicketArrive; }
 
     public GregorianCalendar getGregoTicketArrive(){ return  gregoTicketArrive; }
 
     public Boolean isAvailable() {return available; }
+
+    public Boolean isNewTicket() {return newTicket; }
+
+    public void setNormalTicket() { this.newTicket = false; }
 
     public void setUnavailable() { this.available = false;}
 

@@ -40,9 +40,10 @@ public class SeatingFragment extends Fragment {
     private BusItem BUS;
     private String event,category,discipline,venue,date, price, time, duration,byBus,busType, destination,depart,arrive;
     private String selectedSeat[];
-    private double amountCost;
+    private double amountCost, addOnPriority;
     private AccountItem account;
     private Tickets ticket1,ticket2;
+    private int priorityRow;
 
     public SeatingFragment() {
         // Required empty public constructor
@@ -76,6 +77,12 @@ public class SeatingFragment extends Fragment {
         busType = BUS.getType();
         price = BUS.getCost();
 
+        priorityRow = 0; //Set Priority seats in First Row
+        addOnPriority = 200; //add on priority seats +200฿ per seats
+
+        TextView busDate = view.findViewById(R.id.date_seating);
+        busDate.setText(EVENT.getInitialDate());
+
         TextView busTime = view.findViewById(R.id.time_seating);
         busTime.setText(BUS.getBusDuration());
 
@@ -86,7 +93,7 @@ public class SeatingFragment extends Fragment {
         busTypeAndSeats.setText("BUS "+busType+" / "+BUS.getBusSeats());
 
         TextView busPrice = view.findViewById(R.id.busPrice);
-        busPrice.setText("Normal Seat "+price+" ฿ / Priority Seat +500 ฿");
+        busPrice.setText("Normal Seat "+price+" ฿ / Priority Seat +"+addOnPriority+" ฿");
 
         TableLayout seatingZone = view.findViewById(R.id.seatingZone);
         int[] bookSeats = {1,2,7,9}; //TEST Seat No.1 ,2 ,7 ,9 are booked
@@ -111,7 +118,11 @@ public class SeatingFragment extends Fragment {
             for(int j = 0; j<cols; j++){
 
                 seats[i][j] = new CheckBox(getActivity());
-                seats[i][j].setButtonDrawable(R.drawable.checkbox_selector);
+                if(i == priorityRow)
+                    seats[i][j].setButtonDrawable(R.drawable.checkbox_priority_selector);
+                else
+                    seats[i][j].setButtonDrawable(R.drawable.checkbox_selector);
+
                 seats[i][j].setId(SeatNum);
 
                 //CHECK the seat is available with Seat Number. ( Condition Tester )
@@ -148,7 +159,7 @@ public class SeatingFragment extends Fragment {
         bookBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int cnt = 0;
+                int cnt = 0, cntS = 0;
                 seatingID = new int[2];
                 selectedSeat = new String[2];
                 char[]colNames = {'A','B','C','D','E','F','G'};
@@ -157,6 +168,7 @@ public class SeatingFragment extends Fragment {
                     for (int j = 0; j<cols; j++){
                         if(seats[i][j].isChecked()){
                             cnt++;
+                            if(i == priorityRow)cntS++;
                             int sid = seats[i][j].getId();
                             if(cnt==1){
                                 uSeat += ("" + (i + 1) + colNames[j]);
@@ -200,7 +212,7 @@ public class SeatingFragment extends Fragment {
 
                 }
 
-                amountCost = Double.parseDouble(price)*cnt;
+                amountCost = (Double.parseDouble(price)*cnt)+(addOnPriority*cntS);
                 final int ticketCnt = cnt;
                 //Confirm Booking Dialog
                 final Dialog dialog = new Dialog(getActivity());
@@ -241,13 +253,14 @@ public class SeatingFragment extends Fragment {
                     }
                 });
 
-                Button confirmBtn = dialog.findViewById(R.id.confirm_cb);
+                final Button confirmBtn = dialog.findViewById(R.id.confirm_cb);
                 confirmBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        progressBar.setVisibility(View.VISIBLE);
+                        confirmBtn.setEnabled(false); // Block click many times.
+                        progressBar.setVisibility(View.VISIBLE); // Show progress bar
                         Handler handler = new Handler();
-                        handler.postDelayed(new Runnable() {
+                        handler.postDelayed(new Runnable() { //Delay process 1.5 sec.
                             @Override
                             public void run() {
                                 dialog.cancel();
@@ -255,7 +268,7 @@ public class SeatingFragment extends Fragment {
                                 payDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                                 payDialog.setContentView(R.layout.dialog_confirm_payment);
                                 payDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-                                payDialog.setCancelable(false);
+                                payDialog.setCancelable(false); //Block dismiss dialog
 
                                 TextView amountPay = payDialog.findViewById(R.id.amount_cp);
                                 TextView cardID = payDialog.findViewById(R.id.card_ID_cp);
@@ -269,9 +282,10 @@ public class SeatingFragment extends Fragment {
                                 confirmBtn.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
+                                        confirmBtn.setEnabled(false);
                                         progressBar2.setVisibility(View.VISIBLE);
                                         Handler handler2 = new Handler();
-                                        handler2.postDelayed(new Runnable() {
+                                        handler2.postDelayed(new Runnable() { //Delay process 1 sec.
                                             @Override
                                             public void run() {
                                                 progressBar2.setVisibility(View.INVISIBLE);
@@ -279,6 +293,7 @@ public class SeatingFragment extends Fragment {
                                                 String csvCode = csv.getText().toString().trim();
                                                 if(csvCode.isEmpty()){
                                                     Toast.makeText(getActivity(), "Please enter CSV code", Toast.LENGTH_SHORT).show();
+                                                    confirmBtn.setEnabled(true);
                                                     return;
                                                 }
                                                 if(csvCode.equals(account.getCSV())){
@@ -288,12 +303,15 @@ public class SeatingFragment extends Fragment {
                                                     if (ticketCnt == 1) {
                                                         account.addTicket(ticket1);                                      // Add this ticket to the account
                                                         GregorianCalendar bookingDate = new GregorianCalendar();
+                                                        ticket1.setGregoTicketTime(bookingDate);
                                                         BUS.bookSeat(seatingID[0] + "", account.getAccountID(), bookingDate.getTime().toString());
                                                     }
                                                     else if (ticketCnt == 2) {
                                                         account.addTicket(ticket1);
                                                         account.addTicket(ticket2);
                                                         GregorianCalendar bookingDate = new GregorianCalendar();
+                                                        ticket1.setGregoTicketTime(bookingDate);
+                                                        ticket2.setGregoTicketTime(bookingDate);
                                                         BUS.bookSeat(seatingID[0]+"", account.getAccountID(), bookingDate.getTime().toString());
                                                         BUS.bookSeat(seatingID[1]+"", account.getAccountID(), bookingDate.getTime().toString());
                                                     }
@@ -301,7 +319,7 @@ public class SeatingFragment extends Fragment {
                                                     completeDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                                                     completeDialog.setContentView(R.layout.dialog_booking_complete);
                                                     completeDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-                                                    completeDialog.setCancelable(false);
+                                                    completeDialog.setCancelable(false); //Block dismiss dialog
 
                                                     Button continueBtn = completeDialog.findViewById(R.id.confirm_cb);
                                                     continueBtn.setOnClickListener(new View.OnClickListener() {
@@ -315,6 +333,7 @@ public class SeatingFragment extends Fragment {
                                                     completeDialog.show();
                                                 }else{
                                                     Toast.makeText(getActivity(), "Incorrect CSV code", Toast.LENGTH_SHORT).show();
+                                                    confirmBtn.setEnabled(true);
                                                 }
                                             }
                                         },1000);

@@ -11,6 +11,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 import app.olympics.olymbus.ui.booking.Tickets;
 
@@ -64,6 +65,11 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.TicketView
             holder.olymIcon.setVisibility(View.INVISIBLE);
             holder.busIcon.setVisibility(View.INVISIBLE);
         }
+
+        if(mData.get(position).isNewTicket()){
+            holder.ticketLayout.setBackgroundResource(R.drawable.bg_new_ticket_white_orange_smallcurve);
+            mData.get(position).setNormalTicket();
+        }
     }
 
 
@@ -77,6 +83,7 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.TicketView
          private TextView ticketStatus, type, destination, depart, arrive, date, seatNo, eventName, eventCategory, eventDiscipline;
          private OnTicketListener onTicketListener;
          private ImageView busIcon,olymIcon;
+         private ConstraintLayout ticketLayout;
 
         public TicketViewHolder(@NonNull View itemView, OnTicketListener onTicketListener){
             super(itemView);
@@ -93,6 +100,7 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.TicketView
             ticketStatus = itemView.findViewById(R.id.ticket_status);
             busIcon = itemView.findViewById(R.id.bus_icon_ticket);
             olymIcon = itemView.findViewById(R.id.olympic_rings_icon_ticket);
+            ticketLayout = itemView.findViewById(R.id.ticketLayout);
             this.onTicketListener = onTicketListener;
             itemView.setOnClickListener(this);
 

@@ -29,9 +29,9 @@
             android:id="@+id/busTo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/olymbus"
+            android:layout_below="@id/date_seating"
             android:layout_marginStart="60dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="5dp"
             android:fontFamily="@font/kanit_italic"
             android:text="@string/bus_to"
             android:textColor="@color/colorPrimary"
@@ -41,15 +41,27 @@
             android:id="@+id/busTo2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/olymbus"
+            android:layout_below="@id/date_seating"
             android:layout_alignEnd="@+id/venueAndTime"
             android:layout_marginStart="45dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="5dp"
             android:layout_marginEnd="20dp"
             android:fontFamily="@font/kanit_italic"
             android:text="Time"
             android:textColor="@color/colorPrimary"
             android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/date_seating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/olymbus"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="-5dp"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/kanit_medium"
+            android:text="00.00.0000"
+            android:textColor="@color/colorPrimaryDark" />
 
         <RelativeLayout
             android:id="@+id/venueAndTime"

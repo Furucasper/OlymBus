@@ -16,7 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.GregorianCalendar;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -35,7 +35,7 @@ public class BookingFragment extends Fragment implements TicketAdapter.OnTicketL
     private RecyclerView ticketsRecyclerview;
     private TicketAdapter ticketAdapter;
     private AccountItem account;
-    private ArrayList<Tickets> ticketsData, cancelledTicketsData,ticketsFilter,cancelledTicketsFilter, ticketsDepart, ticketsArrive;
+    private ArrayList<Tickets> ticketsData, cancelledTicketsData;
     private String defaultFilter;
     private boolean cancelledSelected;
 
@@ -120,8 +120,8 @@ public class BookingFragment extends Fragment implements TicketAdapter.OnTicketL
                     }
                 } break;
             case "arrive" :
-                for(int n = 0; n<ticketsData.size(); n++){                                                    // Loop for each event in ArrayList
-                    for(int i = 0; i<ticketsData.size()-1; i++){                                              // Loop to sort events to correct time order
+                for(int n = 0; n<ticketsData.size(); n++){                                                    // Loop for each ticket in ArrayList
+                    for(int i = 0; i<ticketsData.size()-1; i++){                                              // Loop to sort ticket to correct time order
                         if(ticketsData.get(i+1).getGregoTicketArrive().before(ticketsData.get(i).getGregoTicketArrive())){
                             ticketsData.add(i,ticketsData.get(i+1));
                             ticketsData.remove(i+2);
@@ -129,10 +129,14 @@ public class BookingFragment extends Fragment implements TicketAdapter.OnTicketL
                     }
                 }break;
             case "booked" :
-                ticketsFilter = new ArrayList<Tickets>(account.getTickets());
-                Collections.reverse(ticketsFilter);
-                ticketsData = ticketsFilter;
-                break;
+                for(int n = 0; n<ticketsData.size(); n++){                                                    // Loop for each ticket in ArrayList
+                    for(int i = 0; i<ticketsData.size()-1; i++){                                              // Loop to sort tickets to correct time order
+                        if(ticketsData.get(i+1).getGregoTicketTime().after(ticketsData.get(i).getGregoTicketTime())){
+                            ticketsData.add(i,ticketsData.get(i+1));
+                            ticketsData.remove(i+2);
+                        }
+                    }
+                }break;
         }
         ticketAdapter = new TicketAdapter(getActivity(), ticketsData,this);
         ticketsRecyclerview.setAdapter(ticketAdapter);
@@ -140,7 +144,15 @@ public class BookingFragment extends Fragment implements TicketAdapter.OnTicketL
     }
 
     private void showCancelledTicketsRecyclerView(){
-        Collections.reverse(cancelledTicketsData);
+        for(int n = 0; n<cancelledTicketsData.size(); n++){                                                    // Loop for each ticket in ArrayList
+            for(int i = 0; i<cancelledTicketsData.size()-1; i++){                                              // Loop to sort tickets to correct time order
+                if(cancelledTicketsData.get(i+1).getGregoTicketTime().after(cancelledTicketsData.get(i).getGregoTicketTime())){
+                    cancelledTicketsData.add(i,cancelledTicketsData.get(i+1));
+                    cancelledTicketsData.remove(i+2);
+                }
+            }
+        }
+
         ticketAdapter = new TicketAdapter(getActivity(), cancelledTicketsData,this);
         ticketsRecyclerview.setAdapter(ticketAdapter);
         ticketsRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -148,6 +160,7 @@ public class BookingFragment extends Fragment implements TicketAdapter.OnTicketL
 
     @Override
     public void onTicketClick(int position) {
+        //Ticket Detail Dialog
         final Dialog dialog = new Dialog(getActivity());                                    // Create new Dialog
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog_ticket_detail);                                // Set Dialog's Display
@@ -162,6 +175,7 @@ public class BookingFragment extends Fragment implements TicketAdapter.OnTicketL
         TextView date = dialog.findViewById(R.id.date_td);
         TextView seatNo = dialog.findViewById(R.id.seatNo_td);
         TextView price = dialog.findViewById(R.id.price_td);
+        TextView bookedTime = dialog.findViewById(R.id.ticketTime_td);
 
         TextView eventName = dialog.findViewById(R.id.event_td);
         TextView eventCategory = dialog.findViewById(R.id.category_td);
@@ -175,18 +189,20 @@ public class BookingFragment extends Fragment implements TicketAdapter.OnTicketL
         ImageView busIcon = dialog.findViewById(R.id.busIcon_td);
         ImageView olymIcon = dialog.findViewById(R.id.olymIcon_td);
 
-        final Tickets tickets = (cancelledSelected)?
+        final Tickets ticket = (cancelledSelected)?
                 cancelledTicketsData.get(position):ticketsData.get(position);
-        EventItem event = ticketsData.get(position).getTicketEvent();
+        EventItem event = (cancelledSelected)?
+                cancelledTicketsData.get(position).getTicketEvent():ticketsData.get(position).getTicketEvent();
 
-        status.setText(tickets.getTicketStatus());
-        type.setText(tickets.getTicketBusType());
-        destination.setText(tickets.getTicketDestination());
-        depart.setText(tickets.getTicketDepart());
-        arrive.setText(tickets.getTicketArrive());
-        date.setText(tickets.getTicketDate());
-        seatNo.setText(tickets.getSeatNo());
-        price.setText(tickets.getTicketPrice()+" ฿");
+        status.setText(ticket.getTicketStatus());
+        type.setText(ticket.getTicketBusType());
+        destination.setText(ticket.getTicketDestination());
+        depart.setText(ticket.getTicketDepart());
+        arrive.setText(ticket.getTicketArrive());
+        date.setText(ticket.getTicketDate());
+        seatNo.setText(ticket.getSeatNo());
+        price.setText(ticket.getTicketPrice()+" ฿");
+        bookedTime.setText(ticket.getGregoTicketTime().getTime().toString());
 
         eventName.setText(event.getEvent());
         eventCategory.setText(event.getCategory());
@@ -199,7 +215,7 @@ public class BookingFragment extends Fragment implements TicketAdapter.OnTicketL
         eventPic.setImageResource(event.getPic());
 
         final Button cancelTicket = dialog.findViewById(R.id.cancel_ticket);
-        if(!tickets.isAvailable()){
+        if(!ticket.isAvailable()){
             cancelTicket.setVisibility(View.GONE);
             status.setTextColor(0xFFFF4D4D);
             type.setTextColor(Color.GRAY);
@@ -237,7 +253,9 @@ public class BookingFragment extends Fragment implements TicketAdapter.OnTicketL
                     public void onClick(View v) {
                         cancelDialog.cancel();
                         dialog.cancel();
-                        account.cancelTicket(tickets);
+                        GregorianCalendar cancelledDate = new GregorianCalendar();
+                        ticket.setGregoTicketTime(cancelledDate);
+                        account.cancelTicket(ticket);
                         showAvailableTicketsRecyclerView(defaultFilter);
                     }
                 });
