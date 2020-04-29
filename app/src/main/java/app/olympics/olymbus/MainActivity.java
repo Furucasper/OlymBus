@@ -7,12 +7,10 @@ import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-
-import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -20,7 +18,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
-
 import app.olympics.olymbus.ui.booking.Tickets;
 import app.olympics.olymbus.ui.home.EventItem;
 import app.olympics.olymbus.ui.profile.AccountItem;
@@ -33,19 +30,15 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<BusItem> busData;
     private ArrayList<AccountItem> accountData;
     private ArrayList<Tickets> ticketData;
-    private String ticDir,accDir,busDir;
+    private String ticD,accD,busD;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         navView = findViewById(R.id.nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        /*AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_booking, R.id.navigation_profile)
-                .build();
-         */
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        NavigationUI.setupWithNavController(navView, navController);
 
         InputStream input = getResources().openRawResource(R.raw.input);                            // Import data from input.txt
         InputProcess in = new InputProcess(new Scanner(input));                                     // Use InputProcess
@@ -84,15 +77,38 @@ public class MainActivity extends AppCompatActivity {
         }
 
         this.account = (AccountItem) getIntent().getSerializableExtra("Account");
-
+/*
         File tickets_updates = new File ("tickets.txt");
         File buses_updates = new File ("buses.txt");
         File accounts_updates = new File ("accounts.txt");
 
+ */
+        ticketData = new ArrayList<>();
         try {
-            Updates ticketUpdates = new Updates(new Scanner(tickets_updates));
-            Updates busUpdates = new Updates(new Scanner(buses_updates));
-            Updates accountUpdates = new Updates(new Scanner(accounts_updates));
+            FileInputStream fisTickets = openFileInput("tickets.txt");
+            FileInputStream fisBuses = openFileInput("buses.txt");
+            FileInputStream fisAccounts = openFileInput("accounts.txt");
+            int sizeT = fisTickets.available();
+            int sizeB = fisBuses.available();
+            int sizeA = fisAccounts.available();
+            byte[] bufferT = new byte[sizeT];
+            byte[] bufferB = new byte[sizeB];
+            byte[] bufferA = new byte[sizeA];
+            fisTickets.read(bufferT);
+            fisBuses.read(bufferB);
+            fisAccounts.read(bufferA);
+            fisTickets.close();
+            fisBuses.close();
+            fisAccounts.close();
+            ticD = new String(bufferT);
+            busD = new String(bufferB);
+            accD = new String(bufferA);
+            Log.i("Tickets Data", ticD);
+            Log.i("Buses Data", busD);
+            Log.i("Accounts Data", accD);
+            Updates ticketUpdates = new Updates(new Scanner(ticD));
+            Updates busUpdates = new Updates(new Scanner(busD));
+            Updates accountUpdates = new Updates(new Scanner(accD));
 
             String[] bus_change;                                                                    // Add each account form input to ArrayList
             for (int k = 0; k < busUpdates.getAccountUpdates().size(); k++) {
@@ -124,38 +140,10 @@ public class MainActivity extends AppCompatActivity {
             }
             Toast.makeText(MainActivity.this, "Account updated!", Toast.LENGTH_SHORT).show();
 
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             Toast.makeText(MainActivity.this, "Data can not update!", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
-
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        NavigationUI.setupWithNavController(navView, navController);
-
-        /*
-        BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-                = new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                FragmentManager fragmentManager = getSupportFragmentManager();
-                FragmentTransaction transaction = fragmentManager.beginTransaction();
-                switch (item.getItemId()) {
-                    case R.id.navigation_home:
-                        transaction.replace(R.id.content,new HomeFragment()).commit();
-
-                        return true;
-                    case R.id.navigation_booking:
-                        transaction.replace(R.id.content,new BookingFragment()).commit();
-
-                        return true;
-                    case R.id.navigation_profile:
-                        transaction.replace(R.id.content,new ProfileFragment()).commit();
-                        return true;
-                }
-                return false;
-            }
-        };
-         */
     }
 
     public AccountItem getAccount() {
@@ -197,13 +185,16 @@ public class MainActivity extends AppCompatActivity {
 
     public void updateTicketsData() {
         try {
-            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(MainActivity.this.openFileOutput("tickets.txt", Context.MODE_PRIVATE));
+            String data = "";
+            FileOutputStream fos = openFileOutput("tickets.txt",Context.MODE_PRIVATE);
             for (int i = 0; i < account.getTicketsHistory().size(); i++) {
                 Tickets t = account.getTicketsHistory().get(i);
-                outputStreamWriter.write("Ticket : " + t.getTicketEvent().getEventID() + ", " + t.getTicketBus().getBusID() + ", " + t.getSid() + ", "
+                data+=("Ticket : " + t.getTicketEvent().getEventID() + ", " + t.getTicketBus().getBusID() + ", " + t.getSid() + ", "
                         + t.getSeatNo() + ", " + t.getOwnerID() + ", " + t.getTicketStatus() + ", " + t.getBookingTime() + "\n");
             }
-            outputStreamWriter.close();
+            fos.write(data.getBytes());
+            Log.i("Tickets Data WRITE", data);
+            fos.close();
             Toast.makeText(MainActivity.this, "Tickets Saved!", Toast.LENGTH_SHORT).show();
         } catch (IOException e) {
             Log.e("Exception", "File write failed: " + e.toString());
@@ -213,14 +204,17 @@ public class MainActivity extends AppCompatActivity {
 
     public void updateBusData() {
         try {
-            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(MainActivity.this.openFileOutput("buses.txt", Context.MODE_PRIVATE));
+            String data = "";
+            FileOutputStream fos = openFileOutput("buses.txt",Context.MODE_PRIVATE);
             for (int i = 0; i < account.getBusHistory().size(); i++) {
                 BusItem b = account.getBusHistory().get(i);
                 for (int j = 0; j < b.getBookedSeats().size(); j++)
-                outputStreamWriter.write("Bus : " + b.getBusID() + ", " + b.getBookedSeats().get(j)[0]
-                        +", "+ b.getBookedSeats().get(j)[1] + ", " + b.getBookedSeats().get(j)[2] +"\n");
+                    data+=("Bus : " + b.getBusID() + ", " + b.getBookedSeats().get(j)[0]
+                            +", "+ b.getBookedSeats().get(j)[1] + ", " + b.getBookedSeats().get(j)[2] +"\n");
             }
-            outputStreamWriter.close();
+            fos.write(data.getBytes());
+            Log.i("Buses Data WRITE", data);
+            fos.close();
             Toast.makeText(MainActivity.this, "Buses Saved!", Toast.LENGTH_SHORT).show();
         } catch (IOException e) {
             Log.e("Exception", "File write failed: " + e.toString());
@@ -230,9 +224,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void updateAccountData() {
         try {
-            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(MainActivity.this.openFileOutput("accounts.txt", Context.MODE_PRIVATE));
-            outputStreamWriter.write("Account : " + account.getAccountID() + ", " + account.getPassword());
-            outputStreamWriter.close();
+            String data = "";
+            FileOutputStream fos = openFileOutput("accounts.txt",Context.MODE_PRIVATE);
+            data+=("Account : " + account.getAccountID() + ", " + account.getPassword());
+            fos.write(data.getBytes());
+            Log.i("Accounts Data WRITE", data);
+            fos.close();
             Toast.makeText(MainActivity.this, "Accounts Saved!", Toast.LENGTH_SHORT).show();
 
         } catch (IOException e) {
