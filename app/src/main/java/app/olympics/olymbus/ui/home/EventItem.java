@@ -8,7 +8,7 @@ import app.olympics.olymbus.R;
 
 public class EventItem implements Serializable {                                                    // Make these objects serializable
 
-    private String event,category,discipline,venue,date,time, duration,byBus;                    // Declare String instance variables
+    private String event,category,discipline,venue,date,time, duration,byBus;                       // Declare String instance variables
     private int id, idGen;
     private GregorianCalendar gregolendar,beforeEvent2HR,afterEvent1HR;                             // Declare Gregorain instance variables
     private int year,month,day,hour,min;                                                            // Declare integer instance variables

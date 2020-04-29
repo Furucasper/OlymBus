@@ -27,7 +27,7 @@ public class Register extends AppCompatActivity {
     private ArrayList<AccountItem> allAccount ;
     private TextView username, password, con_password, cardNo, csvNo;
     private TextView idPrompt, passPrompt, conPrompt, cardPrompt, csvPrompt;
-    private String id, pass, card, csv;
+    private String id, pass, confirmPass, card, csv;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -186,7 +186,7 @@ public class Register extends AppCompatActivity {
         public void onTextChanged(CharSequence s, int start, int before, int count) {
 
             validConfirmPass = false;
-            String confirmPass = con_password.getText().toString().trim();
+            confirmPass = con_password.getText().toString().trim();
             if(password.getText().toString().length() == confirmPass.length()){
                 for(int i = 0; i < password.getText().toString().trim().length(); i++){
                     if (password.getText().toString().charAt(i) != confirmPass.charAt(i)){
@@ -201,6 +201,10 @@ public class Register extends AppCompatActivity {
                 }
             }
             else conPrompt.setText("Password and confirm password are mismatch");
+            if (confirmPass.isEmpty())
+            {
+                conPrompt.setText("");
+            }
         }
 
         @Override

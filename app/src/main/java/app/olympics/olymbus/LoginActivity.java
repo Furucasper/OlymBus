@@ -22,7 +22,8 @@ public class LoginActivity extends AppCompatActivity
 {
     private ArrayList<AccountItem> accountData = new ArrayList<>();
     private GregorianCalendar wait_init = new GregorianCalendar();
-    private int duration = 0;
+    private int duration_hour = 0;
+    private int duration_min = 0;
     private int attempts = 0;
     private int wait_multiply = 1;
     private AccountItem account = null;
@@ -61,7 +62,7 @@ public class LoginActivity extends AppCompatActivity
                 Boolean validPassword = false;
 
 
-                if (duration <= 0) {                                                                // First, check if cooldown period ends
+                if (duration_hour <= 0 || duration_min <= 0) {                                                                // First, check if cooldown period ends
                     for (int i = 0; i < accountData.size(); i++) {                                  // Second, check if Username valid
                         if (username.equals(accountData.get(i).getUsername())) {
                             validUsername = true;                                                   // set username to valid
@@ -82,8 +83,8 @@ public class LoginActivity extends AppCompatActivity
                                     wait_init.add(Calendar.MINUTE, 15 * wait_multiply);     // Tell when timer ends
                                     wait_multiply++;                                                // More waiting time if still insert wrong password
                                     GregorianCalendar curr_time = new GregorianCalendar();          // Get current local time
-                                    duration = wait_init.get(Calendar.MINUTE) - curr_time.get(Calendar.MINUTE);// Calculate the duration and show toast
-                                    Toast.makeText(getApplicationContext(), "Please try again in " + duration + " minutes.", Toast.LENGTH_LONG).show();
+                                    duration_min = wait_init.get(Calendar.MINUTE) - curr_time.get(Calendar.MINUTE);// Calculate the duration and show toast
+                                    Toast.makeText(getApplicationContext(), "Please try again in " + duration_min + " minutes.", Toast.LENGTH_LONG).show();
                                     attempts = 0;                                                   // Reset attempts count
                                 }
                                 return;
@@ -113,8 +114,13 @@ public class LoginActivity extends AppCompatActivity
                 else                                                                                // if tries to login while still in cooldown
                 {
                     GregorianCalendar curr_time = new GregorianCalendar();                          // get current local time
-                    duration = wait_init.get(Calendar.MINUTE) - curr_time.get(Calendar.MINUTE);     //calculate the duration and show toast
-                    Toast.makeText(getApplicationContext(), "Please try again in " + duration + " minutes.", Toast.LENGTH_LONG).show();
+                    duration_hour = wait_init.get(Calendar.HOUR) - curr_time.get(Calendar.HOUR);    //calculate the duration and show toast
+                    duration_min = wait_init.get(Calendar.MINUTE) - curr_time.get(Calendar.MINUTE);
+
+                    if ( duration_hour <= 0 ) {
+                        Toast.makeText(getApplicationContext(), "Please try again in " + duration_min + " minutes.", Toast.LENGTH_LONG).show();
+                    }
+                    else Toast.makeText(getApplicationContext(), "Please try again in " + duration_hour + " hours." + duration_min + " minutes.", Toast.LENGTH_LONG).show();
                 }
             }
         });

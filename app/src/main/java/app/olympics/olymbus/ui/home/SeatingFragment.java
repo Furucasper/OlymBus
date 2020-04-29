@@ -191,12 +191,12 @@ public class SeatingFragment extends Fragment {
 
                 if(cnt==1){
 
-                    ticket1 = new Tickets(EVENT, BUS, seatingID[0], selectedSeat[0]);                          // Create new ticket for this selected seating
+                    ticket1 = new Tickets(EVENT, BUS, seatingID[0], selectedSeat[0], account.getAccountID());                          // Create new ticket for this selected seating
 
                 }else if(cnt==2){
 
-                    ticket1 = new Tickets(EVENT, BUS, seatingID[0], selectedSeat[0]);
-                    ticket2 = new Tickets(EVENT, BUS, seatingID[1], selectedSeat[1]);
+                    ticket1 = new Tickets(EVENT, BUS, seatingID[0], selectedSeat[0], account.getAccountID());
+                    ticket2 = new Tickets(EVENT, BUS, seatingID[1], selectedSeat[1], account.getAccountID());
 
                 }
 
@@ -315,7 +315,6 @@ public class SeatingFragment extends Fragment {
                                                     completeDialog.show();
                                                 }else{
                                                     Toast.makeText(getActivity(), "Incorrect CSV code", Toast.LENGTH_SHORT).show();
-                                                    payDialog.cancel();
                                                 }
                                             }
                                         },1000);
