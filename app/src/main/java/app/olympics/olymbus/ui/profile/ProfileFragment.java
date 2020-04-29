@@ -53,7 +53,7 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {                                                       // Activate when clicked log out button
                 startActivity(new Intent(getActivity(), LoginActivity.class));
-                ((MainActivity) getActivity()).saveFile();
+//                ((MainActivity) getActivity()).saveFile();
                 finishActivity();
 
             }

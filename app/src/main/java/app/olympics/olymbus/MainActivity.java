@@ -2,22 +2,14 @@ package app.olympics.olymbus;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.os.Environment;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -57,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < in.getEvent().size(); i++)                                              // Loop until no event left
         {
             eventDetail = in.getEvent().get(i).split(",");                                    // Separate each category from each event and sent those to EventItem constructor
-            eventData.add(new EventItem(eventDetail[0], eventDetail[1], eventDetail[2], eventDetail[3], eventDetail[4], eventDetail[5], eventDetail[6], eventDetail[7], eventDetail[8]));
+            eventData.add(new EventItem(eventDetail[0], eventDetail[1], eventDetail[2], eventDetail[3], eventDetail[4], eventDetail[5], eventDetail[6], eventDetail[7]));
         }                                                                                           // Then add each event to ArrayLists
 
         ArrayList <String> eventDate = new ArrayList<>();
@@ -73,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         {
             busDetail=in.getBus().get(j).split(",");                                          // Separate each bus details and send to BusItem
             for(String date : eventDate) {
-                busData.add(new BusItem(busDetail[0], busDetail[1], busDetail[2], busDetail[3], busDetail[4], busDetail[5], busDetail[6], busDetail[7],  date));
+                busData.add(new BusItem(busDetail[0], busDetail[1], busDetail[2], busDetail[3], busDetail[4], busDetail[5], busDetail[6], date));
             }
         }
 
@@ -81,8 +73,10 @@ public class MainActivity extends AppCompatActivity {
         String[] accountDetail ;                                                                    // Add each account form input to ArrayList
         for (int k = 0; k < in.getAccount().size(); k++) {
             accountDetail = in.getAccount().get(k).split(",");
-            accountData.add(new AccountItem(accountDetail[0], accountDetail[1], accountDetail[2], accountDetail[3], accountDetail[4]));
+            accountData.add(new AccountItem(accountDetail[0], accountDetail[1], accountDetail[2], accountDetail[3]));
         }
+
+
 
         this.account = (AccountItem) getIntent().getSerializableExtra("Account");
 

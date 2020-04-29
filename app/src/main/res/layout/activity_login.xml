@@ -34,7 +34,7 @@
         android:textAllCaps="false"
         android:textColor="@color/colorPrimary"
         android:textSize="15sp"
-        android:visibility="invisible" />
+        android:visibility="visible" />
 
     <ImageView
         android:id="@+id/login_logo"

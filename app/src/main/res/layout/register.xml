@@ -54,7 +54,7 @@
         android:fontFamily="sans-serif"
         android:hint="     User ID"
         android:inputType="textPersonName"
-        android:textColor="#FFFFFF"
+        android:textColor="#000000"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -64,16 +64,17 @@
         tools:visibility="visible" />
 
     <EditText
-        android:id="@+id/cvc_number"
+        android:id="@+id/csv_number"
         android:layout_width="274dp"
         android:layout_height="47dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="25dp"
         android:background="@drawable/bg_btn_purple_smallcurve"
         android:backgroundTint="#1AA8A8A8"
         android:ems="10"
         android:fontFamily="sans-serif"
-        android:hint="     CVC"
+        android:hint="     CSV"
         android:inputType="numberPassword"
+        android:textColor="#000000"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
@@ -85,13 +86,14 @@
         android:id="@+id/card_number_reg"
         android:layout_width="274dp"
         android:layout_height="47dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="25dp"
         android:background="@drawable/bg_btn_purple_smallcurve"
         android:backgroundTint="#1AA8A8A8"
         android:ems="10"
         android:fontFamily="sans-serif"
         android:hint="     Card Number"
         android:inputType="number"
+        android:textColor="#000000"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
@@ -103,13 +105,14 @@
         android:id="@+id/password_reg"
         android:layout_width="274dp"
         android:layout_height="47dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="25dp"
         android:background="@drawable/bg_btn_purple_smallcurve"
         android:backgroundTint="#1AA8A8A8"
         android:ems="10"
         android:fontFamily="sans-serif"
         android:hint="     Password"
-        android:inputType="numberPassword"
+        android:inputType="textPassword"
+        android:textColor="#000000"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
@@ -121,13 +124,14 @@
         android:id="@+id/confirm_password"
         android:layout_width="274dp"
         android:layout_height="47dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="25dp"
         android:background="@drawable/bg_btn_purple_smallcurve"
         android:backgroundTint="#1AA8A8A8"
         android:ems="10"
         android:fontFamily="sans-serif"
         android:hint="     Confirm Password"
-        android:inputType="numberPassword"
+        android:inputType="textPassword"
+        android:textColor="#000000"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
@@ -148,7 +152,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cvc_number" />
+        app:layout_constraintTop_toBottomOf="@+id/csv_number" />
 
     <TextView
         android:id="@+id/text"
@@ -163,5 +167,60 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signup_btn"
         app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/id_prompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="-5dp"
+        android:textColor="#FF0000"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toTopOf="@+id/password_reg"
+        app:layout_constraintEnd_toEndOf="@+id/userID_reg"
+        app:layout_constraintTop_toBottomOf="@+id/userID_reg" />
+
+    <TextView
+        android:id="@+id/password_prompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="-5dp"
+        android:textColor="#FF0000"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toTopOf="@+id/confirm_password"
+        app:layout_constraintEnd_toEndOf="@+id/password_reg"
+        app:layout_constraintTop_toBottomOf="@+id/password_reg" />
+
+    <TextView
+        android:id="@+id/confirm_password_prompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="-5dp"
+        android:textColor="#FF0000"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toTopOf="@+id/card_number_reg"
+        app:layout_constraintEnd_toEndOf="@+id/confirm_password"
+        app:layout_constraintTop_toBottomOf="@+id/confirm_password" />
+
+    <TextView
+        android:id="@+id/card_prompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="-5dp"
+        android:textColor="#FF0000"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toTopOf="@+id/csv_number"
+        app:layout_constraintEnd_toEndOf="@+id/card_number_reg"
+        app:layout_constraintTop_toBottomOf="@+id/card_number_reg" />
+
+    <TextView
+        android:id="@+id/csv_prompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="-5dp"
+        android:textColor="#FF0000"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="@+id/csv_number"
+        app:layout_constraintTop_toBottomOf="@+id/csv_number" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

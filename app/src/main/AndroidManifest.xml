@@ -10,12 +10,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ui.profile.Register"></activity>
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="portrait"
             android:label="@string/title_activity_major"
-            tools:ignore="LockedOrientationActivity"/>
-        <activity android:name=".LoginActivity" android:screenOrientation="portrait"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".LoginActivity"
+            android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

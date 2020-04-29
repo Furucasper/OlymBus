@@ -11,9 +11,6 @@ public class InputProcess
 
     public InputProcess (Scanner input)                                                             // Constructor with input in parameter
     {                                                                                               // Categorized with sequential access file. (might change to RandomAccessFile in next update)
-        int EVENTCNT = 0;
-        int BUSTCNT = 0;
-        int ACCOUNTCNT = 0;
         String line ;                                                                               // Declare line for each line read from input
         String[] Details ;                                                                          // Declare Array to split each category from each line
         String trimmedDetails = "";                                                                 // Keep an easy to read details for each category
@@ -23,8 +20,6 @@ public class InputProcess
             line = input.nextLine();                                                                // change String in line each time read
             if (line.startsWith("Event"))                                                           // Check if it an event category
             {
-                EVENTCNT++;
-                trimmedDetails += EVENTCNT+"," ;
                 Details = line.substring(10).split(",");                                      // get rid of headers and split for sub category sorting
                 for (int i = 0; i < Details.length; i++)                                            // Loop trimming each details
                 {
@@ -36,8 +31,6 @@ public class InputProcess
             }
             else if (line.startsWith("Bus"))                                                        // Same steps with events
             {
-                BUSTCNT++;
-                trimmedDetails += BUSTCNT+"," ;
                 Details = line.substring(7).split(",");
                 for (int j = 0; j < Details.length; j++)
                 {
@@ -48,8 +41,6 @@ public class InputProcess
             }
             else if (line.startsWith("Account"))                                                    // Same steps with events and buses
             {
-                ACCOUNTCNT++;
-                trimmedDetails += ACCOUNTCNT+"," ;
                 Details = line.substring(11).split(",");
                 for (int k = 0; k < Details.length; k++)
                 {

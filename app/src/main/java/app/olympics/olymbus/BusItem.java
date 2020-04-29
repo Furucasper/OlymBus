@@ -7,16 +7,17 @@ import java.util.GregorianCalendar;
 
 public class BusItem implements Serializable {
 
-    private String id, type, destination,depart,arrive;
-    private String cost;
+    private String type, destination,depart,arrive,cost;
+    private int id, idGen;
     private int  rows, cols, maximumSeats, availableSeats, duration;
     private GregorianCalendar gregoarrive, gregodepart;
     private String[] booking = new String[3];
     private ArrayList <String[]> bookedSeat = new ArrayList <> ();
 
     //String type, String destination, String depart, int duration, int rows, int cols, double cost
-    public BusItem(String id, String type, String destination, String depart, String duration, String rows, String cols, String cost, String date) {
-        this. id = id;
+    public BusItem(String type, String destination, String depart, String duration, String rows, String cols, String cost, String date) {
+        idGen++;
+        this. id = idGen;
         this.type = type;
         this.destination = destination;
         this.duration = Integer.parseInt(duration);
@@ -73,7 +74,7 @@ public class BusItem implements Serializable {
         return detail;
     }
 
-    public String getBusID() { return id; }
+    public String getBusID() { return id+""; }
 
     public String getType() {
         return type;

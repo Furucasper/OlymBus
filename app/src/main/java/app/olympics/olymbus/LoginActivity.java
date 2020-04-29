@@ -16,6 +16,7 @@ import java.util.Scanner;
 import androidx.appcompat.app.AppCompatActivity;
 
 import app.olympics.olymbus.ui.profile.AccountItem;
+import app.olympics.olymbus.ui.profile.Register;
 
 public class LoginActivity extends AppCompatActivity
 {
@@ -42,8 +43,11 @@ public class LoginActivity extends AppCompatActivity
         String[] accountDetail ;                                                                    // Add each account form input to ArrayList
         for (int k = 0; k < in.getAccount().size(); k++) {
             accountDetail = in.getAccount().get(k).split(",");
-            accountData.add(new AccountItem(accountDetail[0], accountDetail[1], accountDetail[2], accountDetail[3], accountDetail[4]));
+            accountData.add(new AccountItem(accountDetail[0], accountDetail[1], accountDetail[2], accountDetail[3]));
         }
+
+        Intent intent = new Intent(getApplicationContext(), Register.class);
+        intent.putExtra("Account", account);
 
         btn.setOnClickListener(new View.OnClickListener()                                           // Activate method when click log in button
         {
@@ -112,6 +116,17 @@ public class LoginActivity extends AppCompatActivity
                     duration = wait_init.get(Calendar.MINUTE) - curr_time.get(Calendar.MINUTE);     //calculate the duration and show toast
                     Toast.makeText(getApplicationContext(), "Please try again in " + duration + " minutes.", Toast.LENGTH_LONG).show();
                 }
+            }
+        });
+
+        Button signUp = findViewById(R.id.reg_btn);
+        signUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Register.class);
+                intent.putExtra("Account", accountData);
+                startActivity(intent);
+                finish();
             }
         });
     }
