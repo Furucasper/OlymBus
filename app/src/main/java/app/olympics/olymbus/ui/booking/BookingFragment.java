@@ -129,8 +129,9 @@ public class BookingFragment extends Fragment implements TicketAdapter.OnTicketL
                     }
                 }break;
             case "booked" :
-                ticketsData = account.getTickets();
-                Collections.reverse(ticketsData);
+                ticketsFilter = new ArrayList<Tickets>(account.getTickets());
+                Collections.reverse(ticketsFilter);
+                ticketsData = ticketsFilter;
                 break;
         }
         ticketAdapter = new TicketAdapter(getActivity(), ticketsData,this);
