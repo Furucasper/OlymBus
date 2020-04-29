@@ -1,16 +1,22 @@
 package app.olympics.olymbus.ui.booking;
 
 import android.app.Dialog;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
+import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -29,7 +35,9 @@ public class BookingFragment extends Fragment implements TicketAdapter.OnTicketL
     private RecyclerView ticketsRecyclerview;
     private TicketAdapter ticketAdapter;
     private AccountItem account;
-    private ArrayList<Tickets> ticketsData;
+    private ArrayList<Tickets> ticketsData, cancelledTicketsData,ticketsFilter,cancelledTicketsFilter, ticketsDepart, ticketsArrive;
+    private String defaultFilter;
+    private boolean cancelledSelected;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -41,15 +49,98 @@ public class BookingFragment extends Fragment implements TicketAdapter.OnTicketL
 
         ticketsRecyclerview = view.findViewById(R.id.ticketList);
         ticketsData = account.getTickets();
+        cancelledTicketsData = account.getCancelledTickets();
+        defaultFilter = "booked"; //set default filter is booked time.
+        final Button ticketsFilter = view.findViewById(R.id.ticketsFilter);
+        ticketsFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showFilterMenu(v);
+            }
+        });
 
-        //set RecyclerView Adapter
-        showRecyclerView();
+        showAvailableTicketsRecyclerView(defaultFilter);
+
+        RadioGroup ticketsStatus = view.findViewById(R.id.tickets_status_radio);
+        ticketsStatus.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId){
+                    case R.id.availableRadio :
+                        showAvailableTicketsRecyclerView(defaultFilter);
+                        ticketsFilter.setVisibility(View.VISIBLE);
+                        cancelledSelected = false;
+                        break;
+                    case R.id.cancelledRadio :
+                        showCancelledTicketsRecyclerView();
+                        ticketsFilter.setVisibility(View.INVISIBLE);
+                        cancelledSelected = true;
+                        break;
+                }
+            }
+        });
 
         return view;
     }
 
-    public void showRecyclerView(){
+    public void showFilterMenu(View v){
+        PopupMenu filterMenu = new PopupMenu(getActivity(), v);
+        filterMenu.inflate(R.menu.tickets_filter_popup_menu);
+        filterMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                if (item.getItemId() == R.id.sort_by_booked){
+                    defaultFilter = "booked";
+                    Toast.makeText(getActivity(), "Sort by Booked Time ", Toast.LENGTH_SHORT).show();
+                    showAvailableTicketsRecyclerView("booked");
+                }else if (item.getItemId() == R.id.sort_by_depart){
+                    defaultFilter = "depart";
+                    Toast.makeText(getActivity(), "Sort by Depart Time ", Toast.LENGTH_SHORT).show();
+                    showAvailableTicketsRecyclerView("depart");
+                }else if (item.getItemId() == R.id.sort_by_arrive){
+                    defaultFilter = "arrive";
+                    Toast.makeText(getActivity(), "Sort by Arrive Time ", Toast.LENGTH_SHORT).show();
+                    showAvailableTicketsRecyclerView("arrive");
+                }
+                return true;
+            }
+        });
+        filterMenu.show();
+    }
+
+    public void showAvailableTicketsRecyclerView(String sortBy){
+        switch (sortBy){
+            case "depart" :
+                for(int n = 0; n<ticketsData.size(); n++){                                                    // Loop for each event in ArrayList
+                    for(int i = 0; i<ticketsData.size()-1; i++){                                              // Loop to sort events to correct time order
+                        if(ticketsData.get(i+1).getGregoTicketDepart().before(ticketsData.get(i).getGregoTicketDepart())){
+                            ticketsData.add(i,ticketsData.get(i+1));
+                            ticketsData.remove(i+2);
+                        }
+                    }
+                } break;
+            case "arrive" :
+                for(int n = 0; n<ticketsData.size(); n++){                                                    // Loop for each event in ArrayList
+                    for(int i = 0; i<ticketsData.size()-1; i++){                                              // Loop to sort events to correct time order
+                        if(ticketsData.get(i+1).getGregoTicketArrive().before(ticketsData.get(i).getGregoTicketArrive())){
+                            ticketsData.add(i,ticketsData.get(i+1));
+                            ticketsData.remove(i+2);
+                        }
+                    }
+                }break;
+            case "booked" :
+                ticketsData = account.getTickets();
+                Collections.reverse(ticketsData);
+                break;
+        }
         ticketAdapter = new TicketAdapter(getActivity(), ticketsData,this);
+        ticketsRecyclerview.setAdapter(ticketAdapter);
+        ticketsRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
+    }
+
+    public void showCancelledTicketsRecyclerView(){
+        Collections.reverse(cancelledTicketsData);
+        ticketAdapter = new TicketAdapter(getActivity(), cancelledTicketsData,this);
         ticketsRecyclerview.setAdapter(ticketAdapter);
         ticketsRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
@@ -80,8 +171,11 @@ public class BookingFragment extends Fragment implements TicketAdapter.OnTicketL
         TextView eventDuration = dialog.findViewById(R.id.duration_td);
         TextView eventByBus = dialog.findViewById(R.id.byBus_td);
         ImageView eventPic = dialog.findViewById(R.id.eventPic_td);
+        ImageView busIcon = dialog.findViewById(R.id.busIcon_td);
+        ImageView olymIcon = dialog.findViewById(R.id.olymIcon_td);
 
-        final Tickets tickets = ticketsData.get(position);
+        final Tickets tickets = (cancelledSelected)?
+                cancelledTicketsData.get(position):ticketsData.get(position);
         EventItem event = ticketsData.get(position).getTicketEvent();
 
         status.setText(tickets.getTicketStatus());
@@ -104,6 +198,29 @@ public class BookingFragment extends Fragment implements TicketAdapter.OnTicketL
         eventPic.setImageResource(event.getPic());
 
         final Button cancelTicket = dialog.findViewById(R.id.cancel_ticket);
+        if(!tickets.isAvailable()){
+            cancelTicket.setVisibility(View.GONE);
+            status.setTextColor(0xFFFF4D4D);
+            type.setTextColor(Color.GRAY);
+            destination.setTextColor(Color.GRAY);
+            depart.setTextColor(Color.GRAY);
+            arrive.setTextColor(Color.GRAY);
+            date.setTextColor(Color.GRAY);
+            seatNo.setTextColor(Color.GRAY);
+            price.setTextColor(Color.GRAY);
+
+            eventName.setTextColor(Color.GRAY);
+            eventCategory.setTextColor(Color.GRAY);
+            eventDiscipline.setTextColor(Color.GRAY);
+            eventVenue.setTextColor(Color.GRAY);
+            eventDate.setTextColor(Color.GRAY);
+            eventTime.setTextColor(Color.GRAY);
+            eventDuration.setTextColor(Color.GRAY);
+            eventByBus.setTextColor(Color.GRAY);
+            eventPic.setVisibility(View.INVISIBLE);
+            olymIcon.setVisibility(View.INVISIBLE);
+            busIcon.setVisibility(View.INVISIBLE);
+        }
         cancelTicket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -120,7 +237,7 @@ public class BookingFragment extends Fragment implements TicketAdapter.OnTicketL
                         cancelDialog.cancel();
                         dialog.cancel();
                         account.cancelTicket(tickets);
-                        showRecyclerView();
+                        showAvailableTicketsRecyclerView(defaultFilter);
                     }
                 });
 

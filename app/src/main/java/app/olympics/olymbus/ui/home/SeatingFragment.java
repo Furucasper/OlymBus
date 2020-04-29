@@ -283,7 +283,7 @@ public class SeatingFragment extends Fragment {
                                                 }
                                                 if(csvCode.equals(account.getCSV())){
                                                     payDialog.cancel();
-                                                    Toast.makeText(getActivity(), "Booking Complete!", Toast.LENGTH_SHORT).show();
+                                                    Toast.makeText(getActivity(), "Payment Successful !", Toast.LENGTH_SHORT).show();
 
                                                     if (ticketCnt == 1) {
                                                         account.addTicket(ticket1);                                      // Add this ticket to the account
@@ -301,7 +301,7 @@ public class SeatingFragment extends Fragment {
                                                     completeDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                                                     completeDialog.setContentView(R.layout.dialog_booking_complete);
                                                     completeDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-                                                    completeDialog.setCancelable(true);
+                                                    completeDialog.setCancelable(false);
 
                                                     Button continueBtn = completeDialog.findViewById(R.id.confirm_cb);
                                                     continueBtn.setOnClickListener(new View.OnClickListener() {

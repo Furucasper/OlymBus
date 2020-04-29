@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/sort_by_booked"
+        android:title="Booked Time"/>
+    <item
+        android:id="@+id/sort_by_depart"
+        android:title="Depart Time"/>
+    <item
+        android:id="@+id/sort_by_arrive"
+        android:title="Arrive Time"/>
+</menu>

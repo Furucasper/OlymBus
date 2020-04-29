@@ -10,8 +10,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
+        android:layout_marginTop="3dp"
         android:layout_marginEnd="30dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="7dp"
         android:background="@drawable/bg_white_smallcurve"
         android:elevation="3dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -248,7 +249,7 @@
             app:layout_constraintEnd_toEndOf="@+id/seatNo_ticket" />
 
         <ImageView
-            android:id="@+id/imageView4"
+            android:id="@+id/bus_icon_ticket"
             android:layout_width="10dp"
             android:layout_height="10dp"
             android:layout_marginBottom="8dp"
@@ -259,15 +260,15 @@
             app:srcCompat="@drawable/ic_bus" />
 
         <ImageView
-            android:id="@+id/imageView5"
+            android:id="@+id/olympic_rings_icon_ticket"
             android:layout_width="20dp"
             android:layout_height="10dp"
             android:layout_marginEnd="8dp"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView4"
-            app:layout_constraintEnd_toStartOf="@+id/imageView4"
+            app:layout_constraintBottom_toBottomOf="@+id/bus_icon_ticket"
+            app:layout_constraintEnd_toStartOf="@+id/bus_icon_ticket"
             app:layout_constraintHorizontal_bias="0.75"
             app:layout_constraintStart_toStartOf="@+id/ticket_status"
-            app:layout_constraintTop_toTopOf="@+id/imageView4"
+            app:layout_constraintTop_toTopOf="@+id/bus_icon_ticket"
             app:srcCompat="@drawable/ic_olympic_rings" />
 
 

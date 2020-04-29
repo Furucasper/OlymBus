@@ -1,9 +1,11 @@
 package app.olympics.olymbus;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -46,7 +48,22 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.TicketView
         holder.eventName.setText(mData.get(position).getTicketEventName());
         holder.eventCategory.setText(mData.get(position).getTicketEventCategory());
         holder.eventDiscipline.setText(mData.get(position).getTicketEventDiscipline());
+        holder.ticketStatus.setText(mData.get(position).getTicketStatus());
 
+        if(!mData.get(position).isAvailable()){
+            holder.type.setTextColor(Color.GRAY);
+            holder.depart.setTextColor(Color.GRAY);
+            holder.arrive.setTextColor(Color.GRAY);
+            holder.date.setTextColor(Color.GRAY);
+            holder.seatNo.setTextColor(Color.GRAY);
+            holder.destination.setTextColor(Color.GRAY);
+            holder.eventName.setTextColor(Color.GRAY);
+            holder.eventDiscipline.setTextColor(Color.GRAY);
+            holder.eventCategory.setTextColor(Color.GRAY);
+            holder.ticketStatus.setTextColor(0xFFFF4D4D);
+            holder.olymIcon.setVisibility(View.INVISIBLE);
+            holder.busIcon.setVisibility(View.INVISIBLE);
+        }
     }
 
 
@@ -59,6 +76,7 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.TicketView
 
          private TextView ticketStatus, type, destination, depart, arrive, date, seatNo, eventName, eventCategory, eventDiscipline;
          private OnTicketListener onTicketListener;
+         private ImageView busIcon,olymIcon;
 
         public TicketViewHolder(@NonNull View itemView, OnTicketListener onTicketListener){
             super(itemView);
@@ -73,7 +91,8 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.TicketView
             eventCategory = itemView.findViewById(R.id.category_ticket);
             eventDiscipline = itemView.findViewById(R.id.discipline_ticket);
             ticketStatus = itemView.findViewById(R.id.ticket_status);
-
+            busIcon = itemView.findViewById(R.id.bus_icon_ticket);
+            olymIcon = itemView.findViewById(R.id.olympic_rings_icon_ticket);
             this.onTicketListener = onTicketListener;
             itemView.setOnClickListener(this);
 

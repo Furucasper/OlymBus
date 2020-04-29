@@ -99,17 +99,17 @@
 
 
                     <ImageView
-                        android:id="@+id/imageView7"
-                        android:layout_width="40dp"
-                        android:layout_height="18dp"
+                        android:id="@+id/olymIcon_td"
+                        android:layout_width="35dp"
+                        android:layout_height="14dp"
                         android:layout_marginEnd="16dp"
-                        app:layout_constraintBottom_toBottomOf="@+id/imageView6"
-                        app:layout_constraintEnd_toStartOf="@+id/imageView6"
-                        app:layout_constraintTop_toTopOf="@+id/imageView6"
+                        app:layout_constraintBottom_toBottomOf="@+id/busIcon_td"
+                        app:layout_constraintEnd_toStartOf="@+id/busIcon_td"
+                        app:layout_constraintTop_toTopOf="@+id/busIcon_td"
                         app:srcCompat="@drawable/ic_olympic_rings" />
 
                     <ImageView
-                        android:id="@+id/imageView6"
+                        android:id="@+id/busIcon_td"
                         android:layout_width="15dp"
                         android:layout_height="15dp"
                         app:layout_constraintBottom_toBottomOf="@+id/price_td"
@@ -226,7 +226,7 @@
                         android:fontFamily="@font/maven_pro_bold"
                         android:textAlignment="textStart"
                         android:textColor="@color/colorBlack"
-                        android:textSize="18sp"
+                        android:textSize="17sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="@+id/destination"
@@ -265,8 +265,8 @@
                         android:layout_marginEnd="16dp"
                         android:fontFamily="@font/maven_pro_bold"
                         android:textColor="@color/colorBlack"
-                        android:textSize="18sp"
-                        app:layout_constraintEnd_toStartOf="@+id/imageView7"
+                        android:textSize="16sp"
+                        app:layout_constraintEnd_toStartOf="@+id/olymIcon_td"
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="@+id/price"
                         app:layout_constraintTop_toBottomOf="@+id/price" />
@@ -410,7 +410,7 @@
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         app:layout_constraintBottom_toBottomOf="@+id/category_td"
-                        app:layout_constraintEnd_toEndOf="@+id/imageView6"
+                        app:layout_constraintEnd_toEndOf="@+id/busIcon_td"
                         app:layout_constraintTop_toTopOf="@+id/event_td"
                         app:srcCompat="@drawable/ic_taekwondo_pictogram" />
 

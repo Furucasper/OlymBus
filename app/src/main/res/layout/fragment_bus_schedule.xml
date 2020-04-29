@@ -88,17 +88,12 @@
         android:textColor="@color/colorGray"
         android:textSize="12sp" />
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/busList"
+        android:layout_marginTop="7dp"
         android:layout_below="@id/textEventStart"
-        android:layout_marginTop="10dp">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/busList"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </ScrollView>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <TextView
         android:id="@+id/textEventStart"

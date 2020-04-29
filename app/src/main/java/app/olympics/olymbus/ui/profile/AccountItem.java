@@ -48,8 +48,9 @@ public class AccountItem implements Serializable
             Maxed_Quota_Bus.remove(t.getTicketBus());
         }
         else bookedBus.remove(t.getTicketBus());                                                    // Remove the ticket from owned ticket
-
+        cancelled_tickets.add(t);
         t.getTicketBus().cancelSeat(t.getSid(),id+"");
+        t.setUnavailable();
     }
 
     public String getAccountID() { return id+""; }

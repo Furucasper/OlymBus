@@ -1,5 +1,7 @@
 package app.olympics.olymbus.ui.booking;
 
+import java.util.GregorianCalendar;
+
 import app.olympics.olymbus.BusItem;
 import app.olympics.olymbus.ui.home.EventItem;
 
@@ -11,6 +13,7 @@ public class Tickets
     private int id;                                                                                 // Declare Integer instance variables
     private String type, destination, date, seatNo, price, sid, eventName, depart, arrive, eventCategory, eventDiscipline;// Declare String instance variables
     private boolean available;                                                                      // Declare Boolean instance variables
+    private GregorianCalendar gregoTicketDepart ,gregoTicketArrive ,gregoTicketBooked;
 
     public Tickets (EventItem ev, BusItem bus, int sid, String seatNo)
     {
@@ -30,6 +33,8 @@ public class Tickets
         this.eventCategory = ev.getCategory();
         this.eventDiscipline = ev.getDiscipline();
         this.available = true;
+        this.gregoTicketArrive = bus.getGregoarrive();
+        this.gregoTicketDepart = bus.getGregodepart();
     }
 
     public String getSeatNo() { return seatNo; }                                                    // Declare methods for-easy-to-access
@@ -58,13 +63,21 @@ public class Tickets
 
     public BusItem getTicketBus() { return bus; }
 
+    public GregorianCalendar getGregoTicketBooked(){ return gregoTicketBooked; }
+
+    public GregorianCalendar getGregoTicketDepart(){ return gregoTicketArrive; }
+
+    public GregorianCalendar getGregoTicketArrive(){ return  gregoTicketArrive; }
+
     public Boolean isAvailable() {return available; }
+
+    public void setUnavailable() { this.available = false;}
 
     public String getTicketStatus() {
         if (available) {
-            return "available.";
+            return "Available";
         } else {
-            return "unavailable.";
+            return "Cancelled";
         }
     }
 
