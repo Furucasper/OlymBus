@@ -83,7 +83,7 @@ public class BookingFragment extends Fragment implements TicketAdapter.OnTicketL
         return view;
     }
 
-    public void showFilterMenu(View v){
+    private void showFilterMenu(View v){
         PopupMenu filterMenu = new PopupMenu(getActivity(), v);
         filterMenu.inflate(R.menu.tickets_filter_popup_menu);
         filterMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -108,7 +108,7 @@ public class BookingFragment extends Fragment implements TicketAdapter.OnTicketL
         filterMenu.show();
     }
 
-    public void showAvailableTicketsRecyclerView(String sortBy){
+    private void showAvailableTicketsRecyclerView(String sortBy){
         switch (sortBy){
             case "depart" :
                 for(int n = 0; n<ticketsData.size(); n++){                                                    // Loop for each event in ArrayList
@@ -138,7 +138,7 @@ public class BookingFragment extends Fragment implements TicketAdapter.OnTicketL
         ticketsRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
 
-    public void showCancelledTicketsRecyclerView(){
+    private void showCancelledTicketsRecyclerView(){
         Collections.reverse(cancelledTicketsData);
         ticketAdapter = new TicketAdapter(getActivity(), cancelledTicketsData,this);
         ticketsRecyclerview.setAdapter(ticketAdapter);
