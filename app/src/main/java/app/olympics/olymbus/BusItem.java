@@ -10,7 +10,7 @@ public class BusItem implements Serializable {
     private String id, type, destination,depart,arrive,cost;                                            //Declare String instance variables
     private int  rows, cols, maximumSeats, availableSeats, duration;                     //Declare Integer instance variables
     private GregorianCalendar gregoarrive, gregodepart;                                             //Declare Time instance variables
-    private String[] booking = new String[3];                                                       //Declare String Array to store booking details
+    private String[] booking;                                                       //Declare String Array to store booking details
     private ArrayList <String[]> bookedSeat = new ArrayList <> ();                                  //Make String ArrayList to store all booked seats for the bus
 
     //String type, String destination, String depart, int duration, int rows, int cols, double cost
@@ -47,6 +47,7 @@ public class BusItem implements Serializable {
 
     public void bookSeat (String sid, String aid, String time)
     {
+        booking = new String[3];
         booking[0] = sid;
         booking[1] = aid;
         booking[2] = time;
@@ -56,6 +57,7 @@ public class BusItem implements Serializable {
 
     public void cancelSeat (String sid, String aid)
     {
+        booking = new String[2];
         booking[0] = sid;
         booking[1] = aid;
         bookedSeat.remove(booking);
