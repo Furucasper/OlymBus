@@ -261,6 +261,7 @@ public class BookingFragment extends Fragment implements TicketAdapter.OnTicketL
                         GregorianCalendar cancelledDate = new GregorianCalendar();
                         ticket.setGregoTicketTime(cancelledDate);
                         account.cancelTicket(ticket);
+                        Toast.makeText(getActivity(), "Cancelling Ticket", Toast.LENGTH_SHORT).show();
                         showAvailableTicketsRecyclerView(defaultFilter);
                     }
                 });
