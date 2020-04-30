@@ -58,9 +58,10 @@ public class BusItem implements Serializable {
 
     public void cancelSeat (String sid, String aid)
     {
-        for(String[] s : bookedSeat){
-            if(s[0].equals(sid)&&s[1].equals(aid))
-                bookedSeat.remove(s);
+        for (int i = 0; i < bookedSeat.size(); i++){
+            if(bookedSeat.get(i)[0].equals(sid) && bookedSeat.get(i)[1].equals(aid)){
+                bookedSeat.remove(i);
+            }
         }
         availableSeats++;
     }
