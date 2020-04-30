@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<BusItem> busData;
     private ArrayList<AccountItem> accountData;
     private ArrayList<Tickets> ticketData;
+    private ArrayList<BusItem> busChanged = new ArrayList<BusItem>();
     private String ticD,accD,busD;
     private String aid;
 
@@ -122,6 +123,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 if(event!=null && bus!=null){ // Ticket : EventID, BusID, SID, SeatNo., AccountID, Status, BookingTime
                     Tickets t = new Tickets(event, bus,Integer.parseInt(act_ticket[2]),act_ticket[3],act_ticket[4]);
+                    busChanged.add(t.getTicketBus());
                     ticketData.add(t);
                     for (AccountItem a : accountData){
                         if (a.getAccountID().equals(t.getOwnerID())){
@@ -214,11 +216,17 @@ public class MainActivity extends AppCompatActivity {
 
     public void updateBusData() {
         try {
+            for (int i = 0; i < account.getBusHistory().size(); i++) {
+                if (!busChanged.contains(account.getBusHistory().get(i))) {
+                    busChanged.add(account.getBusHistory().get(i));
+                }
+            }
+
             String data = "";
             FileOutputStream fos = openFileOutput("busesDat.txt",Context.MODE_PRIVATE);
             data += "// Bus : BusID, SID, AccountID, Date\n";
-            for (int i = 0; i < account.getBusHistory().size(); i++) {
-                    BusItem b = account.getBusHistory().get(i);
+            for (int i = 0; i < busChanged.size(); i++) {
+                    BusItem b = busChanged.get(i);
                     for (int j = 0; j < b.getBookedSeats().size(); j++)                                 // Bus : BusID, SID, AccountID, Date
                         data+=("Bus : " + b.getBusID() + ", " + b.getBookedSeats().get(j)[0]
                                 +", "+ b.getBookedSeats().get(j)[1] + ", " + b.getBookedSeats().get(j)[2] +"\n");
