@@ -1,9 +1,10 @@
 package app.olympics.olymbus;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class BusItem implements Serializable {
 
@@ -11,7 +12,7 @@ public class BusItem implements Serializable {
     private int  rows, cols, maximumSeats, availableSeats, duration;                     //Declare Integer instance variables
     private GregorianCalendar gregoarrive, gregodepart;                                             //Declare Time instance variables
     private String[] booking;                                                       //Declare String Array to store booking details
-    private ArrayList <String[]> bookedSeat = new ArrayList <> ();                                  //Make String ArrayList to store all booked seats for the bus
+    private List<String[]> bookedSeat = new CopyOnWriteArrayList<>();                                  //Make String ArrayList to store all booked seats for the bus
 
     //String type, String destination, String depart, int duration, int rows, int cols, double cost
     public BusItem(String bid, String type, String destination, String depart, String duration, String rows, String cols, String cost, String date) {
@@ -128,7 +129,7 @@ public class BusItem implements Serializable {
         return gregodepart;
     }
 
-    public ArrayList<String[]> getBookedSeats (){
+    public List<String[]> getBookedSeats (){
         return bookedSeat;
     }
 
