@@ -1,6 +1,7 @@
 package app.olympics.olymbus.ui.booking;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 import app.olympics.olymbus.BusItem;
@@ -76,7 +77,12 @@ public class Tickets implements Serializable
 
     public void setGregoTicketTime(GregorianCalendar bookedTime){
         this.gregoTicketTime = bookedTime;
-        this.bookingTime = bookedTime.getTime().toString();
+        this.bookingTime = bookedTime.getTime().getYear()+".";
+        bookingTime += bookedTime.getTime().getMonth()+".";
+        bookingTime += bookedTime.getTime().getDay()+" ";
+        bookingTime += bookedTime.getTime().getHours()+":";
+        bookingTime += bookedTime.getTime().getMinutes()+":";
+        bookingTime += bookedTime.getTime().getSeconds()+"";
     }
 
     public GregorianCalendar getGregoTicketTime(){ return gregoTicketTime; }
