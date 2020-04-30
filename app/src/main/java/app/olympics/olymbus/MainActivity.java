@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < in.getEvent().size(); i++)                                              // Loop until no event left
         {
             eventDetail = in.getEvent().get(i).split(",");                                    // Separate each category from each event and sent those to EventItem constructor
-            eventData.add(new EventItem(eventDetail[0], eventDetail[1], eventDetail[2], eventDetail[3], eventDetail[4], eventDetail[5], eventDetail[6], eventDetail[7]));
+            eventData.add(new EventItem(eventDetail[0], eventDetail[1], eventDetail[2], eventDetail[3], eventDetail[4], eventDetail[5], eventDetail[6], eventDetail[7], eventDetail[8]));
         }                                                                                           // Then add each event to ArrayLists
 
         ArrayList<String> eventDate = new ArrayList<>();
@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         {
             busDetail = in.getBus().get(j).split(",");                                          // Separate each bus details and send to BusItem
             for (String date : eventDate) {
-                busData.add(new BusItem(busDetail[0], busDetail[1], busDetail[2], busDetail[3], busDetail[4], busDetail[5], busDetail[6], date));
+                busData.add(new BusItem(busDetail[0], busDetail[1], busDetail[2], busDetail[3], busDetail[4], busDetail[5], busDetail[6], busDetail[7], date));
             }
         }
 
@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
         String[] accountDetail;                                                                    // Add each account form input to ArrayList
         for (int k = 0; k < in.getAccount().size(); k++) {
             accountDetail = in.getAccount().get(k).split(",");
-            accountData.add(new AccountItem(accountDetail[0], accountDetail[1], accountDetail[2], accountDetail[3]));
+            accountData.add(new AccountItem(accountDetail[0], accountDetail[1], accountDetail[2], accountDetail[3], accountDetail[4]));
         }
 
         this.account = (AccountItem) getIntent().getSerializableExtra("Account");
@@ -85,9 +85,9 @@ public class MainActivity extends AppCompatActivity {
  */
         ticketData = new ArrayList<>();
         try {
-            FileInputStream fisTickets = openFileInput("tickets.txt");
-            FileInputStream fisBuses = openFileInput("buses.txt");
-            FileInputStream fisAccounts = openFileInput("accounts.txt");
+            FileInputStream fisTickets = openFileInput("ticketsDat.txt");
+            FileInputStream fisBuses = openFileInput("busesDat.txt");
+            FileInputStream fisAccounts = openFileInput("accountsDat.txt");
             int sizeT = fisTickets.available();
             int sizeB = fisBuses.available();
             int sizeA = fisAccounts.available();
@@ -107,38 +107,43 @@ public class MainActivity extends AppCompatActivity {
             Log.i("Buses Data", busD);
             Log.i("Accounts Data", accD);
             Updates ticketUpdates = new Updates(new Scanner(ticD));
-            Updates busUpdates = new Updates(new Scanner(busD));
-            Updates accountUpdates = new Updates(new Scanner(accD));
-
-            String[] bus_change;                                                                    // Add each account form input to ArrayList
-            for (int k = 0; k < busUpdates.getAccountUpdates().size(); k++) {
-                bus_change = busUpdates.getAllBookedBusUpdates().get(k).split(",");
-                busData.get(Integer.parseInt(bus_change[0])).bookSeat(bus_change[1],bus_change[2],bus_change[3]);
-            }
-            Toast.makeText(MainActivity.this, "Bus updated!", Toast.LENGTH_SHORT).show();
-
+            int loops1 = 0;
             String[] act_ticket;                                                                    // Add each account form input to ArrayList
             for (int i = 0; i < ticketUpdates.getAllTickets().size(); i++) {
                 act_ticket = ticketUpdates.getAllTickets().get(i).split(",");
-                Tickets t = new Tickets(eventData.get(Integer.parseInt(act_ticket[0])),busData.get(Integer.parseInt(act_ticket[1])),Integer.parseInt(act_ticket[2]),act_ticket[3],act_ticket[4]);
+                Tickets t = new Tickets(eventData.get(Integer.parseInt(act_ticket[0])-1),busData.get(Integer.parseInt(act_ticket[1])-1),Integer.parseInt(act_ticket[2]),act_ticket[3],act_ticket[4]);
                 ticketData.add(t);
                 for (int j = 0; j < accountData.size(); j++){
-                    if (t.getOwnerID()==accountData.get(j).getAccountID()){
+                    if (t.getOwnerID().equals(accountData.get(j).getAccountID())){
                         accountData.get(j).addTicket(t);
-                        if (act_ticket[5] == "Cancelled"){
+                        loops1++;
+                        if (act_ticket[5].equals("Cancelled")){
                             accountData.get(j).cancelTicket(t);
                         }
                     }
                 }
                 t.setBookedTime(act_ticket[6]);
             }
-            Toast.makeText(MainActivity.this, "Tickets updated!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, loops1 + " Tickets updated!", Toast.LENGTH_SHORT).show();
 
+            int loops2 = 0;
+            Updates busUpdates = new Updates(new Scanner(busD));
+            String[] bus_change;                                                                    // Add each account form input to ArrayList
+            for (int k = 0; k < busUpdates.getAllBookedBusUpdates().size(); k++) {
+                bus_change = busUpdates.getAllBookedBusUpdates().get(k).split(",");
+                (busData.get(Integer.parseInt(bus_change[0])-1)).bookSeat(bus_change[1],bus_change[2],bus_change[3]);
+                loops2++;
+            }
+            Toast.makeText(MainActivity.this, loops2 + " Bus updated!", Toast.LENGTH_SHORT).show();
+
+            int loops3 = 0;
+            Updates accountUpdates = new Updates(new Scanner(accD));
             String[] acc_change;                                                                    // Add each account form input to ArrayList
             for (int k = 0; k < accountUpdates.getAccountUpdates().size(); k++) {
-                acc_change = in.getAccount().get(k).split(",");
+                acc_change = accountUpdates.getAccountUpdates().get(k).split(",");
             }
             Toast.makeText(MainActivity.this, "Account updated!", Toast.LENGTH_SHORT).show();
+            loops3 = 0;
 
         } catch (IOException e) {
             Toast.makeText(MainActivity.this, "Data can not update!", Toast.LENGTH_SHORT).show();
@@ -166,28 +171,12 @@ public class MainActivity extends AppCompatActivity {
         navView.setSelectedItemId(R.id.navigation_booking);
     }
 
-//    public void updateTicketsData() {
-//        try {
-//            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(MainActivity.this.openFileOutput("tickets.txt", Context.MODE_PRIVATE));
-//
-//            for (int i = 0; i < account.getTicketsHistory().size(); i++) {
-//                Tickets t = account.getTicketsHistory().get(i);
-//                outputStreamWriter.write("Ticket : " + t.getTicketEvent().getEventID() + ", " + t.getTicketBus().getBusID() + ", " + t.getSid() + ", "
-//                        + t.getSeatNo() + ", " + t.getOwnerID() + ", " + t.getTicketStatus() + ", " + t.getBookingTime() + "\n");
-//            }
-//            outputStreamWriter.close();
-//            Toast.makeText(MainActivity.this, "Tickets Saved!", Toast.LENGTH_SHORT).show();
-//        } catch (IOException e) {
-//            Log.e("Exception", "File write failed: " + e.toString());
-//            Toast.makeText(MainActivity.this, "Tickets Save Failed!", Toast.LENGTH_SHORT).show();
-//        }
-//    }
-
     public void updateTicketsData() {
         try {
             String data = "";
-            FileOutputStream fos = openFileOutput("tickets.txt",Context.MODE_PRIVATE);
+            FileOutputStream fos = openFileOutput("ticketsDat.txt",Context.MODE_PRIVATE);
             for (int i = 0; i < account.getTicketsHistory().size(); i++) {
+                data += "// Ticket : EventID, BusID, SID, SeatNo., AccountID, Status, BookingTime\n"; // Ticket : EventID, BusID, SID, SeatNo., AccountID, Status, BookingTime
                 Tickets t = account.getTicketsHistory().get(i);
                 data+=("Ticket : " + t.getTicketEvent().getEventID() + ", " + t.getTicketBus().getBusID() + ", " + t.getSid() + ", "
                         + t.getSeatNo() + ", " + t.getOwnerID() + ", " + t.getTicketStatus() + ", " + t.getBookingTime() + "\n");
@@ -205,10 +194,11 @@ public class MainActivity extends AppCompatActivity {
     public void updateBusData() {
         try {
             String data = "";
-            FileOutputStream fos = openFileOutput("buses.txt",Context.MODE_PRIVATE);
+            FileOutputStream fos = openFileOutput("busesDat.txt",Context.MODE_PRIVATE);
+            data += "// Bus : BusID, SID, AccountID, Date\n";
             for (int i = 0; i < account.getBusHistory().size(); i++) {
                 BusItem b = account.getBusHistory().get(i);
-                for (int j = 0; j < b.getBookedSeats().size(); j++)
+                for (int j = 0; j < b.getBookedSeats().size(); j++)                                 // Bus : BusID, SID, AccountID, Date
                     data+=("Bus : " + b.getBusID() + ", " + b.getBookedSeats().get(j)[0]
                             +", "+ b.getBookedSeats().get(j)[1] + ", " + b.getBookedSeats().get(j)[2] +"\n");
             }
@@ -225,7 +215,8 @@ public class MainActivity extends AppCompatActivity {
     public void updateAccountData() {
         try {
             String data = "";
-            FileOutputStream fos = openFileOutput("accounts.txt",Context.MODE_PRIVATE);
+            FileOutputStream fos = openFileOutput("accountsDat.txt",Context.MODE_PRIVATE);
+            data += "// Bus : AccountID, Password\n";
             data+=("Account : " + account.getAccountID() + ", " + account.getPassword());
             fos.write(data.getBytes());
             Log.i("Accounts Data WRITE", data);

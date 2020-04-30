@@ -4,14 +4,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import app.olympics.olymbus.BusItem;
-import app.olympics.olymbus.MainActivity;
 import app.olympics.olymbus.ui.booking.Tickets;
 
 public class AccountItem implements Serializable
 {
 
-    private String username,password,cardNo,CSV;                                                    // Declare String instance variables
-    private int id, idGen;                                                                          // Declare Integer instance variables
+    private String username,password,cardNo,CSV, id;                                                    // Declare String instance variables
     private ArrayList <Tickets> ticketsHistory = new ArrayList <> ();
     private ArrayList <Tickets> active_tickets = new ArrayList <> ();                                      // Make new Ticket ArrayList that user owns
     private ArrayList <Tickets> cancelled_tickets = new ArrayList <> ();                            // Make new Ticket ArrayList that user has been cancelled
@@ -21,10 +19,9 @@ public class AccountItem implements Serializable
 
     public AccountItem(){ }                                                                         // Empty constructor
 
-    public AccountItem(String username, String password, String card, String cvc)                   // Constructor with each every account's details
-    {
-        idGen++;                                                                                    //set each instance variable depends on each account
-        this. id = idGen;
+    public AccountItem(String aid, String username, String password, String card, String cvc)                   // Constructor with each every account's details
+    {         //set each instance variable depends on each account
+        this.id = aid;
         this.username = username;
         this.password = password;
         this.cardNo = card;
@@ -35,7 +32,10 @@ public class AccountItem implements Serializable
     {
         active_tickets.add(t);
         ticketsHistory.add(t);
-        busHistory.add(t.getTicketBus());
+        if (!busHistory.contains(t.getTicketBus()))
+        {
+            busHistory.add(t.getTicketBus());
+        }
         if (bookedBus.contains(t.getTicketBus()))                                                   // Check if this bus has been book before by this user
         {
             Maxed_Quota_Bus.add(t.getTicketBus());                                                  // Transfer this bus to bus that this user maxed out quota
@@ -54,11 +54,11 @@ public class AccountItem implements Serializable
         }
         else bookedBus.remove(t.getTicketBus());                                                    // Remove the ticket from owned ticket
         cancelled_tickets.add(t);
-        t.getTicketBus().cancelSeat(t.getSid(),id+"");
+        t.getTicketBus().cancelSeat(t.getSid(),id);
         t.setUnavailable();
     }
 
-    public String getAccountID() { return id+""; }                                                  // Declare methods for-easy-to-access
+    public String getAccountID() { return id; }                                                  // Declare methods for-easy-to-access
 
     public String getUsername() { return username; }
 

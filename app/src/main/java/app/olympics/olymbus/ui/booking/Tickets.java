@@ -12,7 +12,7 @@ public class Tickets implements Serializable
     private EventItem event;                                                                        // Declare Event instance variables
     private BusItem bus;                                                                            // Declare Bus instance variables
     private int id;                                                                                 // Declare Integer instance variables
-    private String type, destination, date, seatNo, price, sid,aid, eventName, depart, arrive, eventCategory, eventDiscipline, bookingTime;// Declare String instance variables
+    private String type, destination, date, seatNo, price, sid, aid, eventName, depart, arrive, eventCategory, eventDiscipline, bookingTime;// Declare String instance variables
     private boolean available, newTicket;                                                                      // Declare Boolean instance variables
     private GregorianCalendar gregoTicketDepart ,gregoTicketArrive ,gregoTicketTime;
 
@@ -74,7 +74,10 @@ public class Tickets implements Serializable
 
     public BusItem getTicketBus() { return bus; }
 
-    public void setGregoTicketTime(GregorianCalendar bookedTime){ this.gregoTicketTime = bookedTime; }
+    public void setGregoTicketTime(GregorianCalendar bookedTime){
+        this.gregoTicketTime = bookedTime;
+        this.bookingTime = bookedTime.getTime().toString();
+    }
 
     public GregorianCalendar getGregoTicketTime(){ return gregoTicketTime; }
 

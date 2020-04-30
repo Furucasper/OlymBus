@@ -61,8 +61,8 @@ public class Register extends AppCompatActivity {
                 boolean valid_account = validID && validPass && validConfirmPass && validCard && validCSV;
                 if (valid_account)
                 {
-                    allAccount.add(new AccountItem(id, pass,card,csv));
-                    newAccount = new AccountItem(id, pass,card,csv);
+                    allAccount.add(new AccountItem(allAccount.size()+"",id, pass,card,csv));
+                    newAccount = new AccountItem(allAccount.size()+"",id, pass,card,csv);
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     intent.putExtra("Account", newAccount);
                     startActivity(intent);

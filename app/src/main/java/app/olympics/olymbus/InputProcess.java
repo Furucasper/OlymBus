@@ -20,6 +20,7 @@ public class InputProcess
             line = input.nextLine();                                                                // change String in line each time read
             if (line.startsWith("Event"))                                                           // Check if it an event category
             {
+                trimmedDetails += line.substring(5).split(":")[0].trim()+",";
                 Details = line.substring(10).split(",");                                      // get rid of headers and split for sub category sorting
                 for (int i = 0; i < Details.length; i++)                                            // Loop trimming each details
                 {
@@ -31,6 +32,7 @@ public class InputProcess
             }
             else if (line.startsWith("Bus"))                                                        // Same steps with events
             {
+                trimmedDetails += line.substring(3).split(":")[0].trim()+",";
                 Details = line.substring(7).split(",");
                 for (int j = 0; j < Details.length; j++)
                 {
@@ -41,6 +43,7 @@ public class InputProcess
             }
             else if (line.startsWith("Account"))                                                    // Same steps with events and buses
             {
+                trimmedDetails += line.substring(7).split(":")[0].trim()+",";
                 Details = line.substring(11).split(",");
                 for (int k = 0; k < Details.length; k++)
                 {
