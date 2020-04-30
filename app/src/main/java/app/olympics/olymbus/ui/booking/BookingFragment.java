@@ -263,6 +263,8 @@ public class BookingFragment extends Fragment implements TicketAdapter.OnTicketL
                         account.cancelTicket(ticket);
                         Toast.makeText(getActivity(), "Cancelling Ticket", Toast.LENGTH_SHORT).show();
                         showAvailableTicketsRecyclerView(defaultFilter);
+                        if (ticket.isOldTicket())
+                            getActivity().recreate();
                     }
                 });
 

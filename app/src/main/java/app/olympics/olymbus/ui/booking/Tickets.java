@@ -1,7 +1,7 @@
 package app.olympics.olymbus.ui.booking;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import app.olympics.olymbus.BusItem;
@@ -14,7 +14,7 @@ public class Tickets implements Serializable
     private BusItem bus;                                                                            // Declare Bus instance variables
     private int id;                                                                                 // Declare Integer instance variables
     private String type, destination, date, seatNo, price, sid, aid, eventName, depart, arrive, eventCategory, eventDiscipline, bookingTime;// Declare String instance variables
-    private boolean available, newTicket;                                                                      // Declare Boolean instance variables
+    private boolean available, newTicket, oldTicket;                                                                      // Declare Boolean instance variables
     private GregorianCalendar gregoTicketDepart ,gregoTicketArrive ,gregoTicketTime;
 
     public Tickets (EventItem ev, BusItem bus, int sid, String seatNo, String aid)
@@ -41,7 +41,11 @@ public class Tickets implements Serializable
         this.newTicket = true;
     }
 
+    public boolean isOldTicket() { return oldTicket; }
+
     public void setBookedTime(String time) { this.bookingTime = time; }
+
+    public void setOldTicket() { this.oldTicket = true; }
 
     public String getTicketID() { return id+""; }
 
@@ -77,12 +81,23 @@ public class Tickets implements Serializable
 
     public void setGregoTicketTime(GregorianCalendar bookedTime){
         this.gregoTicketTime = bookedTime;
-        this.bookingTime = bookedTime.getTime().getYear()+".";
-        bookingTime += bookedTime.getTime().getMonth()+".";
-        bookingTime += bookedTime.getTime().getDay()+" ";
-        bookingTime += bookedTime.getTime().getHours()+":";
-        bookingTime += bookedTime.getTime().getMinutes()+":";
-        bookingTime += bookedTime.getTime().getSeconds()+"";
+
+        String time = "";
+        int HH,mm,ss;
+
+        time += bookedTime.get(Calendar.YEAR)+".";
+        time += bookedTime.get(Calendar.MONTH)+".";
+        time= bookedTime.get(Calendar.DATE)+" ";
+
+        HH = bookedTime.get(Calendar.HOUR);
+        mm = bookedTime.get(Calendar.MINUTE);
+        ss = bookedTime.get(Calendar.SECOND);
+
+        time += (HH<10)? "0"+HH+":" : HH+":";
+        time += (mm<10)? "0"+mm+":" : mm+":";
+        time += (ss<10)? "0"+ss : ss;
+
+        bookingTime = time;
     }
 
     public GregorianCalendar getGregoTicketTime(){ return gregoTicketTime; }

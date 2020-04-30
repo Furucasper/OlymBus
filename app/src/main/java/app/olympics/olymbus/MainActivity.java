@@ -123,6 +123,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 if(event!=null && bus!=null){ // Ticket : EventID, BusID, SID, SeatNo., AccountID, Status, BookingTime
                     Tickets t = new Tickets(event, bus,Integer.parseInt(act_ticket[2]),act_ticket[3],act_ticket[4]);
+                    t.setOldTicket();
                     busChanged.add(t.getTicketBus());
                     ticketData.add(t);
                     for (AccountItem a : accountData){
