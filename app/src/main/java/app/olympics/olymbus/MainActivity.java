@@ -32,8 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Tickets> ticketData;
     private String ticD,accD,busD;
     private String aid;
-    private EventItem event;
-    private BusItem bus;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,7 +111,8 @@ public class MainActivity extends AppCompatActivity {
             int loops1 = 0;
             String[] act_ticket;                                                                    // Add each account form input to ArrayList
             for(String ticketUp : ticketUpdates.getAllTickets()){
-
+                EventItem event = null;
+                BusItem bus = null;
                 act_ticket = ticketUp.split(",");
                 for (EventItem e : eventData){
                     if (e.getEventID().equals(act_ticket[0])) event = e;

@@ -147,6 +147,7 @@ public class BookingFragment extends Fragment implements TicketAdapter.OnTicketL
     }
 
     private void showCancelledTicketsRecyclerView(){
+        /*
         for(int n = 0; n<cancelledTicketsData.size(); n++){                                                    // Loop for each ticket in ArrayList
             for(int i = 0; i<cancelledTicketsData.size()-1; i++){                                              // Loop to sort tickets to correct time order
                 if(cancelledTicketsData.get(i+1).getGregoTicketTime().after(cancelledTicketsData.get(i).getGregoTicketTime())){
@@ -154,7 +155,7 @@ public class BookingFragment extends Fragment implements TicketAdapter.OnTicketL
                     cancelledTicketsData.remove(i+2);
                 }
             }
-        }
+        }*/
 
         ticketAdapter = new TicketAdapter(getActivity(), cancelledTicketsData,this);
         ticketsRecyclerview.setAdapter(ticketAdapter);
