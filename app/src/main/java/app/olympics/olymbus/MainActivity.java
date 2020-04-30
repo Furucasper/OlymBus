@@ -31,6 +31,9 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<AccountItem> accountData;
     private ArrayList<Tickets> ticketData;
     private String ticD,accD,busD;
+    private String aid;
+    private EventItem event;
+    private BusItem bus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,14 +78,13 @@ public class MainActivity extends AppCompatActivity {
             accountDetail = in.getAccount().get(k).split(",");
             accountData.add(new AccountItem(accountDetail[0], accountDetail[1], accountDetail[2], accountDetail[3], accountDetail[4]));
         }
+        aid = getIntent().getStringExtra("AID");
+        for(AccountItem a : accountData){
+            if (a.getAccountID().equals(aid)) {
+                account = a;
+            }
+        }
 
-        this.account = (AccountItem) getIntent().getSerializableExtra("Account");
-/*
-        File tickets_updates = new File ("tickets.txt");
-        File buses_updates = new File ("buses.txt");
-        File accounts_updates = new File ("accounts.txt");
-
- */
         ticketData = new ArrayList<>();
         try {
             FileInputStream fisTickets = openFileInput("ticketsDat.txt");
@@ -109,30 +111,44 @@ public class MainActivity extends AppCompatActivity {
             Updates ticketUpdates = new Updates(new Scanner(ticD));
             int loops1 = 0;
             String[] act_ticket;                                                                    // Add each account form input to ArrayList
-            for (int i = 0; i < ticketUpdates.getAllTickets().size(); i++) {
-                act_ticket = ticketUpdates.getAllTickets().get(i).split(",");
-                Tickets t = new Tickets(eventData.get(Integer.parseInt(act_ticket[0])-1),busData.get(Integer.parseInt(act_ticket[1])-1),Integer.parseInt(act_ticket[2]),act_ticket[3],act_ticket[4]);
-                ticketData.add(t);
-                for (int j = 0; j < accountData.size(); j++){
-                    if (t.getOwnerID().equals(accountData.get(j).getAccountID())){
-                        accountData.get(j).addTicket(t);
-                        loops1++;
-                        if (act_ticket[5].equals("Cancelled")){
-                            accountData.get(j).cancelTicket(t);
+            for(String ticketUp : ticketUpdates.getAllTickets()){
+
+                act_ticket = ticketUp.split(",");
+                for (EventItem e : eventData){
+                    if (e.getEventID().equals(act_ticket[0])) event = e;
+                }
+                for (BusItem b : busData){
+                    if (b.getBusID().equals(act_ticket[1])) bus = b;
+                }
+                if(event!=null && bus!=null){ // Ticket : EventID, BusID, SID, SeatNo., AccountID, Status, BookingTime
+                    Tickets t = new Tickets(event, bus,Integer.parseInt(act_ticket[2]),act_ticket[3],act_ticket[4]);
+                    ticketData.add(t);
+                    for (AccountItem a : accountData){
+                        if (a.getAccountID().equals(t.getOwnerID())){
+                            a.addTicket(t);
+                            loops1++;
+                            if (act_ticket[5].equals("Cancelled")){
+                                a.cancelTicket(t);
+                            }
                         }
                     }
+                    t.setBookedTime(act_ticket[6]);
+                    //2020.04.30 19:49:36 Date(int year, int month, int date, int hrs, int min, int sec)
                 }
-                t.setBookedTime(act_ticket[6]);
             }
             Toast.makeText(MainActivity.this, loops1 + " Tickets updated!", Toast.LENGTH_SHORT).show();
 
             int loops2 = 0;
             Updates busUpdates = new Updates(new Scanner(busD));
             String[] bus_change;                                                                    // Add each account form input to ArrayList
-            for (int k = 0; k < busUpdates.getAllBookedBusUpdates().size(); k++) {
-                bus_change = busUpdates.getAllBookedBusUpdates().get(k).split(",");
-                (busData.get(Integer.parseInt(bus_change[0])-1)).bookSeat(bus_change[1],bus_change[2],bus_change[3]);
-                loops2++;
+            for (String busUpdate : busUpdates.getAllBookedBusUpdates()){
+                bus_change = busUpdate.split(",");
+                for(BusItem b : busData){
+                    if(b.getBusID().equals(bus_change[0])){
+                        b.bookSeat(bus_change[1],bus_change[2],bus_change[3]);
+                        loops2++;
+                    }
+                }
             }
             Toast.makeText(MainActivity.this, loops2 + " Bus updated!", Toast.LENGTH_SHORT).show();
 

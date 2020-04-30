@@ -129,6 +129,7 @@ public class BookingFragment extends Fragment implements TicketAdapter.OnTicketL
                     }
                 }break;
             case "booked" :
+                /*
                 for(int n = 0; n<ticketsData.size(); n++){                                                    // Loop for each ticket in ArrayList
                     for(int i = 0; i<ticketsData.size()-1; i++){                                              // Loop to sort tickets to correct time order
                         if(ticketsData.get(i+1).getGregoTicketTime().after(ticketsData.get(i).getGregoTicketTime())){
@@ -136,7 +137,9 @@ public class BookingFragment extends Fragment implements TicketAdapter.OnTicketL
                             ticketsData.remove(i+2);
                         }
                     }
-                }break;
+                }
+                 */
+                break;
         }
         ticketAdapter = new TicketAdapter(getActivity(), ticketsData,this);
         ticketsRecyclerview.setAdapter(ticketAdapter);
@@ -202,7 +205,8 @@ public class BookingFragment extends Fragment implements TicketAdapter.OnTicketL
         date.setText(ticket.getTicketDate());
         seatNo.setText(ticket.getSeatNo());
         price.setText(ticket.getTicketPrice()+" ฿");
-        bookedTime.setText(ticket.getGregoTicketTime().getTime().toString());
+        bookedTime.setText(ticket.getBookingTime());
+        //bookedTime.setText(ticket.getGregoTicketTime().getTime().toString());
 
         eventName.setText(event.getEvent());
         eventCategory.setText(event.getCategory());

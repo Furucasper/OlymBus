@@ -299,17 +299,16 @@ public class SeatingFragment extends Fragment {
                                                 if(csvCode.equals(account.getCSV())){
                                                     payDialog.cancel();
                                                     Toast.makeText(getActivity(), "Payment Successful !", Toast.LENGTH_SHORT).show();
+                                                    GregorianCalendar bookingDate = new GregorianCalendar();
 
                                                     if (ticketCnt == 1) {
                                                         account.addTicket(ticket1);                                      // Add this ticket to the account
-                                                        GregorianCalendar bookingDate = new GregorianCalendar();
                                                         ticket1.setGregoTicketTime(bookingDate);
                                                         BUS.bookSeat(seatingID[0] + "", account.getAccountID(), bookingDate.getTime().toString());
                                                     }
                                                     else if (ticketCnt == 2) {
                                                         account.addTicket(ticket1);
                                                         account.addTicket(ticket2);
-                                                        GregorianCalendar bookingDate = new GregorianCalendar();
                                                         ticket1.setGregoTicketTime(bookingDate);
                                                         ticket2.setGregoTicketTime(bookingDate);
                                                         BUS.bookSeat(seatingID[0]+"", account.getAccountID(), bookingDate.getTime().toString());

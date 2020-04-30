@@ -50,6 +50,7 @@ public class LoginActivity extends AppCompatActivity
         Intent intent = new Intent(getApplicationContext(), Register.class);
         intent.putExtra("Account", account);
 
+
         btn.setOnClickListener(new View.OnClickListener()                                           // Activate method when click log in button
         {
             @Override
@@ -108,6 +109,7 @@ public class LoginActivity extends AppCompatActivity
                     {
                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                         intent.putExtra("Account", account);
+                        intent.putExtra("AID",account.getAccountID());
                         startActivity(intent);
                         finish();
                     }
@@ -136,4 +138,5 @@ public class LoginActivity extends AppCompatActivity
             }
         });
     }
+
 }

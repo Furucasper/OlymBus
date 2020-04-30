@@ -67,7 +67,7 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.TicketView
         }
 
         if(mData.get(position).isNewTicket()){
-            holder.ticketLayout.setBackgroundResource(R.drawable.bg_new_ticket_white_orange_smallcurve);
+            holder.ticketLayout.setBackgroundResource(R.drawable.bg_new_ticket_white_lightblue_smallcurve);
             mData.get(position).setNormalTicket();
         }
     }
