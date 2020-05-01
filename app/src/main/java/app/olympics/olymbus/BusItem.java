@@ -8,11 +8,12 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public class BusItem implements Serializable {
 
-    private String id, type, destination,depart,arrive,cost;                                            //Declare String instance variables
-    private int  rows, cols, maximumSeats, availableSeats, duration;                     //Declare Integer instance variables
+    private String id, type, destination,depart,arrive,cost;                                        //Declare String instance variables
+    private int  rows, cols, maximumSeats, availableSeats, duration;                                //Declare Integer instance variables
     private GregorianCalendar gregoarrive, gregodepart;                                             //Declare Time instance variables
-    private String[] booking;                                                       //Declare String Array to store booking details
-    private List<String[]> bookedSeat = new CopyOnWriteArrayList<>();                                  //Make String ArrayList to store all booked seats for the bus
+    private String[] booking;                                                                       //Declare String Array to store booking details
+    private List<String[]> bookedSeat = new CopyOnWriteArrayList<>();                               //Make String ArrayList to store all booked seats for the bus
+    private boolean isBooked = false;
 
     //String type, String destination, String depart, int duration, int rows, int cols, double cost
     public BusItem(String bid, String type, String destination, String depart, String duration, String rows, String cols, String cost, String date) {
@@ -52,6 +53,7 @@ public class BusItem implements Serializable {
         booking[0] = sid;
         booking[1] = aid;
         booking[2] = time;
+        isBooked = true;
 
         boolean seatNoBooked = true;
         for(String[] bs : bookedSeat){
@@ -75,6 +77,7 @@ public class BusItem implements Serializable {
             }
         }
         availableSeats++;
+        if(availableSeats == maximumSeats) { isBooked = false; }
     }
 
     @Override
@@ -88,6 +91,10 @@ public class BusItem implements Serializable {
     }
 
     public String getBusID() { return id; }
+
+    public boolean isBooked() {
+        return isBooked;
+    }
 
     public String getType() {
         return type;

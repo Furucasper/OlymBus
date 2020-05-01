@@ -207,9 +207,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void updateTicketsData() {
         try {
-            for (int i = 0; i < account.getTickets().size(); i++){
-                if(!ticketData.contains(account.getTickets().get(i))){
-                    ticketData.add(account.getTickets().get(i));
+            for (int i = 0; i < account.getTicketsHistory().size(); i++){
+                if(!ticketData.contains(account.getTicketsHistory().get(i))){
+                    ticketData.add(account.getTicketsHistory().get(i));
                 }
             }
             String data = "";
@@ -235,11 +235,14 @@ public class MainActivity extends AppCompatActivity {
             String data = "";
             FileOutputStream fos = openFileOutput("busesDat.txt",Context.MODE_PRIVATE);
             data += "// Bus : BusID, SID, AccountID, Date\n";
-            for (int i = 0; i < account.getBusHistory().size(); i++) {
-                    BusItem b = account.getBusHistory().get(i);
-                    for (int j = 0; j < b.getBookedSeats().size(); j++)                                 // Bus : BusID, SID, AccountID, Date
-                        data+=("Bus : " + b.getBusID() + ", " + b.getBookedSeats().get(j)[0]
-                                +", "+ b.getBookedSeats().get(j)[1] + ", " + b.getBookedSeats().get(j)[2] +"\n");
+            for (int i = 0; i < busData.size(); i++) {
+                    BusItem b = busData.get(i);
+                    if (b.isBooked()){
+                        for (int j = 0; j < b.getBookedSeats().size(); j++)  {                               // Bus : BusID, SID, AccountID, Date
+                                data += ("Bus : " + b.getBusID() + ", " + b.getBookedSeats().get(j)[0]
+                                        + ", " + b.getBookedSeats().get(j)[1] + ", " + b.getBookedSeats().get(j)[2] + "\n");
+                        }
+                    }
             }
             fos.write(data.getBytes());
             Log.i("Buses Data WRITE", data);

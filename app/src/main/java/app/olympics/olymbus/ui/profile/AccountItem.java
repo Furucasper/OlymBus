@@ -70,6 +70,8 @@ public class AccountItem implements Serializable
 
     public String getCSV() { return CSV; }
 
+    public ArrayList<Tickets> getTicketsHistory() { return ticketsHistory; }
+
     public ArrayList<Tickets> getTickets () { return active_tickets; }
 
     public ArrayList<Tickets> getCancelledTickets () { return cancelled_tickets; }
