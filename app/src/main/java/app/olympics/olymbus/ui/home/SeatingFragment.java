@@ -311,8 +311,8 @@ public class SeatingFragment extends Fragment {
                                                         account.addTicket(ticket2);
                                                         ticket1.setGregoTicketTime(bookingDate);
                                                         ticket2.setGregoTicketTime(bookingDate);
-                                                        BUS.bookSeat(seatingID[0]+"", account.getAccountID(), bookingDate.getTime().toString());
-                                                        BUS.bookSeat(seatingID[1]+"", account.getAccountID(), bookingDate.getTime().toString());
+                                                        BUS.bookSeat(seatingID[0]+"", account.getAccountID(), ticket1.getBookingTime());
+                                                        BUS.bookSeat(seatingID[1]+"", account.getAccountID(), ticket2.getBookingTime());
                                                     }
                                                     final Dialog completeDialog = new Dialog(getActivity());
                                                     completeDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);

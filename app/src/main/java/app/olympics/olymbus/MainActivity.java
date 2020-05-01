@@ -170,6 +170,11 @@ public class MainActivity extends AppCompatActivity {
             String[] acc_change;                                                                    // Add each account form input to ArrayList
             for (int k = 0; k < accountUpdates.getAccountUpdates().size(); k++) {
                 acc_change = accountUpdates.getAccountUpdates().get(k).split(",");
+                for(int i = 0; i < accountData.size(); i++){
+                    if(Integer.parseInt(acc_change[0]) > accountData.size()){
+                        accountData.add(new AccountItem(acc_change[0],acc_change[1],acc_change[2],acc_change[3],acc_change[4]));
+                    }
+                }
             }
             //Toast.makeText(MainActivity.this, "Account updated!", Toast.LENGTH_SHORT).show();
             loops3 = 0;
@@ -209,8 +214,8 @@ public class MainActivity extends AppCompatActivity {
             }
             String data = "";
             FileOutputStream fos = openFileOutput("ticketsDat.txt",Context.MODE_PRIVATE);
+            data += "// Ticket : EventID, BusID, SID, SeatNo., AccountID, Status, BookingTime\n"; // Ticket : EventID, BusID, SID, SeatNo., AccountID, Status, BookingTime
             for (int i = 0; i < ticketData.size(); i++) {
-                data += "// Ticket : EventID, BusID, SID, SeatNo., AccountID, Status, BookingTime\n"; // Ticket : EventID, BusID, SID, SeatNo., AccountID, Status, BookingTime
                 Tickets t = ticketData.get(i);
                 data+=("Ticket : " + t.getTicketEvent().getEventID() + ", " + t.getTicketBus().getBusID() + ", " + t.getSid() + ", "
                         + t.getSeatNo() + ", " + t.getOwnerID() + ", " + t.getTicketStatus() + ", " + t.getBookingTime() + "\n");
@@ -250,8 +255,12 @@ public class MainActivity extends AppCompatActivity {
         try {
             String data = "";
             FileOutputStream fos = openFileOutput("accountsDat.txt",Context.MODE_PRIVATE);
-            data += "// Bus : AccountID, Password\n";
-            data+=("Account : " + account.getAccountID() + ", " + account.getPassword());
+            data += "// Account : AccountID, Username, Password, Card, CSV\n";
+            for (int i = 0; i <accountData.size(); i++ ){
+                data+=("Account : " + accountData.get(i).getAccountID() + ", " +
+                        accountData.get(i).getUsername() + ", " + accountData.get(i).getPassword()
+                        + ", " + accountData.get(i).getCardNumber() + ", " + accountData.get(i).getCSV()+"\n");
+            }
             fos.write(data.getBytes());
             Log.i("Accounts Data WRITE", data);
             fos.close();

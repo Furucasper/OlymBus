@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Updates {
-    private ArrayList<String> allTicketsHistory = new ArrayList <>();                                     // Create ArrayList for Events
+    private ArrayList<String> allTicketsHistory = new ArrayList <>();
     private  ArrayList <String> allBookedBusesUpdates = new ArrayList <>();                                        // Create ArrayList for Buses
     private  ArrayList <String> allMaxedQuotaBusesUpdates = new ArrayList <>();
     private  ArrayList <String> allAccountsUpdates = new ArrayList <>();                                    // Create ArrayList for Accounts

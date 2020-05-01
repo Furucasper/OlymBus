@@ -2,11 +2,15 @@ package app.olympics.olymbus;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -27,6 +31,7 @@ public class LoginActivity extends AppCompatActivity
     private int attempts = 0;
     private int wait_multiply = 1;
     private AccountItem account = null;
+    private String accD;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -47,9 +52,32 @@ public class LoginActivity extends AppCompatActivity
             accountData.add(new AccountItem(accountDetail[0], accountDetail[1], accountDetail[2], accountDetail[3], accountDetail[4]));
         }
 
+        FileInputStream fisAccounts = null;
+        try {
+            fisAccounts = openFileInput("accountsDat.txt");
+            int sizeA = fisAccounts.available();
+            byte[] bufferA = new byte[sizeA];
+            fisAccounts.read(bufferA);
+            fisAccounts.close();
+            accD = new String(bufferA);
+            Log.i("Accounts Data", accD);
+            int loops3 = 0;
+            Updates accountUpdates = new Updates(new Scanner(accD));
+            String[] acc_change;                                                                    // Add each account form input to ArrayList
+            for (int k = 0; k < accountUpdates.getAccountUpdates().size(); k++) {
+                acc_change = accountUpdates.getAccountUpdates().get(k).split(",");
+                for(int i = 0; i < accountData.size(); i++){
+                    if(Integer.parseInt(acc_change[0]) > accountData.size()){
+                        accountData.add(new AccountItem(acc_change[0],acc_change[1],acc_change[2],acc_change[3],acc_change[4]));
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         Intent intent = new Intent(getApplicationContext(), Register.class);
         intent.putExtra("Account", account);
-
 
         btn.setOnClickListener(new View.OnClickListener()                                           // Activate method when click log in button
         {
@@ -63,7 +91,7 @@ public class LoginActivity extends AppCompatActivity
                 Boolean validPassword = false;
 
 
-                if (duration_hour <= 0 || duration_min <= 0) {                                                                // First, check if cooldown period ends
+                if (duration_hour <= 0 && duration_min <= 0) {                                                                // First, check if cooldown period ends
                     for (int i = 0; i < accountData.size(); i++) {                                  // Second, check if Username valid
                         if (username.equals(accountData.get(i).getUsername())) {
                             validUsername = true;                                                   // set username to valid
