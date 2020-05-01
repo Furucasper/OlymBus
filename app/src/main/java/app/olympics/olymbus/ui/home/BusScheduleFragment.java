@@ -125,16 +125,20 @@ public class BusScheduleFragment extends Fragment implements BusAdapter.OnBusLis
         });
 
         boolean valid = true;
-        for(BusItem b : busData){
+        for(BusItem b : busData) {
+            valid = true;
             String destinationRequest = venue.toLowerCase().trim();                                 // First, get venue name// Check if each bus is qualified for an event
-                if(b.getDestination().toLowerCase().trim().contains(destinationRequest)) {              // Then, check if the bus goes to the venue
-                    if(b.getGregoarrive().after(EVENT.getBeforeEvent2HR()) && b.getGregoarrive().before(EVENT.getAfterEvent1HR()))// Then, check if the bus is depart to a venue 2 hour before and 1 hour after from a venue
-                        for ( BusItem maxed : account.getMaxedQuotaBus()){
-                            if (maxed.getBusID().equals(b.getBusID())){
-                                valid = false;
-                            }
+            if (b.getDestination().toLowerCase().trim().contains(destinationRequest)) {              // Then, check if the bus goes to the venue
+                if (b.getGregoarrive().after(EVENT.getBeforeEvent2HR()) && b.getGregoarrive().before(EVENT.getAfterEvent1HR())) {// Then, check if the bus is depart to a venue 2 hour before and 1 hour after from a venue
+                    for (BusItem maxed : account.getMaxedQuotaBus()) {
+                        if (maxed.getBusID().equals(b.getBusID())) {
+                            valid = false;
                         }
-                        if(valid) busFilter.add(b);                                                               // Bus qualified add to ArrayList
+                    }
+                    if (valid) {
+                        busFilter.add(b);                                                 // Bus qualified add to ArrayList
+                    }
+                }
             }
         }
 
