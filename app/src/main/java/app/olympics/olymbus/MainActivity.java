@@ -3,6 +3,7 @@ package app.olympics.olymbus;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -75,14 +76,6 @@ public class MainActivity extends AppCompatActivity {
         for (int k = 0; k < in.getAccount().size(); k++) {
             accountDetail = in.getAccount().get(k).split(",");
             accountData.add(new AccountItem(accountDetail[0], accountDetail[1], accountDetail[2], accountDetail[3], accountDetail[4]));
-        }
-        newAccount = (AccountItem) getIntent().getSerializableExtra("NEW ACCOUNT");
-        if(newAccount!=null) accountData.add(newAccount);
-        aid = getIntent().getStringExtra("AID");
-        for(AccountItem a : accountData){
-            if (a.getAccountID().equals(aid)) {
-                account = a;
-            }
         }
 
         ticketData = new ArrayList<>();
@@ -168,12 +161,11 @@ public class MainActivity extends AppCompatActivity {
             int loops3 = 0;
             Updates accountUpdates = new Updates(new Scanner(accD));
             String[] acc_change;                                                                    // Add each account form input to ArrayList
+            int lastestInputAccount = accountData.size();
             for (int k = 0; k < accountUpdates.getAccountUpdates().size(); k++) {
                 acc_change = accountUpdates.getAccountUpdates().get(k).split(",");
-                for(int i = 0; i < accountData.size(); i++){
-                    if(Integer.parseInt(acc_change[0]) > accountData.size()){
-                        accountData.add(new AccountItem(acc_change[0],acc_change[1],acc_change[2],acc_change[3],acc_change[4]));
-                    }
+                if ( Integer.parseInt(acc_change[0]) > lastestInputAccount){
+                    accountData.add(new AccountItem(acc_change[0],acc_change[1],acc_change[2],acc_change[3],acc_change[4]));
                 }
             }
             //Toast.makeText(MainActivity.this, "Account updated!", Toast.LENGTH_SHORT).show();
@@ -182,6 +174,15 @@ public class MainActivity extends AppCompatActivity {
         } catch (IOException e) {
             //Toast.makeText(MainActivity.this, "Data can not update!", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
+        }
+
+        newAccount = (AccountItem) getIntent().getSerializableExtra("NEW ACCOUNT");
+        if(newAccount!=null) accountData.add(newAccount);
+        aid = getIntent().getStringExtra("AID");
+        for(AccountItem a : accountData){
+            if (a.getAccountID().equals(aid)) {
+                account = a;
+            }
         }
     }
 
