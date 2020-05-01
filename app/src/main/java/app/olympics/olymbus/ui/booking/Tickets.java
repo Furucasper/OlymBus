@@ -89,18 +89,19 @@ public class Tickets implements Serializable
         String time = "";
         int MM,dd,HH,mm,ss;
 
-        time += bookedTime.get(Calendar.YEAR)+".";
-        MM = bookedTime.get(Calendar.MONTH);
-        dd = bookedTime.get(Calendar.DATE);
-        HH = bookedTime.get(Calendar.HOUR);
-        mm = bookedTime.get(Calendar.MINUTE);
-        ss = bookedTime.get(Calendar.SECOND);
+        MM = gregoTicketTime.get(Calendar.MONTH);
+        dd = gregoTicketTime.get(Calendar.DATE);
+        HH = gregoTicketTime.get(Calendar.HOUR);
+        mm = gregoTicketTime.get(Calendar.MINUTE);
+        ss = gregoTicketTime.get(Calendar.SECOND);
 
+        time += gregoTicketTime.get(Calendar.YEAR)+".";
         time += (MM<10)? "0"+MM+"." : MM+".";
         time += (dd<10)? "0"+dd+" " : dd+" ";
         time += (HH<10)? "0"+HH+":" : HH+":";
         time += (mm<10)? "0"+mm+":" : mm+":";
         time += (ss<10)? "0"+ss : ss;
+
 
         bookingTime = time;
     }

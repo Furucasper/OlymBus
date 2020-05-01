@@ -15,12 +15,13 @@ import androidx.recyclerview.widget.RecyclerView;
 public class BusAdapter extends RecyclerView.Adapter<BusAdapter.BusViewHolder> {
 
     private Context mContext;
-    private List<BusItem> mData;
+    private List<BusItem> mData,busData;
     private OnBusListener onBusListener;
 
-    public BusAdapter(Context mContext, List<BusItem> mData,OnBusListener onBusListener) {
+    public BusAdapter(Context mContext, List<BusItem> mData,List<BusItem>busData,OnBusListener onBusListener) {
         this.mContext = mContext;
         this.mData = mData;
+        this.busData = busData;
         this.onBusListener = onBusListener;
     }
 
@@ -36,22 +37,27 @@ public class BusAdapter extends RecyclerView.Adapter<BusAdapter.BusViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull BusViewHolder holder, int position) {
+        BusItem bus = null;
+        for(BusItem b : busData){
+            if(b.getBusID().equals(mData.get(position).getBusID()))
+                bus = b;
+        }
 
-        holder.duration.setText(mData.get(position).getBusDuration());
+        holder.duration.setText(bus.getBusDuration());
         //holder.departFrom.setText("Depart : "+mData.get(position).getDepartFrom());
-        holder.busType.setText(mData.get(position).getType());
-        holder.busSeats.setText(mData.get(position).getBusSeats());
-        holder.availableSeats.setText(""+mData.get(position).getAvailableSeats());
-        holder.price.setText(""+mData.get(position).getCost()+" ฿");
+        holder.busType.setText(bus.getType());
+        holder.busSeats.setText(bus.getBusSeats());
+        holder.availableSeats.setText(""+bus.getAvailableSeats());
+        holder.price.setText(""+bus.getCost()+" ฿");
 
-        if(mData.get(position).getAvailableSeats() == 0){
+        if(bus.getAvailableSeats() == 0){
             holder.busStatus.setText("sold out");
             holder.busStatus.setTextColor(Color.GRAY);
             holder.availableSeats.setTextColor(Color.GRAY);
             holder.duration.setTextColor(Color.GRAY);
             holder.busType.setTextColor(Color.GRAY);
             holder.busSeats.setTextColor(Color.GRAY);
-        }else if (mData.get(position).getAvailableSeats() <= 2){
+        }else if (bus.getAvailableSeats() <= 2){
             holder.busStatus.setTextColor(0xFFFF4D4D);
             holder.availableSeats.setTextColor(0xFFFF4D4D);
         }

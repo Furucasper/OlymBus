@@ -1,7 +1,6 @@
 package app.olympics.olymbus.ui.home;
 
 
-import android.accounts.Account;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -153,7 +152,7 @@ public class BusScheduleFragment extends Fragment implements BusAdapter.OnBusLis
         }
 
         //set RecyclerView Adapter
-        busAdapter = new BusAdapter(getActivity(),busFilter,this);
+        busAdapter = new BusAdapter(getActivity(),busFilter,busData,this);
         busRecyclerview.setAdapter(busAdapter);
         busRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
 
