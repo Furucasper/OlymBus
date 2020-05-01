@@ -1,7 +1,5 @@
 package app.olympics.olymbus.ui.profile;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -12,6 +10,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import androidx.appcompat.app.AppCompatActivity;
 import app.olympics.olymbus.LoginActivity;
 import app.olympics.olymbus.MainActivity;
 import app.olympics.olymbus.R;
@@ -64,7 +63,8 @@ public class Register extends AppCompatActivity {
                     allAccount.add(new AccountItem(allAccount.size()+"",id, pass,card,csv));
                     newAccount = new AccountItem(allAccount.size()+"",id, pass,card,csv);
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    intent.putExtra("Account", newAccount);
+                    intent.putExtra("NEW ACCOUNT", newAccount);
+                    intent.putExtra("AID",newAccount.getAccountID());
                     startActivity(intent);
                     finish();
                 }

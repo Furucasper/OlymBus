@@ -24,13 +24,12 @@ import app.olympics.olymbus.ui.profile.AccountItem;
 
 public class MainActivity extends AppCompatActivity {
 
-    private AccountItem account;
+    private AccountItem account, newAccount;
     private BottomNavigationView navView;
     private ArrayList<EventItem> eventData;
     private ArrayList<BusItem> busData;
     private ArrayList<AccountItem> accountData;
     private ArrayList<Tickets> ticketData;
-    private ArrayList<BusItem> busChanged = new ArrayList<BusItem>();
     private String ticD,accD,busD;
     private String aid;
 
@@ -78,6 +77,8 @@ public class MainActivity extends AppCompatActivity {
             accountDetail = in.getAccount().get(k).split(",");
             accountData.add(new AccountItem(accountDetail[0], accountDetail[1], accountDetail[2], accountDetail[3], accountDetail[4]));
         }
+        newAccount = (AccountItem) getIntent().getSerializableExtra("NEW ACCOUNT");
+        if(newAccount!=null) accountData.add(newAccount);
         aid = getIntent().getStringExtra("AID");
         for(AccountItem a : accountData){
             if (a.getAccountID().equals(aid)) {
@@ -124,7 +125,6 @@ public class MainActivity extends AppCompatActivity {
                 if(event!=null && bus!=null){ // Ticket : EventID, BusID, SID, SeatNo., AccountID, Status, BookingTime
                     Tickets t = new Tickets(event, bus,Integer.parseInt(act_ticket[2]),act_ticket[3],act_ticket[4]);
                     t.setOldTicket();
-                    busChanged.add(t.getTicketBus());
                     ticketData.add(t);
                     for (AccountItem a : accountData){
                         if (a.getAccountID().equals(t.getOwnerID())){
@@ -136,6 +136,17 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                     t.setBookedTime(act_ticket[6]);
+                    int yyyy,MM,dd,HH,mm,ss;
+                    String[] bookedTime = act_ticket[6].split(" ");
+                    String[] date = bookedTime[0].split("\\.");
+                    String[] time = bookedTime[1].split(":");
+                    yyyy = Integer.parseInt(date[0]);
+                    MM = Integer.parseInt(date[1]);
+                    dd = Integer.parseInt(date[2]);
+                    HH = Integer.parseInt(date[0]);
+                    mm = Integer.parseInt(date[1]);
+                    ss = Integer.parseInt(date[2]);
+                    t.setGregoTicketTime(yyyy,MM,dd,HH,mm,ss);
                     //2020.04.30 19:49:36 Date(int year, int month, int date, int hrs, int min, int sec)
                 }
             }
@@ -217,17 +228,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void updateBusData() {
         try {
-            for (int i = 0; i < account.getBusHistory().size(); i++) {
-                if (!busChanged.contains(account.getBusHistory().get(i))) {
-                    busChanged.add(account.getBusHistory().get(i));
-                }
-            }
-
             String data = "";
             FileOutputStream fos = openFileOutput("busesDat.txt",Context.MODE_PRIVATE);
             data += "// Bus : BusID, SID, AccountID, Date\n";
-            for (int i = 0; i < busChanged.size(); i++) {
-                    BusItem b = busChanged.get(i);
+            for (int i = 0; i < account.getBusHistory().size(); i++) {
+                    BusItem b = account.getBusHistory().get(i);
                     for (int j = 0; j < b.getBookedSeats().size(); j++)                                 // Bus : BusID, SID, AccountID, Date
                         data+=("Bus : " + b.getBusID() + ", " + b.getBookedSeats().get(j)[0]
                                 +", "+ b.getBookedSeats().get(j)[1] + ", " + b.getBookedSeats().get(j)[2] +"\n");

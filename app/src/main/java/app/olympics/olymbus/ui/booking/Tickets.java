@@ -79,20 +79,25 @@ public class Tickets implements Serializable
 
     public BusItem getTicketBus() { return bus; }
 
+    public void setGregoTicketTime(int yyyy, int MM, int dd, int HH, int mm, int ss){
+        this.gregoTicketTime = new GregorianCalendar(yyyy,MM,dd,HH,mm,ss);
+    }
+
     public void setGregoTicketTime(GregorianCalendar bookedTime){
         this.gregoTicketTime = bookedTime;
 
         String time = "";
-        int HH,mm,ss;
+        int MM,dd,HH,mm,ss;
 
         time += bookedTime.get(Calendar.YEAR)+".";
-        time += bookedTime.get(Calendar.MONTH)+".";
-        time= bookedTime.get(Calendar.DATE)+" ";
-
+        MM = bookedTime.get(Calendar.MONTH);
+        dd = bookedTime.get(Calendar.DATE);
         HH = bookedTime.get(Calendar.HOUR);
         mm = bookedTime.get(Calendar.MINUTE);
         ss = bookedTime.get(Calendar.SECOND);
 
+        time += (MM<10)? "0"+MM+"." : MM+".";
+        time += (dd<10)? "0"+dd+" " : dd+" ";
         time += (HH<10)? "0"+HH+":" : HH+":";
         time += (mm<10)? "0"+mm+":" : mm+":";
         time += (ss<10)? "0"+ss : ss;

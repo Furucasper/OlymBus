@@ -129,7 +129,6 @@ public class BookingFragment extends Fragment implements TicketAdapter.OnTicketL
                     }
                 }break;
             case "booked" :
-                /*
                 for(int n = 0; n<ticketsData.size(); n++){                                                    // Loop for each ticket in ArrayList
                     for(int i = 0; i<ticketsData.size()-1; i++){                                              // Loop to sort tickets to correct time order
                         if(ticketsData.get(i+1).getGregoTicketTime().after(ticketsData.get(i).getGregoTicketTime())){
@@ -138,7 +137,6 @@ public class BookingFragment extends Fragment implements TicketAdapter.OnTicketL
                         }
                     }
                 }
-                 */
                 break;
         }
         ticketAdapter = new TicketAdapter(getActivity(), ticketsData,this);
@@ -147,7 +145,7 @@ public class BookingFragment extends Fragment implements TicketAdapter.OnTicketL
     }
 
     private void showCancelledTicketsRecyclerView(){
-        /*
+
         for(int n = 0; n<cancelledTicketsData.size(); n++){                                                    // Loop for each ticket in ArrayList
             for(int i = 0; i<cancelledTicketsData.size()-1; i++){                                              // Loop to sort tickets to correct time order
                 if(cancelledTicketsData.get(i+1).getGregoTicketTime().after(cancelledTicketsData.get(i).getGregoTicketTime())){
@@ -155,7 +153,7 @@ public class BookingFragment extends Fragment implements TicketAdapter.OnTicketL
                     cancelledTicketsData.remove(i+2);
                 }
             }
-        }*/
+        }
 
         ticketAdapter = new TicketAdapter(getActivity(), cancelledTicketsData,this);
         ticketsRecyclerview.setAdapter(ticketAdapter);
