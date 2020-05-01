@@ -118,22 +118,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/card_ID_cp" />
 
-            <Button
-                android:id="@+id/add_payment_cp"
-                android:layout_width="wrap_content"
-                android:layout_height="20dp"
-                android:layout_marginTop="8dp"
-                android:background="@android:color/transparent"
-                android:text="+ Add New Payment"
-                android:textAllCaps="false"
-                android:textColor="@color/colorGray"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toTopOf="@+id/confirm_cb"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/csv_check_cp"
-                app:layout_constraintVertical_bias="0.0" />
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -3,7 +3,6 @@ package app.olympics.olymbus;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -150,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
                     //2020.04.30 19:49:36 Date(int year, int month, int date, int hrs, int min, int sec)
                 }
             }
-            Toast.makeText(MainActivity.this, loops1 + " Tickets updated!", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(MainActivity.this, loops1 + " Tickets updated!", Toast.LENGTH_SHORT).show();
 
             int loops2 = 0;
             Updates busUpdates = new Updates(new Scanner(busD));
@@ -164,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             }
-            Toast.makeText(MainActivity.this, loops2 + " Bus updated!", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(MainActivity.this, loops2 + " Bus updated!", Toast.LENGTH_SHORT).show();
 
             int loops3 = 0;
             Updates accountUpdates = new Updates(new Scanner(accD));
@@ -172,11 +171,11 @@ public class MainActivity extends AppCompatActivity {
             for (int k = 0; k < accountUpdates.getAccountUpdates().size(); k++) {
                 acc_change = accountUpdates.getAccountUpdates().get(k).split(",");
             }
-            Toast.makeText(MainActivity.this, "Account updated!", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(MainActivity.this, "Account updated!", Toast.LENGTH_SHORT).show();
             loops3 = 0;
 
         } catch (IOException e) {
-            Toast.makeText(MainActivity.this, "Data can not update!", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(MainActivity.this, "Data can not update!", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
     }
@@ -219,10 +218,10 @@ public class MainActivity extends AppCompatActivity {
             fos.write(data.getBytes());
             Log.i("Tickets Data WRITE", data);
             fos.close();
-            Toast.makeText(MainActivity.this, "Tickets Saved!", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(MainActivity.this, "Tickets Saved!", Toast.LENGTH_SHORT).show();
         } catch (IOException e) {
             Log.e("Exception", "File write failed: " + e.toString());
-            Toast.makeText(MainActivity.this, "Tickets Save Failed!", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(MainActivity.this, "Tickets Save Failed!", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -240,10 +239,10 @@ public class MainActivity extends AppCompatActivity {
             fos.write(data.getBytes());
             Log.i("Buses Data WRITE", data);
             fos.close();
-            Toast.makeText(MainActivity.this, "Buses Saved!", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(MainActivity.this, "Buses Saved!", Toast.LENGTH_SHORT).show();
         } catch (IOException e) {
             Log.e("Exception", "File write failed: " + e.toString());
-            Toast.makeText(MainActivity.this, "Buses Save Failed!", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(MainActivity.this, "Buses Save Failed!", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -256,11 +255,11 @@ public class MainActivity extends AppCompatActivity {
             fos.write(data.getBytes());
             Log.i("Accounts Data WRITE", data);
             fos.close();
-            Toast.makeText(MainActivity.this, "Accounts Saved!", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(MainActivity.this, "Accounts Saved!", Toast.LENGTH_SHORT).show();
 
         } catch (IOException e) {
             Log.e("Exception", "File write failed: " + e.toString());
-            Toast.makeText(MainActivity.this, "Accounts Save Failed!", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(MainActivity.this, "Accounts Save Failed!", Toast.LENGTH_SHORT).show();
         }
     }
 

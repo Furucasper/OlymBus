@@ -52,8 +52,19 @@ public class BusItem implements Serializable {
         booking[0] = sid;
         booking[1] = aid;
         booking[2] = time;
-        bookedSeat.add(booking);
-        availableSeats--;
+
+        boolean seatNoBooked = true;
+        for(String[] bs : bookedSeat){
+            if(bs[0].equals(sid)){
+                seatNoBooked = false;
+                break;
+            }
+        }
+
+        if(seatNoBooked){
+            bookedSeat.add(booking);
+            availableSeats--;
+        }
     }
 
     public void cancelSeat (String sid, String aid)
