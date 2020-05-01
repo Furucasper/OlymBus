@@ -101,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
             Log.i("Tickets Data", ticD);
             Log.i("Buses Data", busD);
             Log.i("Accounts Data", accD);
+
             Updates ticketUpdates = new Updates(new Scanner(ticD));
             int loops1 = 0;
             String[] act_ticket;                                                                    // Add each account form input to ArrayList
@@ -114,10 +115,11 @@ public class MainActivity extends AppCompatActivity {
                 for (BusItem b : busData){
                     if (b.getBusID().equals(act_ticket[1])) bus = b;
                 }
-                if(event!=null && bus!=null){ // Ticket : EventID, BusID, SID, SeatNo., AccountID, Status, BookingTime
+                if(event!=null && bus!=null){ // Ticket : Event, Bus, SID, SeatNo., AccountID, Status, BookingTime
                     Tickets t = new Tickets(event, bus,Integer.parseInt(act_ticket[2]),act_ticket[3],act_ticket[4]);
                     t.setOldTicket();
                     ticketData.add(t);
+                    t.setBookingTime(act_ticket[6]);
                     for (AccountItem a : accountData){
                         if (a.getAccountID().equals(t.getOwnerID())){
                             a.addTicket(t);
@@ -127,7 +129,6 @@ public class MainActivity extends AppCompatActivity {
                             }
                         }
                     }
-                    t.setBookedTime(act_ticket[6]);
                     int yyyy,MM,dd,HH,mm,ss;
                     String[] bookedTime = act_ticket[6].split(" ");
                     String[] date = bookedTime[0].split("\\.");
@@ -151,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
                 bus_change = busUpdate.split(",");
                 for(BusItem b : busData){
                     if(b.getBusID().equals(bus_change[0])){
-                        b.bookSeat(bus_change[1],bus_change[2],bus_change[3]);
+//                        b.bookSeat(bus_change[1],bus_change[2],bus_change[3]);
                         loops2++;
                     }
                 }
@@ -234,16 +235,20 @@ public class MainActivity extends AppCompatActivity {
     public void updateBusData() {
         try {
             String data = "";
+            ArrayList <BusItem> changedBus = new ArrayList<>();
             FileOutputStream fos = openFileOutput("busesDat.txt",Context.MODE_PRIVATE);
             data += "// Bus : BusID, SID, AccountID, Date\n";
             for (int i = 0; i < busData.size(); i++) {
-                    BusItem b = busData.get(i);
-                    if (b.isBooked()){
-                        for (int j = 0; j < b.getBookedSeats().size(); j++)  {                               // Bus : BusID, SID, AccountID, Date
-                                data += ("Bus : " + b.getBusID() + ", " + b.getBookedSeats().get(j)[0]
-                                        + ", " + b.getBookedSeats().get(j)[1] + ", " + b.getBookedSeats().get(j)[2] + "\n");
-                        }
-                    }
+                if (busData.get(i).isBooked()){
+                    changedBus.add(busData.get(i));
+                }
+            }
+            for (int i = 0; i < changedBus.size(); i++){
+                for(int j = 0; j < changedBus.get(i).getBookedSeats().size(); j++){
+                    data += "Bus : " + changedBus.get(i).getBusID() + ", " + changedBus.get(i).getBookedSeats().get(j)[0]
+                            + ", " + changedBus.get(i).getBookedSeats().get(j)[1] + ", "
+                            + changedBus.get(i).getBookedSeats().get(j)[2] +"\n";
+                }
             }
             fos.write(data.getBytes());
             Log.i("Buses Data WRITE", data);

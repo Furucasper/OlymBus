@@ -62,7 +62,6 @@ public class BusItem implements Serializable {
                 break;
             }
         }
-
         if(seatNoBooked){
             bookedSeat.add(booking);
             availableSeats--;

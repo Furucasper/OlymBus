@@ -19,6 +19,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 import androidx.fragment.app.Fragment;
@@ -38,7 +39,8 @@ public class SeatingFragment extends Fragment {
     private Bundle bundle;
     private EventItem EVENT;
     private BusItem BUS;
-    private String event,category,discipline,venue,date, price, time, duration,byBus,busType, destination,depart,arrive;
+    private ArrayList<BusItem> allBus;
+    private String event,category,discipline,venue,date, price, time, duration,byBus,busType, destination,depart,arrive,busID;
     private String selectedSeat[];
     private double amountCost, addOnPriority;
     private AccountItem account;
@@ -56,7 +58,14 @@ public class SeatingFragment extends Fragment {
 
         bundle = getArguments();
         EVENT = (EventItem) bundle.getSerializable("EVENT");
-        BUS = (BusItem) bundle.getSerializable("BUS");
+        allBus = ((MainActivity)getActivity()).getAllBus();
+        busID = bundle.getSerializable("BUSID")+"";
+        for (int i = 0; i < allBus.size(); i++){
+            BusItem b = allBus.get(i);
+            if (b.getBusID().equals(busID)){
+                BUS = b;
+            }
+        }
         account = ((MainActivity)getActivity()).getAccount();
 
         event = EVENT.getEvent();
@@ -302,17 +311,17 @@ public class SeatingFragment extends Fragment {
                                                     GregorianCalendar bookingDate = new GregorianCalendar();
 
                                                     if (ticketCnt == 1) {
-                                                        account.addTicket(ticket1);                                      // Add this ticket to the account
                                                         ticket1.setGregoTicketTime(bookingDate);
-                                                        BUS.bookSeat(seatingID[0] + "", account.getAccountID(), bookingDate.getTime().toString());
+                                                        account.addTicket(ticket1);                                      // Add this ticket to the account
+//                                                        BUS.bookSeat(seatingID[0] + "", account.getAccountID(), bookingDate.getTime().toString());
                                                     }
                                                     else if (ticketCnt == 2) {
-                                                        account.addTicket(ticket1);
-                                                        account.addTicket(ticket2);
                                                         ticket1.setGregoTicketTime(bookingDate);
                                                         ticket2.setGregoTicketTime(bookingDate);
-                                                        BUS.bookSeat(seatingID[0]+"", account.getAccountID(), ticket1.getBookingTime());
-                                                        BUS.bookSeat(seatingID[1]+"", account.getAccountID(), ticket2.getBookingTime());
+                                                        account.addTicket(ticket1);
+                                                        account.addTicket(ticket2);
+//                                                        BUS.bookSeat(seatingID[0]+"", account.getAccountID(), ticket1.getBookingTime());
+//                                                        BUS.bookSeat(seatingID[1]+"", account.getAccountID(), ticket2.getBookingTime());
                                                     }
                                                     final Dialog completeDialog = new Dialog(getActivity());
                                                     completeDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);

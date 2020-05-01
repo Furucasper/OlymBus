@@ -124,11 +124,17 @@ public class BusScheduleFragment extends Fragment implements BusAdapter.OnBusLis
             }
         });
 
-        for(BusItem b : busData){                                                                   // Check if each bus is qualified for an event
-            String destinationRequest = venue.toLowerCase().trim();                                 // First, get venue name
-            if(b.getDestination().toLowerCase().trim().contains(destinationRequest)) {              // Then, check if the bus goes to the venue
-                if(b.getGregoarrive().after(EVENT.getBeforeEvent2HR()) && b.getGregoarrive().before(EVENT.getAfterEvent1HR()) && !account.getMaxedQuotaBus().contains(b))// Then, check if the bus is depart to a venue 2 hour before and 1 hour after from a venue
-                    busFilter.add(b);                                                               // Bus qualified add to ArrayList
+        boolean valid = true;
+        for(BusItem b : busData){
+            String destinationRequest = venue.toLowerCase().trim();                                 // First, get venue name// Check if each bus is qualified for an event
+                if(b.getDestination().toLowerCase().trim().contains(destinationRequest)) {              // Then, check if the bus goes to the venue
+                    if(b.getGregoarrive().after(EVENT.getBeforeEvent2HR()) && b.getGregoarrive().before(EVENT.getAfterEvent1HR()))// Then, check if the bus is depart to a venue 2 hour before and 1 hour after from a venue
+                        for ( BusItem maxed : account.getMaxedQuotaBus()){
+                            if (maxed.getBusID().equals(b.getBusID())){
+                                valid = false;
+                            }
+                        }
+                        if(valid) busFilter.add(b);                                                               // Bus qualified add to ArrayList
             }
         }
 
@@ -156,7 +162,7 @@ public class BusScheduleFragment extends Fragment implements BusAdapter.OnBusLis
             Toast.makeText(getActivity(), "This bus is sold out.", Toast.LENGTH_SHORT).show();
             return;
         }
-        bundle.putSerializable("BUS",busFilter.get(position));
+        bundle.putSerializable("BUSID",busFilter.get(position).getBusID());
         NavHostFragment.findNavController(this).navigate(R.id.action_busScheduleFragment_to_seatingFragment, bundle);
     }
 

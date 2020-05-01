@@ -34,6 +34,7 @@ public class AccountItem implements Serializable
     {
         active_tickets.add(t);
         ticketsHistory.add(t);
+        t.getTicketBus().bookSeat(t.getSid(),this.id,t.getBookingTime());
         if (!busHistory.contains(t.getTicketBus()))
         {
             busHistory.add(t.getTicketBus());

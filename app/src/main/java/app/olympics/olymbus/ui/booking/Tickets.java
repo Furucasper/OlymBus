@@ -41,9 +41,9 @@ public class Tickets implements Serializable
         this.newTicket = true;
     }
 
-    public boolean isOldTicket() { return oldTicket; }
+    public void setBookingTime (String time) { this.bookingTime = time; }
 
-    public void setBookedTime(String time) { this.bookingTime = time; }
+    public boolean isOldTicket() { return oldTicket; }
 
     public void setOldTicket() { this.oldTicket = true; }
 
