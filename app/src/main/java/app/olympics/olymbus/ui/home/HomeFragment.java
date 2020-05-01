@@ -19,15 +19,12 @@ import app.olympics.olymbus.R;
 
 public class HomeFragment extends Fragment implements EventAdapter.OnEventListener {
 
-    private HomeViewModel homeViewModel;
     private RecyclerView eventsRecyclerview;
     private EventAdapter eventsAdapter;
     private ArrayList<EventItem> eventData;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                ViewModelProviders.of(this).get(HomeViewModel.class);
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         eventsRecyclerview = view.findViewById(R.id.eventList);

@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.fragment.NavHostFragment;
 import app.olympics.olymbus.LoginActivity;
 import app.olympics.olymbus.MainActivity;
@@ -20,7 +19,6 @@ import app.olympics.olymbus.R;
 
 public class ProfileFragment extends Fragment {
 
-    private ProfileViewModel profileViewModel;
     private String username, cardNo, csv, password = "";                                                            // String instance variables
     private AccountItem account;
 
@@ -30,7 +28,6 @@ public class ProfileFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        profileViewModel = ViewModelProviders.of(this).get(ProfileViewModel.class);
         final View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
         TextView user = view.findViewById(R.id.userViewID);                                         // Declare username text box

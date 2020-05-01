@@ -20,7 +20,6 @@ import java.util.GregorianCalendar;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import app.olympics.olymbus.MainActivity;
@@ -31,7 +30,6 @@ import app.olympics.olymbus.ui.profile.AccountItem;
 
 public class BookingFragment extends Fragment implements TicketAdapter.OnTicketListener {
 
-    private BookingViewModel bookingViewModel;
     private RecyclerView ticketsRecyclerview;
     private TicketAdapter ticketAdapter;
     private AccountItem account;
@@ -41,8 +39,7 @@ public class BookingFragment extends Fragment implements TicketAdapter.OnTicketL
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        bookingViewModel =
-                ViewModelProviders.of(this).get(BookingViewModel.class);
+
         View view = inflater.inflate(R.layout.fragment_booking, container, false);
 
         account = ((MainActivity)getActivity()).getAccount();
